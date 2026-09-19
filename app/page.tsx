@@ -17,7 +17,7 @@ export default function HomePage() {
               Calculate My Protein
             </CtaButton>
             <a
-              href="https://hitprotein.com.au"
+              href="/protein-tracker"
               className="text-sm font-semibold text-pt-white/70 hover:text-pt-white"
             >
               Already know your target? Track it with HitProtein →

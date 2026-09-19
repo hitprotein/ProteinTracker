@@ -59,9 +59,52 @@ export default function RootLayout({
               />
             </Link>
             <div className="hidden items-center gap-8 text-sm font-medium text-pt-white/80 md:flex">
-              <Link href="/protein-calculator" className="hover:text-pt-white">
-                Calculate
-              </Link>
+              <div className="group relative">
+                <button className="flex items-center gap-1 py-2 hover:text-pt-white">
+                  Calculate
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" className="mt-0.5">
+                    <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" />
+                  </svg>
+                </button>
+                <div className="invisible absolute left-0 top-full w-56 rounded-card border border-pt-white/10 bg-pt-black p-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100">
+                  <Link href="/protein-calculator" className="block rounded-lg px-3 py-2 hover:bg-pt-white/10 hover:text-pt-white">
+                    Protein Calculator
+                  </Link>
+                  <Link href="/protein-calculator/weight-loss" className="block rounded-lg px-3 py-2 hover:bg-pt-white/10 hover:text-pt-white">
+                    For Weight Loss
+                  </Link>
+                  <Link href="/protein-calculator/muscle-gain" className="block rounded-lg px-3 py-2 hover:bg-pt-white/10 hover:text-pt-white">
+                    For Muscle Gain
+                  </Link>
+                  <Link href="/protein-calculator/women" className="block rounded-lg px-3 py-2 hover:bg-pt-white/10 hover:text-pt-white">
+                    For Women
+                  </Link>
+                  <Link href="/protein-calculator/men" className="block rounded-lg px-3 py-2 hover:bg-pt-white/10 hover:text-pt-white">
+                    For Men
+                  </Link>
+                  <Link href="/protein-calculator/over-50" className="block rounded-lg px-3 py-2 hover:bg-pt-white/10 hover:text-pt-white">
+                    Over 50
+                  </Link>
+                </div>
+              </div>
+
+              <div className="group relative">
+                <button className="flex items-center gap-1 py-2 hover:text-pt-white">
+                  Track
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" className="mt-0.5">
+                    <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" />
+                  </svg>
+                </button>
+                <div className="invisible absolute left-0 top-full w-56 rounded-card border border-pt-white/10 bg-pt-black p-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100">
+                  <Link href="/protein-tracker" className="block rounded-lg px-3 py-2 hover:bg-pt-white/10 hover:text-pt-white">
+                    Protein Tracker
+                  </Link>
+                  <Link href="/ai-protein-tracker" className="block rounded-lg px-3 py-2 hover:bg-pt-white/10 hover:text-pt-white">
+                    AI Protein Tracker
+                  </Link>
+                </div>
+              </div>
+
               <Link href="/protein-foods" className="hover:text-pt-white">
                 Foods
               </Link>
