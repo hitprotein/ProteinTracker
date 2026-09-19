@@ -100,7 +100,7 @@ export default function SiteHeader() {
           on narrow phones rather than wrapping or hiding behind a menu
           button people have to know to tap. */}
       <div className="border-t border-pt-white/10">
-        <div className="mx-auto flex max-w-6xl items-center gap-6 overflow-x-auto px-6 py-3 text-sm font-medium text-pt-white/80">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-6 py-3 text-sm font-medium text-pt-white/80">
           <NavDropdown
             label="Calculate"
             links={CALCULATE_LINKS}
