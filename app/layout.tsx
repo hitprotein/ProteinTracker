@@ -51,10 +51,10 @@ export default function RootLayout({
               <Image
                 src="/header-logo-64h.png"
                 alt="ProteinTracker.com.au"
-                width={388}
-                height={144}
+                width={592}
+                height={220}
                 priority
-                className="h-12 w-auto"
+                className="h-16 w-auto md:h-20"
               />
             </Link>
             <div className="hidden items-center gap-8 text-sm font-medium text-pt-white/80 md:flex">
