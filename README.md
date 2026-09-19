@@ -21,10 +21,40 @@ Health, NHMRC) before publishing.
 4. In GoDaddy → DNS management for proteintracker.com.au → update the
    A record (`@`) and CNAME (`www`) to the values Vercel gave you.
    Do not change nameservers — just the records.
-5. Add the Google Search Console verification TXT record in GoDaddy DNS
-   alongside the above (don't replace anything).
-6. Env vars in Vercel: `NEXT_PUBLIC_GA_ID` (GA4), plus anything else
-   added later (e.g. MailerLite key).
+5. Set up Google Analytics 4 and Search Console (see below).
+
+## Google Analytics & Search Console
+
+**GA4:**
+1. Create a GA4 property at analytics.google.com for proteintracker.com.au.
+2. Copy its Measurement ID (looks like `G-XXXXXXXXXX`).
+3. In Vercel → Project → Settings → Environment Variables, add
+   `NEXT_PUBLIC_GA_ID` = that value, for Production.
+4. Redeploy. `components/GoogleAnalytics.tsx` picks it up automatically —
+   no code change needed. Until this env var is set, the component
+   renders nothing (safe to ship without it).
+
+**Search Console:**
+1. Add proteintracker.com.au as a property at
+   search.google.com/search-console — choose the "HTML tag" verification
+   method (simpler than DNS TXT once the site's already live).
+2. It gives you a `content="..."` value. In Vercel, add
+   `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` = that value, for Production.
+3. Redeploy, then click Verify in Search Console.
+4. Once verified, submit the sitemap: Search Console → Sitemaps →
+   enter `sitemap.xml` → Submit. (The site generates this automatically
+   at /sitemap.xml — see app/sitemap.ts.)
+
+## Technical SEO already wired up
+
+- `/sitemap.xml` — auto-generated from `app/sitemap.ts`. **Add any new
+  page's route to that file the same day it ships**, or it won't be
+  discovered via the sitemap.
+- `/robots.txt` — auto-generated from `app/robots.ts`, allows all
+  crawlers and points to the sitemap.
+- Every page sets its own canonical URL via `alternates.canonical`.
+- Sitewide WebSite + Organization JSON-LD is in `app/layout.tsx`.
+  Page-specific FAQPage/Recipe schema lives on the pages that use it.
 
 ## Content workflow
 

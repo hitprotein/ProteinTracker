@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
 import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import "./globals.css";
 
 const heading = Manrope({
@@ -35,6 +36,11 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   themeColor: "#0B0D0C",
+  verification: {
+    // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION in Vercel once you have the
+    // code from Search Console — leaving it unset just omits the tag.
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
 };
 
 export default function RootLayout({
@@ -45,6 +51,29 @@ export default function RootLayout({
   return (
     <html lang="en-AU" className={`${heading.variable} ${body.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "ProteinTracker.com.au",
+                url: "https://proteintracker.com.au",
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "ProteinTracker.com.au",
+                url: "https://proteintracker.com.au",
+                logo: "https://proteintracker.com.au/header-logo-64h.png",
+                sameAs: ["https://hitprotein.com.au"],
+              },
+            ]),
+          }}
+        />
+        <GoogleAnalytics />
+
         <SiteHeader />
 
         <main>{children}</main>
