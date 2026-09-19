@@ -1,4 +1,4 @@
-import Link from "next/link";
+import CtaButton from "@/components/CtaButton";
 
 export default function HomePage() {
   return (
@@ -12,13 +12,10 @@ export default function HomePage() {
             Calculate how much protein you need, discover high-protein foods
             and meals, and learn how to reach your daily protein target.
           </p>
-          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Link
-              href="/protein-calculator"
-              className="rounded-card bg-pt-green px-6 py-3 font-heading font-bold text-pt-black transition hover:opacity-90"
-            >
+          <div className="mx-auto mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <CtaButton href="/protein-calculator" size="lg">
               Calculate My Protein
-            </Link>
+            </CtaButton>
             <a
               href="https://hitprotein.com.au"
               className="text-sm font-semibold text-pt-white/70 hover:text-pt-white"

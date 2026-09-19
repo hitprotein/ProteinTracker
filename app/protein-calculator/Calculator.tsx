@@ -7,6 +7,7 @@ import {
   type GoalType,
   type ProteinCalculatorResult,
 } from "@/lib/protein-calculator";
+import CtaButton from "@/components/CtaButton";
 
 const GOAL_OPTIONS: { value: GoalType; label: string }[] = [
   { value: "maintain", label: "Maintain weight" },
@@ -160,12 +161,11 @@ export default function ProteinCalculator() {
               eat, and can scan a photo of your meal to estimate its protein
               with AI.
             </p>
-            <a
-              href="https://hitprotein.com.au/download"
-              className="mt-4 inline-block rounded-card bg-pt-green px-6 py-3 font-heading font-bold text-pt-black transition hover:opacity-90"
-            >
-              Track Your Protein With HitProtein
-            </a>
+            <div className="mt-4">
+              <CtaButton href="https://hitprotein.com.au/download">
+                Track Your Protein With HitProtein
+              </CtaButton>
+            </div>
           </div>
         </div>
       )}

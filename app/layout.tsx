@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import CtaButton from "@/components/CtaButton";
 import "./globals.css";
 
 const heading = Manrope({
@@ -71,12 +72,9 @@ export default function RootLayout({
                 Guides
               </Link>
             </div>
-            <a
-              href="https://hitprotein.com.au/download"
-              className="rounded-card bg-pt-green px-4 py-2 text-sm font-semibold text-pt-black transition hover:opacity-90"
-            >
-              Try HitProtein →
-            </a>
+            <CtaButton href="https://hitprotein.com.au/download">
+              Try HitProtein
+            </CtaButton>
           </nav>
         </header>
 
