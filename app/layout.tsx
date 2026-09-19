@@ -3,6 +3,7 @@ import { Manrope, Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import CtaButton from "@/components/CtaButton";
+import MobileNav from "@/components/MobileNav";
 import "./globals.css";
 
 const heading = Manrope({
@@ -46,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en-AU" className={`${heading.variable} ${body.variable}`}>
       <body>
-        <header className="bg-pt-black">
+        <header className="relative bg-pt-black">
           <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
             <Link href="/" aria-label="ProteinTracker.com.au home">
               <Image
@@ -115,9 +116,12 @@ export default function RootLayout({
                 Guides
               </Link>
             </div>
-            <CtaButton href="https://hitprotein.com.au/download">
-              Try HitProtein
-            </CtaButton>
+            <div className="flex items-center gap-3">
+              <CtaButton href="https://hitprotein.com.au/download">
+                Try HitProtein
+              </CtaButton>
+              <MobileNav />
+            </div>
           </nav>
         </header>
 
