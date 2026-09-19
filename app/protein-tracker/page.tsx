@@ -20,6 +20,7 @@ const steps = [
   {
     title: "Scan With AI",
     body: "Take a photo of your meal and HitProtein's AI can estimate the protein for you — no manual searching or weighing required. This feature lives inside the HitProtein app.",
+    link: "/ai-protein-tracker",
   },
   {
     title: "Get Meal Ideas",
@@ -68,6 +69,14 @@ export default function ProteinTrackerPage() {
               <div>
                 <h3 className="font-heading text-lg font-bold">{step.title}</h3>
                 <p className="mt-1 text-pt-black/80">{step.body}</p>
+                {"link" in step && step.link && (
+                  <a
+                    href={step.link}
+                    className="mt-1 inline-block text-sm font-semibold text-pt-black underline"
+                  >
+                    See how AI scanning works →
+                  </a>
+                )}
               </div>
             </div>
           ))}
