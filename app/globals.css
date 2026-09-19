@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-pt-offwhite text-pt-black font-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading font-bold text-pt-black;
+  }
+
+  a {
+    @apply underline-offset-2;
+  }
+
+  :focus-visible {
+    outline: 2px solid #b4ff00;
+    outline-offset: 2px;
+  }
+}
