@@ -25,6 +25,23 @@ export const metadata: Metadata = {
   },
   description:
     "Calculate how much protein you need, discover high-protein foods and meals, and learn how to reach your daily protein target — then track it with HitProtein.",
+  openGraph: {
+    title: "Protein Tracker Australia | Calculate & Hit Your Protein Goal",
+    description:
+      "Calculate how much protein you need, discover high-protein foods and meals, and learn how to reach your daily protein target — then track it with HitProtein.",
+    url: "https://proteintracker.com.au",
+    siteName: "ProteinTracker.com.au",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    locale: "en_AU",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Protein Tracker Australia | Calculate & Hit Your Protein Goal",
+    description:
+      "Calculate how much protein you need, discover high-protein foods and meals, and learn how to reach your daily protein target — then track it with HitProtein.",
+    images: ["/og-image.png"],
+  },
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
