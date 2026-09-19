@@ -15,7 +15,7 @@
   h2,
   h3,
   h4 {
-    @apply font-heading font-bold text-pt-black;
+    @apply font-heading font-bold;
   }
 
   a {
