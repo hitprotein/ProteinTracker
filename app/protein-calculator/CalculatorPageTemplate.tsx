@@ -1,10 +1,6 @@
 import Calculator from "@/components/Calculator";
 import type { ActivityLevel, GoalType } from "@/lib/protein-calculator";
-
-export interface FAQItem {
-  q: string;
-  a: string;
-}
+import type { FAQItem } from "@/lib/content-types";
 
 export interface ContentSection {
   heading: string;
