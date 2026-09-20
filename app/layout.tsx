@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, Inter } from "next/font/google";
 import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
@@ -52,12 +52,15 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon-180x180.png",
   },
   manifest: "/site.webmanifest",
-  themeColor: "#0B0D0C",
   verification: {
     // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION in Vercel once you have the
     // code from Search Console — leaving it unset just omits the tag.
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0B0D0C",
 };
 
 export default function RootLayout({
