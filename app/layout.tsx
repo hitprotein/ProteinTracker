@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
 import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
+import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
 
 const heading = Manrope({
@@ -89,7 +89,7 @@ export default function RootLayout({
             ]),
           }}
         />
-        <GoogleAnalytics />
+        <CookieConsent />
 
         <SiteHeader />
 
