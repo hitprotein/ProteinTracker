@@ -1,3 +1,4 @@
+import Image from "next/image";
 import CtaButton from "@/components/CtaButton";
 
 export interface MealIdea {
@@ -7,7 +8,13 @@ export interface MealIdea {
   ingredients: string[];
   method: string;
   substitutions: string;
+  // Path under /public, e.g. "/meals/tuna-cottage-cheese-salad.jpg". Google
+  // only shows a Recipe rich result when the schema includes an image, so
+  // every meal should get one; the card simply renders without it until then.
+  image?: { src: string; width: number; height: number };
 }
+
+const SITE_URL = "https://proteintracker.com.au";
 
 interface MealsPageTemplateProps {
   h1: string;
@@ -35,11 +42,22 @@ export default function MealsPageTemplate({
         <div className="space-y-3 text-pt-black/80">{intro}</div>
 
         <div className="mt-10 space-y-6">
-          {meals.map((meal) => (
+          {meals.map((meal, i) => (
             <div
               key={meal.name}
-              className="rounded-card border border-pt-black/10 bg-pt-white p-6 shadow-sm"
+              className="overflow-hidden rounded-card border border-pt-black/10 bg-pt-white p-6 shadow-sm"
             >
+              {meal.image && (
+                <Image
+                  src={meal.image.src}
+                  alt={meal.name}
+                  width={meal.image.width}
+                  height={meal.image.height}
+                  sizes="(min-width: 768px) 720px, 100vw"
+                  priority={i === 0}
+                  className="-mx-6 -mt-6 mb-6 block h-auto w-[calc(100%+3rem)] max-w-none"
+                />
+              )}
               <div className="flex items-baseline justify-between gap-4">
                 <h2 className="font-heading text-xl font-bold">{meal.name}</h2>
                 <span className="whitespace-nowrap rounded-full bg-pt-black px-3 py-1 text-sm font-bold text-pt-green">
@@ -92,6 +110,7 @@ export default function MealsPageTemplate({
               "@context": "https://schema.org",
               "@type": "Recipe",
               name: meal.name,
+              ...(meal.image && { image: [`${SITE_URL}${meal.image.src}`] }),
               recipeYield: meal.serves,
               recipeIngredient: meal.ingredients,
               recipeInstructions: meal.method,

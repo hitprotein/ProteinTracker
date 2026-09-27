@@ -28,6 +28,7 @@ export default function ThirtyGramMealsPage() {
       meals={[
         {
           name: "Greek Yoghurt Protein Bowl",
+          image: { src: "/meals/greek-yoghurt-protein-bowl.jpg", width: 1408, height: 768 },
           protein: 30,
           serves: "Serves 1",
           ingredients: [
@@ -43,6 +44,7 @@ export default function ThirtyGramMealsPage() {
         },
         {
           name: "3-Egg Veggie Omelette with Cheddar",
+          image: { src: "/meals/3-egg-veggie-omelette.jpg", width: 1408, height: 768 },
           protein: 30,
           serves: "Serves 1",
           ingredients: [
@@ -58,6 +60,7 @@ export default function ThirtyGramMealsPage() {
         },
         {
           name: "Tuna and Cottage Cheese Salad",
+          image: { src: "/meals/tuna-cottage-cheese-salad.jpg", width: 1408, height: 768 },
           protein: 30,
           serves: "Serves 1",
           ingredients: [
