@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "High Protein Meal Ideas — 30g, 40g and 50g Protein Meals",
@@ -29,23 +30,23 @@ export default function ProteinMealsPage() {
       <section className="mx-auto max-w-3xl px-6 py-16">
         <div className="grid gap-4 sm:grid-cols-3">
           {targets.map((t) => (
-            <a
+            <Link
               key={t.href}
               href={t.href}
               className="rounded-card border border-pt-black/10 bg-pt-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <p className="font-heading text-lg font-bold">{t.name}</p>
               <p className="mt-1 text-sm text-pt-black/60">{t.body}</p>
-            </a>
+            </Link>
           ))}
         </div>
 
         <p className="mt-10 text-pt-black/80">
           Know exactly how much protein you need per meal, not just per day?
           Try the{" "}
-          <a href="/protein-meal-calculator" className="font-semibold text-pt-black underline">
+          <Link href="/protein-meal-calculator" className="font-semibold text-pt-black underline">
             protein meal calculator
-          </a>{" "}
+          </Link>{" "}
           — enter a gram target and get a food combination that gets you
           there, rather than picking from a fixed list.
         </p>

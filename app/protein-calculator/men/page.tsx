@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import CalculatorPageTemplate from "../CalculatorPageTemplate";
 
 export const metadata: Metadata = {
@@ -52,19 +53,19 @@ export default function MenCalculatorPage() {
               weight" from the goal dropdown above for a target adjusted to
               that specific goal. For more detail on either, see the
               dedicated{" "}
-              <a
+              <Link
                 href="/protein-calculator/muscle-gain"
                 className="font-semibold text-pt-black underline"
               >
                 muscle gain calculator
-              </a>{" "}
+              </Link>{" "}
               or{" "}
-              <a
+              <Link
                 href="/protein-calculator/weight-loss"
                 className="font-semibold text-pt-black underline"
               >
                 weight loss calculator
-              </a>
+              </Link>
               .
             </p>
           ),

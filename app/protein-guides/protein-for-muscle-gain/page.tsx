@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import GuidePageTemplate from "../GuidePageTemplate";
 
 export const metadata: Metadata = {
@@ -38,12 +39,12 @@ export default function ProteinForMuscleGainGuide() {
               bodyweight per day for maximising muscle growth — intakes
               well above that don't appear to provide further benefit for
               most people. Our{" "}
-              <a
+              <Link
                 href="/protein-calculator/muscle-gain"
                 className="font-semibold text-pt-black underline"
               >
                 protein calculator for muscle gain
-              </a>{" "}
+              </Link>{" "}
               adjusts within that range based on your training intensity
               and age.
             </p>

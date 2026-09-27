@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import MealsPageTemplate from "../MealsPageTemplate";
 
 export const metadata: Metadata = {
@@ -18,9 +19,9 @@ export default function ThirtyGramMealsPage() {
           30g of protein is a reasonable target for a lighter meal, a
           bigger snack, or a breakfast you don't want to spend much time on.
           Each of these is built around ingredients from our{" "}
-          <a href="/protein-foods" className="font-semibold text-pt-black underline">
+          <Link href="/protein-foods" className="font-semibold text-pt-black underline">
             protein foods guide
-          </a>
+          </Link>
           , so the numbers line up with what you'd see there.
         </p>
       }

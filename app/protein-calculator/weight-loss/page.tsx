@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import CalculatorPageTemplate from "../CalculatorPageTemplate";
 
 export const metadata: Metadata = {
@@ -68,13 +69,13 @@ export default function WeightLossCalculatorPage() {
               without blowing your calorie budget — think chicken breast,
               white fish, egg whites, non-fat Greek yoghurt and lean beef
               mince. See our{" "}
-              <a href="/protein-foods" className="font-semibold text-pt-black underline">
+              <Link href="/protein-foods" className="font-semibold text-pt-black underline">
                 protein foods guide
-              </a>{" "}
+              </Link>{" "}
               for protein-per-calorie comparisons, or browse{" "}
-              <a href="/protein-meals" className="font-semibold text-pt-black underline">
+              <Link href="/protein-meals" className="font-semibold text-pt-black underline">
                 high-protein meal ideas
-              </a>{" "}
+              </Link>{" "}
               built for exactly this.
             </p>
           ),

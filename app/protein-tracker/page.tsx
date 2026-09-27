@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import CtaButton from "@/components/CtaButton";
 
 export const metadata: Metadata = {
@@ -70,12 +71,12 @@ export default function ProteinTrackerPage() {
                 <h3 className="font-heading text-lg font-bold">{step.title}</h3>
                 <p className="mt-1 text-pt-black/80">{step.body}</p>
                 {"link" in step && step.link && (
-                  <a
+                  <Link
                     href={step.link}
                     className="mt-1 inline-block text-sm font-semibold text-pt-black underline"
                   >
                     See how AI scanning works →
-                  </a>
+                  </Link>
                 )}
               </div>
             </div>
@@ -84,9 +85,9 @@ export default function ProteinTrackerPage() {
 
         <p className="mt-10 text-sm text-pt-black/50">
           Don't know your protein target yet? Start with the{" "}
-          <a href="/protein-calculator" className="font-semibold text-pt-black underline">
+          <Link href="/protein-calculator" className="font-semibold text-pt-black underline">
             protein calculator
-          </a>{" "}
+          </Link>{" "}
           first.
         </p>
 

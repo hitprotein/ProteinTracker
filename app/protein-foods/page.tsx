@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "High Protein Foods — Protein Content Guide (Australia)",
@@ -36,14 +37,14 @@ export default function ProteinFoodsPage() {
       <section className="mx-auto max-w-4xl px-6 py-16">
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {foods.map((food) => (
-            <a
+            <Link
               key={food.href}
               href={food.href}
               className="rounded-card border border-pt-black/10 bg-pt-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <p className="font-heading text-lg font-bold">{food.name}</p>
               <p className="mt-1 text-sm text-pt-black/60">{food.protein}</p>
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -55,13 +56,13 @@ export default function ProteinFoodsPage() {
 
         <p className="mt-6 text-pt-black/80">
           Not sure how these foods add up toward your day? Try our{" "}
-          <a href="/protein-calculator" className="font-semibold text-pt-black underline">
+          <Link href="/protein-calculator" className="font-semibold text-pt-black underline">
             protein calculator
-          </a>{" "}
+          </Link>{" "}
           to get your daily target, or the{" "}
-          <a href="/protein-meal-calculator" className="font-semibold text-pt-black underline">
+          <Link href="/protein-meal-calculator" className="font-semibold text-pt-black underline">
             protein meal calculator
-          </a>{" "}
+          </Link>{" "}
           to build a meal around a specific gram target.
         </p>
       </section>
