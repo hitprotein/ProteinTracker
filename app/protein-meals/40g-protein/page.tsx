@@ -27,6 +27,7 @@ export default function FortyGramMealsPage() {
       meals={[
         {
           name: "Chicken and Rice Bowl",
+          image: { src: "/meals/chicken-rice-bowl.jpg", width: 1408, height: 768 },
           protein: 40,
           serves: "Serves 1",
           ingredients: [
@@ -42,6 +43,7 @@ export default function FortyGramMealsPage() {
         },
         {
           name: "Beef Mince Tacos",
+          image: { src: "/meals/beef-mince-tacos.jpg", width: 1408, height: 768 },
           protein: 39,
           serves: "Serves 1 (2–3 tacos)",
           ingredients: [
@@ -57,6 +59,7 @@ export default function FortyGramMealsPage() {
         },
         {
           name: "Grilled Salmon with Quinoa",
+          image: { src: "/meals/grilled-salmon-quinoa.jpg", width: 1408, height: 768 },
           protein: 39,
           serves: "Serves 1",
           ingredients: [
