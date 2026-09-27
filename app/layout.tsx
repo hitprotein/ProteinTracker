@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Inter } from "next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
@@ -55,6 +56,16 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
 };
+
+const FOOTER_LINKS = [
+  { label: "Protein Calculator", href: "/protein-calculator" },
+  { label: "Meal Calculator", href: "/protein-meal-calculator" },
+  { label: "Protein Tracker", href: "/protein-tracker" },
+  { label: "AI Protein Tracker", href: "/ai-protein-tracker" },
+  { label: "High Protein Foods", href: "/protein-foods" },
+  { label: "High Protein Meals", href: "/protein-meals" },
+  { label: "Protein Guides", href: "/protein-guides" },
+];
 
 export const viewport: Viewport = {
   themeColor: "#0B0D0C",
@@ -118,7 +129,18 @@ export default function RootLayout({
               height={49}
               className="mt-3 h-5 w-auto"
             />
-            <p className="mt-4 max-w-xl text-sm text-pt-white/60">
+            <nav aria-label="Footer" className="mt-8">
+              <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-pt-white/80">
+                {FOOTER_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="hover:text-pt-white">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <p className="mt-8 max-w-xl text-sm text-pt-white/60">
               Nutrition figures are sourced from Australian government
               references (FSANZ AUSNUT/NUTTAB, Eat for Health) where
               available and are approximate — actual values vary by brand,
