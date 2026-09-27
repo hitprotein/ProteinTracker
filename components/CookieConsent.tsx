@@ -6,19 +6,37 @@ import Script from "next/script";
 const CONSENT_KEY = "pt_cookie_consent";
 type Consent = "accepted" | "declined" | null;
 
+// localStorage can throw (Safari private mode, blocked site data). Treat that
+// as "no stored choice" rather than crashing the page.
+function readConsent(): Consent {
+  try {
+    const value = window.localStorage.getItem(CONSENT_KEY);
+    return value === "accepted" || value === "declined" ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeConsent(choice: "accepted" | "declined") {
+  try {
+    window.localStorage.setItem(CONSENT_KEY, choice);
+  } catch {
+    // Choice still applies for this page view; it just won't persist.
+  }
+}
+
 export default function CookieConsent() {
   const [consent, setConsent] = useState<Consent>(null);
   const [hydrated, setHydrated] = useState(false);
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   useEffect(() => {
-    const stored = window.localStorage.getItem(CONSENT_KEY) as Consent;
-    setConsent(stored);
+    setConsent(readConsent());
     setHydrated(true);
   }, []);
 
   function decide(choice: "accepted" | "declined") {
-    window.localStorage.setItem(CONSENT_KEY, choice);
+    writeConsent(choice);
     setConsent(choice);
   }
 
@@ -44,7 +62,11 @@ export default function CookieConsent() {
       )}
 
       {hydrated && consent === null && (
-        <div className="fixed inset-x-0 bottom-0 z-50 border-t border-pt-white/10 bg-pt-black px-6 py-5 text-pt-white">
+        <div
+          role="region"
+          aria-label="Cookie consent"
+          className="fixed inset-x-0 bottom-0 z-50 border-t border-pt-white/10 bg-pt-black px-6 py-5 text-pt-white"
+        >
           <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 sm:flex-row sm:justify-between">
             <p className="text-sm text-pt-white/80">
               We use cookies to understand site traffic via Google

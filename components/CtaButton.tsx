@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 interface CtaButtonProps {
@@ -18,14 +19,20 @@ export default function CtaButton({
 }: CtaButtonProps) {
   const sizeClasses =
     size === "lg" ? "px-8 py-4 text-base" : "px-6 py-3 text-sm";
+  // Internal links go through next/link for client-side navigation and
+  // prefetching; external ones (HitProtein download) stay a plain <a>.
+  const Anchor = href.startsWith("/") ? Link : "a";
 
   return (
-    <a
+    <Anchor
       href={href}
       className={`group inline-flex items-center gap-2 rounded-full bg-pt-green font-heading font-extrabold uppercase tracking-wide text-pt-black shadow-[0_0_0_3px_rgba(180,255,0,0.18)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_0_6px_rgba(180,255,0,0.3)] ${sizeClasses} ${className}`}
     >
       {children}
-      <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-    </a>
+      <ArrowRight
+        aria-hidden="true"
+        className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+      />
+    </Anchor>
   );
 }

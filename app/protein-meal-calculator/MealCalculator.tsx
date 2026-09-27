@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CtaButton from "@/components/CtaButton";
 
 // Protein-per-100g figures match the individual food pages under
@@ -27,12 +27,19 @@ export default function MealCalculator() {
     "chicken_breast"
   );
   const [result, setResult] = useState<{
+    targetGrams: number;
     primaryLabel: string;
     primaryGrams: number;
     secondaryLabel: string;
     secondaryGrams: number;
     total: number;
   } | null>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
+
+  // On phones the result renders below the fold — bring it into view.
+  useEffect(() => {
+    if (result) resultRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [result]);
 
   function handleCalculate(e: React.FormEvent) {
     e.preventDefault();
@@ -54,6 +61,7 @@ export default function MealCalculator() {
     const secondaryProtein = (secondaryGrams * secondary.proteinPer100g) / 100;
 
     setResult({
+      targetGrams,
       primaryLabel: primary.label,
       primaryGrams,
       secondaryLabel: secondary.label,
@@ -103,42 +111,44 @@ export default function MealCalculator() {
         </button>
       </form>
 
-      {result && (
-        <div className="mt-8 rounded-card bg-pt-black p-8 text-pt-white">
-          <p className="text-sm uppercase tracking-wide text-pt-white/60">
-            {target}g protein meal
-          </p>
-          <ul className="mt-3 space-y-1 text-lg">
-            <li>
-              {result.primaryGrams}g {result.primaryLabel}
-            </li>
-            <li>Rice or a carb of your choice</li>
-            <li>Vegetables</li>
-            <li>
-              {result.secondaryGrams}g {result.secondaryLabel}
-            </li>
-          </ul>
-          <p className="mt-3 font-heading text-2xl font-extrabold text-pt-green">
-            ≈{result.total}g protein
-          </p>
-          <p className="mt-2 text-xs text-pt-white/50">
-            Rice and vegetables add a small amount of protein too — this
-            estimate is based on the two main protein sources above.
-          </p>
-
-          <div className="mt-6 border-t border-pt-white/10 pt-6">
-            <p className="text-sm text-pt-white/70">
-              Want personalised meal ideas throughout the day instead of
-              calculating manually?
+      <div ref={resultRef} aria-live="polite">
+        {result && (
+          <div className="mt-8 rounded-card bg-pt-black p-8 text-pt-white">
+            <p className="text-sm uppercase tracking-wide text-pt-white/60">
+              {result.targetGrams}g protein meal
             </p>
-            <div className="mt-4">
-              <CtaButton href="https://hitprotein.com.au/download">
-                Try Protein Coach in HitProtein
-              </CtaButton>
+            <ul className="mt-3 space-y-1 text-lg">
+              <li>
+                {result.primaryGrams}g {result.primaryLabel}
+              </li>
+              <li>Rice or a carb of your choice</li>
+              <li>Vegetables</li>
+              <li>
+                {result.secondaryGrams}g {result.secondaryLabel}
+              </li>
+            </ul>
+            <p className="mt-3 font-heading text-2xl font-extrabold text-pt-green">
+              ≈{result.total}g protein
+            </p>
+            <p className="mt-2 text-xs text-pt-white/50">
+              Rice and vegetables add a small amount of protein too — this
+              estimate is based on the two main protein sources above.
+            </p>
+
+            <div className="mt-6 border-t border-pt-white/10 pt-6">
+              <p className="text-sm text-pt-white/70">
+                Want personalised meal ideas throughout the day instead of
+                calculating manually?
+              </p>
+              <div className="mt-4">
+                <CtaButton href="https://hitprotein.com.au/download">
+                  Try Protein Coach in HitProtein
+                </CtaButton>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

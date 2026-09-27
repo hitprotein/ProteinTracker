@@ -89,11 +89,18 @@ export default function RootLayout({
             ]),
           }}
         />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-pt-green focus:px-5 focus:py-2 focus:font-semibold focus:text-pt-black"
+        >
+          Skip to content
+        </a>
+
         <CookieConsent />
 
         <SiteHeader />
 
-        <main>{children}</main>
+        <main id="main">{children}</main>
 
         <footer className="mt-24 border-t border-pt-black/10 bg-pt-black py-12 text-pt-white">
           <div className="mx-auto max-w-6xl px-6">

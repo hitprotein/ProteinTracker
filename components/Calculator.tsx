@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   calculateProteinTarget,
   type ActivityLevel,
@@ -41,6 +41,12 @@ export default function ProteinCalculator({
   const [activityLevel, setActivityLevel] = useState<ActivityLevel>(defaultActivityLevel);
   const [goalType, setGoalType] = useState<GoalType>(defaultGoalType);
   const [result, setResult] = useState<ProteinCalculatorResult | null>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
+
+  // On phones the result renders below the fold — bring it into view.
+  useEffect(() => {
+    if (result) resultRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [result]);
 
   function handleCalculate(e: React.FormEvent) {
     e.preventDefault();
@@ -149,36 +155,38 @@ export default function ProteinCalculator({
         </button>
       </form>
 
-      {result && (
-        <div className="mt-8 rounded-card bg-pt-black p-8 text-center text-pt-white">
-          <p className="text-sm uppercase tracking-wide text-pt-white/60">
-            Your recommended protein target
-          </p>
-          <p className="mt-2 font-heading text-5xl font-extrabold text-pt-green">
-            {result.proteinGoal}g <span className="text-2xl text-pt-white">per day</span>
-          </p>
-          <p className="mt-2 text-sm text-pt-white/60">
-            ≈ {result.proteinPerKg}g per kg of reference bodyweight (
-            {result.referenceWeightKg}kg)
-          </p>
+      <div ref={resultRef} aria-live="polite">
+        {result && (
+          <div className="mt-8 rounded-card bg-pt-black p-8 text-center text-pt-white">
+            <p className="text-sm uppercase tracking-wide text-pt-white/60">
+              Your recommended protein target
+            </p>
+            <p className="mt-2 font-heading text-5xl font-extrabold text-pt-green">
+              {result.proteinGoal}g <span className="text-2xl text-pt-white">per day</span>
+            </p>
+            <p className="mt-2 text-sm text-pt-white/60">
+              ≈ {result.proteinPerKg}g per kg of reference bodyweight (
+              {result.referenceWeightKg}kg)
+            </p>
 
-          <div className="mt-8 border-t border-pt-white/10 pt-6 text-left">
-            <p className="font-heading text-lg font-bold text-pt-white">
-              Now that you know your target, the next step is actually hitting it.
-            </p>
-            <p className="mt-2 text-sm text-pt-white/70">
-              HitProtein sets this goal for you automatically, tracks what you
-              eat, and can scan a photo of your meal to estimate its protein
-              with AI.
-            </p>
-            <div className="mt-4">
-              <CtaButton href="https://hitprotein.com.au/download">
-                Track Your Protein With HitProtein
-              </CtaButton>
+            <div className="mt-8 border-t border-pt-white/10 pt-6 text-left">
+              <p className="font-heading text-lg font-bold text-pt-white">
+                Now that you know your target, the next step is actually hitting it.
+              </p>
+              <p className="mt-2 text-sm text-pt-white/70">
+                HitProtein sets this goal for you automatically, tracks what you
+                eat, and can scan a photo of your meal to estimate its protein
+                with AI.
+              </p>
+              <div className="mt-4">
+                <CtaButton href="https://hitprotein.com.au/download">
+                  Track Your Protein With HitProtein
+                </CtaButton>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
