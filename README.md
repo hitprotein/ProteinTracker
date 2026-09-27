@@ -30,9 +30,10 @@ Health, NHMRC) before publishing.
 2. Copy its Measurement ID (looks like `G-XXXXXXXXXX`).
 3. In Vercel → Project → Settings → Environment Variables, add
    `NEXT_PUBLIC_GA_ID` = that value, for Production.
-4. Redeploy. `components/GoogleAnalytics.tsx` picks it up automatically —
-   no code change needed. Until this env var is set, the component
-   renders nothing (safe to ship without it).
+4. Redeploy. `components/CookieConsent.tsx` picks it up automatically —
+   no code change needed. GA4 only loads after a visitor clicks Accept on
+   the cookie banner; until this env var is set, it never loads at all
+   (safe to ship without it).
 
 **Search Console:**
 1. Add proteintracker.com.au as a property at
