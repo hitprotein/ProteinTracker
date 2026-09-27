@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import CookieConsent from "@/components/CookieConsent";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 import "./globals.css";
 
 const heading = Manrope({
@@ -138,6 +139,9 @@ export default function RootLayout({
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <CookieSettingsButton className="hover:text-pt-white" />
+                </li>
               </ul>
             </nav>
             <p className="mt-8 max-w-xl text-sm text-pt-white/60">

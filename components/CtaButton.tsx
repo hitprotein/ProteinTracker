@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 interface CtaButtonProps {
   href: string;
   children: React.ReactNode;
-  size?: "md" | "lg";
+  size?: "sm" | "md" | "lg";
   className?: string;
 }
 
@@ -17,8 +17,13 @@ export default function CtaButton({
   size = "md",
   className = "",
 }: CtaButtonProps) {
-  const sizeClasses =
-    size === "lg" ? "px-8 py-4 text-base" : "px-6 py-3 text-sm";
+  // "sm" is compact on phones and matches "md" from the sm breakpoint up —
+  // for tight spots like the header, next to the logo.
+  const sizeClasses = {
+    sm: "px-4 py-2.5 text-xs sm:px-6 sm:py-3 sm:text-sm",
+    md: "px-6 py-3 text-sm",
+    lg: "px-8 py-4 text-base",
+  }[size];
   // Internal links go through next/link for client-side navigation and
   // prefetching; external ones (HitProtein download) stay a plain <a>.
   const Anchor = href.startsWith("/") ? Link : "a";

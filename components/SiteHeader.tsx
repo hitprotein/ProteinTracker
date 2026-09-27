@@ -109,7 +109,7 @@ export default function SiteHeader() {
 
   return (
     <header className="bg-pt-black">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
         <Link href="/" aria-label="ProteinTracker.com.au home" onClick={() => setOpenKey(null)}>
           <Image
             src="/header-logo-64h.png"
@@ -117,10 +117,10 @@ export default function SiteHeader() {
             width={592}
             height={220}
             priority
-            className="h-14 w-auto md:h-20"
+            className="h-12 w-auto sm:h-14 md:h-20"
           />
         </Link>
-        <CtaButton href="https://hitprotein.com.au/download">
+        <CtaButton href="https://hitprotein.com.au/download" size="sm" className="shrink-0 whitespace-nowrap">
           Try HitProtein
         </CtaButton>
       </div>

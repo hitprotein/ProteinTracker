@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Script from "next/script";
 
 const CONSENT_KEY = "pt_cookie_consent";
+// Fired by the footer's "Cookie settings" button to reopen the banner.
+export const OPEN_COOKIE_SETTINGS_EVENT = "pt:open-cookie-settings";
 type Consent = "accepted" | "declined" | null;
 
 // localStorage can throw (Safari private mode, blocked site data). Treat that
@@ -25,19 +27,47 @@ function writeConsent(choice: "accepted" | "declined") {
   }
 }
 
+// Withdrawing consent after GA has loaded: the script can't be unloaded, but
+// GA's documented opt-out flag stops it sending anything further, and its
+// cookies are removed. Cookies are set on the registrable domain, so try
+// every parent domain of the current host.
+function disableAnalytics(gaId: string) {
+  (window as unknown as Record<string, boolean>)[`ga-disable-${gaId}`] = true;
+  const parts = window.location.hostname.split(".");
+  const domains = parts.map((_, i) => parts.slice(i).join("."));
+  for (const c of document.cookie.split(";")) {
+    const name = c.split("=")[0].trim();
+    if (name !== "_ga" && !name.startsWith("_ga_")) continue;
+    document.cookie = `${name}=; Max-Age=0; path=/`;
+    for (const d of domains) {
+      document.cookie = `${name}=; Max-Age=0; path=/; domain=.${d}`;
+    }
+  }
+}
+
 export default function CookieConsent() {
   const [consent, setConsent] = useState<Consent>(null);
   const [hydrated, setHydrated] = useState(false);
+  const [reopened, setReopened] = useState(false);
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   useEffect(() => {
     setConsent(readConsent());
     setHydrated(true);
+
+    const open = () => setReopened(true);
+    window.addEventListener(OPEN_COOKIE_SETTINGS_EVENT, open);
+    return () => window.removeEventListener(OPEN_COOKIE_SETTINGS_EVENT, open);
   }, []);
 
   function decide(choice: "accepted" | "declined") {
     writeConsent(choice);
+    if (gaId) {
+      if (choice === "declined") disableAnalytics(gaId);
+      else delete (window as unknown as Record<string, boolean>)[`ga-disable-${gaId}`];
+    }
     setConsent(choice);
+    setReopened(false);
   }
 
   return (
@@ -61,7 +91,7 @@ export default function CookieConsent() {
         </>
       )}
 
-      {hydrated && consent === null && (
+      {hydrated && (consent === null || reopened) && (
         <div
           role="region"
           aria-label="Cookie consent"
