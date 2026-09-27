@@ -25,11 +25,11 @@ export const metadata: Metadata = {
   },
   description:
     "Calculate how much protein you need, discover high-protein foods and meals, and learn how to reach your daily protein target — then track it with HitProtein.",
+  // Only the sitewide parts of the share card live here. Title and
+  // description fall through from each page's own metadata, and og:url is
+  // left out so scrapers use the canonical URL. Hardcoding them here made
+  // every page share as the homepage.
   openGraph: {
-    title: "Protein Tracker Australia | Calculate & Hit Your Protein Goal",
-    description:
-      "Calculate how much protein you need, discover high-protein foods and meals, and learn how to reach your daily protein target — then track it with HitProtein.",
-    url: "https://proteintracker.com.au",
     siteName: "ProteinTracker.com.au",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     locale: "en_AU",
@@ -37,9 +37,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Protein Tracker Australia | Calculate & Hit Your Protein Goal",
-    description:
-      "Calculate how much protein you need, discover high-protein foods and meals, and learn how to reach your daily protein target — then track it with HitProtein.",
     images: ["/og-image.png"],
   },
   icons: {
