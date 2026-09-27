@@ -28,6 +28,7 @@ export default function FiftyGramMealsPage() {
       meals={[
         {
           name: "Chicken Burrito Bowl",
+          image: { src: "/meals/chicken-burrito-bowl.jpg", width: 1408, height: 768 },
           protein: 50,
           serves: "Serves 1",
           ingredients: [
@@ -44,6 +45,7 @@ export default function FiftyGramMealsPage() {
         },
         {
           name: "Steak with Roasted Vegetables",
+          image: { src: "/meals/steak-roasted-vegetables.jpg", width: 1408, height: 768 },
           protein: 50,
           serves: "Serves 1",
           ingredients: [
@@ -59,6 +61,7 @@ export default function FiftyGramMealsPage() {
         },
         {
           name: "Tuna and Egg Salad",
+          image: { src: "/meals/tuna-egg-salad.jpg", width: 1408, height: 768 },
           protein: 50,
           serves: "Serves 1",
           ingredients: [
