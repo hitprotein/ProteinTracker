@@ -1,4 +1,5 @@
 import CtaButton from "@/components/CtaButton";
+import FaqSection from "@/components/FaqSection";
 import type { FAQItem } from "@/lib/content-types";
 
 export interface GuideSection {
@@ -40,19 +41,7 @@ export default function GuidePageTemplate({
           </div>
         ))}
 
-        {faqs.length > 0 && (
-          <>
-            <h2 className="mt-10 text-2xl font-bold">FAQs</h2>
-            <div className="mt-4 space-y-6">
-              {faqs.map((f) => (
-                <div key={f.q}>
-                  <h3 className="font-semibold">{f.q}</h3>
-                  <p className="mt-1 text-pt-black/80">{f.a}</p>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
+        <FaqSection faqs={faqs} />
 
         <div className="mt-12 rounded-card bg-pt-black p-8 text-center text-pt-white">
           <p className="font-heading text-xl font-bold">{ctaHeading}</p>
@@ -64,23 +53,6 @@ export default function GuidePageTemplate({
           </div>
         </div>
       </article>
-
-      {faqs.length > 0 && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              mainEntity: faqs.map((f) => ({
-                "@type": "Question",
-                name: f.q,
-                acceptedAnswer: { "@type": "Answer", text: f.a },
-              })),
-            }),
-          }}
-        />
-      )}
     </>
   );
 }

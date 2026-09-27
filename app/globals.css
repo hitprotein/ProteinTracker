@@ -22,8 +22,14 @@
     @apply underline-offset-2;
   }
 
+  /* Dark ring on the light page, lime ring inside dark sections — a lime
+     ring on the off-white background is close to invisible. */
   :focus-visible {
-    outline: 2px solid #b4ff00;
+    outline: 2px solid theme("colors.pt-black");
     outline-offset: 2px;
+  }
+
+  .bg-pt-black :focus-visible {
+    outline-color: theme("colors.pt-green");
   }
 }

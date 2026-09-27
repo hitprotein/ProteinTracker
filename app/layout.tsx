@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Inter } from "next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import CookieConsent from "@/components/CookieConsent";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 import "./globals.css";
 
 const heading = Manrope({
@@ -25,11 +27,11 @@ export const metadata: Metadata = {
   },
   description:
     "Calculate how much protein you need, discover high-protein foods and meals, and learn how to reach your daily protein target — then track it with HitProtein.",
+  // Only the sitewide parts of the share card live here. Title and
+  // description fall through from each page's own metadata, and og:url is
+  // left out so scrapers use the canonical URL. Hardcoding them here made
+  // every page share as the homepage.
   openGraph: {
-    title: "Protein Tracker Australia | Calculate & Hit Your Protein Goal",
-    description:
-      "Calculate how much protein you need, discover high-protein foods and meals, and learn how to reach your daily protein target — then track it with HitProtein.",
-    url: "https://proteintracker.com.au",
     siteName: "ProteinTracker.com.au",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     locale: "en_AU",
@@ -37,9 +39,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Protein Tracker Australia | Calculate & Hit Your Protein Goal",
-    description:
-      "Calculate how much protein you need, discover high-protein foods and meals, and learn how to reach your daily protein target — then track it with HitProtein.",
     images: ["/og-image.png"],
   },
   icons: {
@@ -58,6 +57,16 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
 };
+
+const FOOTER_LINKS = [
+  { label: "Protein Calculator", href: "/protein-calculator" },
+  { label: "Meal Calculator", href: "/protein-meal-calculator" },
+  { label: "Protein Tracker", href: "/protein-tracker" },
+  { label: "AI Protein Tracker", href: "/ai-protein-tracker" },
+  { label: "High Protein Foods", href: "/protein-foods" },
+  { label: "High Protein Meals", href: "/protein-meals" },
+  { label: "Protein Guides", href: "/protein-guides" },
+];
 
 export const viewport: Viewport = {
   themeColor: "#0B0D0C",
@@ -92,11 +101,18 @@ export default function RootLayout({
             ]),
           }}
         />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-pt-green focus:px-5 focus:py-2 focus:font-semibold focus:text-pt-black"
+        >
+          Skip to content
+        </a>
+
         <CookieConsent />
 
         <SiteHeader />
 
-        <main>{children}</main>
+        <main id="main">{children}</main>
 
         <footer className="mt-24 border-t border-pt-black/10 bg-pt-black py-12 text-pt-white">
           <div className="mx-auto max-w-6xl px-6">
@@ -114,7 +130,21 @@ export default function RootLayout({
               height={49}
               className="mt-3 h-5 w-auto"
             />
-            <p className="mt-4 max-w-xl text-sm text-pt-white/60">
+            <nav aria-label="Footer" className="mt-8">
+              <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-pt-white/80">
+                {FOOTER_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="hover:text-pt-white">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <CookieSettingsButton className="hover:text-pt-white" />
+                </li>
+              </ul>
+            </nav>
+            <p className="mt-8 max-w-xl text-sm text-pt-white/60">
               Nutrition figures are sourced from Australian government
               references (FSANZ AUSNUT/NUTTAB, Eat for Health) where
               available and are approximate — actual values vary by brand,
