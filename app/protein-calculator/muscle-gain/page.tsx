@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import CalculatorPageTemplate from "../CalculatorPageTemplate";
 
 export const metadata: Metadata = {
@@ -67,9 +68,9 @@ export default function MuscleGainCalculatorPage() {
               reasonably calorie-efficient package — useful since building
               muscle also usually means eating in a slight calorie surplus.
               See{" "}
-              <a href="/protein-meals" className="font-semibold text-pt-black underline">
+              <Link href="/protein-meals" className="font-semibold text-pt-black underline">
                 40g and 50g protein meal ideas
-              </a>{" "}
+              </Link>{" "}
               for meals sized around a muscle-building target.
             </p>
           ),

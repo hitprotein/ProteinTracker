@@ -1,3 +1,4 @@
+import Link from "next/link";
 import CtaButton from "@/components/CtaButton";
 import FaqSection from "@/components/FaqSection";
 import type { FAQItem } from "@/lib/content-types";
@@ -85,16 +86,16 @@ export default function FoodPageTemplate({
             <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-pt-black/80">
               {relatedFoods.map((f) => (
                 <li key={f.href}>
-                  <a href={f.href} className="font-semibold text-pt-black underline">
+                  <Link href={f.href} className="font-semibold text-pt-black underline">
                     {f.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
               {relatedMeal && (
                 <li>
-                  <a href={relatedMeal.href} className="font-semibold text-pt-black underline">
+                  <Link href={relatedMeal.href} className="font-semibold text-pt-black underline">
                     {relatedMeal.name}
-                  </a>
+                  </Link>
                 </li>
               )}
             </ul>

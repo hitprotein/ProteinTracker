@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import GuidePageTemplate from "../GuidePageTemplate";
 
 export const metadata: Metadata = {
@@ -87,9 +88,9 @@ export default function HowMuchProteinGuide() {
               General ranges are useful for understanding the topic, but
               they're not a substitute for a number based on your actual
               weight, age, activity and goal. Our{" "}
-              <a href="/protein-calculator" className="font-semibold text-pt-black underline">
+              <Link href="/protein-calculator" className="font-semibold text-pt-black underline">
                 protein calculator
-              </a>{" "}
+              </Link>{" "}
               runs the same calculation used in the HitProtein app to give
               you a specific daily target rather than a broad range.
             </p>

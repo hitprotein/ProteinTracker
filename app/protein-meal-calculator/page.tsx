@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import MealCalculator from "./MealCalculator";
 
 export const metadata: Metadata = {
@@ -35,18 +36,18 @@ export default function ProteinMealCalculatorPage() {
             way to your target, then suggests a smaller side (Greek yoghurt
             or cottage cheese) to close the gap — a combination similar to
             how the meal ideas on our{" "}
-            <a href="/protein-meals" className="font-semibold text-pt-black underline">
+            <Link href="/protein-meals" className="font-semibold text-pt-black underline">
               protein meals pages
-            </a>{" "}
+            </Link>{" "}
             are built.
           </p>
           <p className="text-sm text-pt-black/50">
             This gives a genuinely useful starting combination, not an exact
             prescription — actual protein content varies by brand and exact
             serving size, as explained on each food's page in our{" "}
-            <a href="/protein-foods" className="font-semibold text-pt-black underline">
+            <Link href="/protein-foods" className="font-semibold text-pt-black underline">
               protein foods guide
-            </a>
+            </Link>
             .
           </p>
         </div>

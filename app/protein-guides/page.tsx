@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Protein Guides — How Much Protein Do You Actually Need?",
@@ -46,22 +47,22 @@ export default function ProteinGuidesPage() {
       <section className="mx-auto max-w-3xl px-6 py-16">
         <div className="grid gap-4 sm:grid-cols-2">
           {guides.map((g) => (
-            <a
+            <Link
               key={g.href}
               href={g.href}
               className="rounded-card border border-pt-black/10 bg-pt-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <p className="font-heading text-lg font-bold">{g.name}</p>
               <p className="mt-2 text-sm text-pt-black/60">{g.body}</p>
-            </a>
+            </Link>
           ))}
         </div>
 
         <p className="mt-10 text-pt-black/80">
           Want your actual number rather than general guidance? Use the{" "}
-          <a href="/protein-calculator" className="font-semibold text-pt-black underline">
+          <Link href="/protein-calculator" className="font-semibold text-pt-black underline">
             protein calculator
-          </a>
+          </Link>
           .
         </p>
       </section>

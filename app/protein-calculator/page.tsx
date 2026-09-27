@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import CalculatorPageTemplate from "./CalculatorPageTemplate";
 
 export const metadata: Metadata = {
@@ -93,9 +94,9 @@ export default function ProteinCalculatorPage() {
               Chicken breast, eggs, Greek yoghurt, lean beef, tuna, salmon,
               cottage cheese, milk and tofu are all efficient ways to hit a
               daily protein target without excess calories. See our{" "}
-              <a href="/protein-foods" className="font-semibold text-pt-black underline">
+              <Link href="/protein-foods" className="font-semibold text-pt-black underline">
                 protein foods guide
-              </a>{" "}
+              </Link>{" "}
               for exact amounts per serving.
             </p>
           ),
@@ -109,12 +110,12 @@ export default function ProteinCalculatorPage() {
               synthesis responds better to repeated moderate doses through
               the day than to one very large serving. If you're not sure
               what that looks like in practice, our{" "}
-              <a
+              <Link
                 href="/protein-meal-calculator"
                 className="font-semibold text-pt-black underline"
               >
                 protein meal calculator
-              </a>{" "}
+              </Link>{" "}
               can suggest food combinations for a specific per-meal target.
             </p>
           ),
@@ -124,29 +125,29 @@ export default function ProteinCalculatorPage() {
           body: (
             <ul className="grid gap-2 sm:grid-cols-2">
               <li>
-                <a href="/protein-calculator/weight-loss" className="font-semibold text-pt-black underline">
+                <Link href="/protein-calculator/weight-loss" className="font-semibold text-pt-black underline">
                   Protein calculator for weight loss
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/protein-calculator/muscle-gain" className="font-semibold text-pt-black underline">
+                <Link href="/protein-calculator/muscle-gain" className="font-semibold text-pt-black underline">
                   Protein calculator for muscle gain
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/protein-calculator/women" className="font-semibold text-pt-black underline">
+                <Link href="/protein-calculator/women" className="font-semibold text-pt-black underline">
                   Protein calculator for women
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/protein-calculator/men" className="font-semibold text-pt-black underline">
+                <Link href="/protein-calculator/men" className="font-semibold text-pt-black underline">
                   Protein calculator for men
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/protein-calculator/over-50" className="font-semibold text-pt-black underline">
+                <Link href="/protein-calculator/over-50" className="font-semibold text-pt-black underline">
                   Protein calculator over 50
-                </a>
+                </Link>
               </li>
             </ul>
           ),

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import GuidePageTemplate from "../GuidePageTemplate";
 
 export const metadata: Metadata = {
@@ -65,17 +66,17 @@ export default function HowMuchProteinPerMealGuide() {
               Rather than guessing, aim for a rough per-meal target based on
               your daily total split across 3–4 meals, and check it against
               real food combinations. Our{" "}
-              <a href="/protein-meals" className="font-semibold text-pt-black underline">
+              <Link href="/protein-meals" className="font-semibold text-pt-black underline">
                 30g, 40g and 50g protein meal pages
-              </a>{" "}
+              </Link>{" "}
               show exactly what that looks like with real ingredients, and
               the{" "}
-              <a
+              <Link
                 href="/protein-meal-calculator"
                 className="font-semibold text-pt-black underline"
               >
                 protein meal calculator
-              </a>{" "}
+              </Link>{" "}
               can suggest a combination for any specific gram target.
             </p>
           ),

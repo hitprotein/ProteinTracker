@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import GuidePageTemplate from "../GuidePageTemplate";
 
 export const metadata: Metadata = {
@@ -51,12 +52,12 @@ export default function ProteinForWeightLossGuide() {
               the 2.0–2.4g per kilogram range calculated off a
               partially-adjusted reference weight, particularly for people
               with meaningful fat to lose. Our{" "}
-              <a
+              <Link
                 href="/protein-calculator/weight-loss"
                 className="font-semibold text-pt-black underline"
               >
                 protein calculator for weight loss
-              </a>{" "}
+              </Link>{" "}
               calculates this automatically based on your current weight,
               goal weight and activity level.
             </p>

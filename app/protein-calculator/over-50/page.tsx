@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import CalculatorPageTemplate from "../CalculatorPageTemplate";
 
 export const metadata: Metadata = {
@@ -56,9 +57,9 @@ export default function Over50CalculatorPage() {
               across 3–4 meals rather than one large one, tends to work
               better than trying to eat a large amount in a single sitting.
               See our{" "}
-              <a href="/protein-foods" className="font-semibold text-pt-black underline">
+              <Link href="/protein-foods" className="font-semibold text-pt-black underline">
                 protein foods guide
-              </a>{" "}
+              </Link>{" "}
               for protein-dense options.
             </p>
           ),
