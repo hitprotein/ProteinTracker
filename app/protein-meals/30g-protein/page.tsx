@@ -13,6 +13,7 @@ export default function ThirtyGramMealsPage() {
   return (
     <MealsPageTemplate
       h1="30g Protein Meals"
+      targetProtein={30}
       subtitle="Solid meals or snack-sized portions that add up quickly across a day."
       intro={
         <p>
@@ -28,6 +29,9 @@ export default function ThirtyGramMealsPage() {
       meals={[
         {
           name: "Greek Yoghurt Protein Bowl",
+          description:
+            "A no-cook breakfast bowl of thick Greek yoghurt swirled with peanut butter and topped with berries.",
+          category: "Breakfast",
           image: { src: "/meals/greek-yoghurt-protein-bowl.jpg", width: 1408, height: 768 },
           protein: 30,
           serves: "Serves 1",
@@ -44,6 +48,9 @@ export default function ThirtyGramMealsPage() {
         },
         {
           name: "3-Egg Veggie Omelette with Cheddar",
+          description:
+            "A quick omelette with an extra egg white, spinach, mushrooms and melted cheddar.",
+          category: "Breakfast",
           image: { src: "/meals/3-egg-veggie-omelette.jpg", width: 1408, height: 768 },
           protein: 30,
           serves: "Serves 1",
@@ -60,6 +67,9 @@ export default function ThirtyGramMealsPage() {
         },
         {
           name: "Tuna and Cottage Cheese Salad",
+          description:
+            "A no-cook salad of tuna and cottage cheese over mixed greens with a lemon and olive oil dressing.",
+          category: "Lunch",
           image: { src: "/meals/tuna-cottage-cheese-salad.jpg", width: 1408, height: 768 },
           protein: 30,
           serves: "Serves 1",

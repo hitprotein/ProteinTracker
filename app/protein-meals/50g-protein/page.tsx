@@ -13,6 +13,7 @@ export default function FiftyGramMealsPage() {
   return (
     <MealsPageTemplate
       h1="50g Protein Meals"
+      targetProtein={50}
       subtitle="Bigger meals for higher protein targets — useful if you're building muscle or have a demanding daily goal."
       intro={
         <p>
@@ -28,6 +29,10 @@ export default function FiftyGramMealsPage() {
       meals={[
         {
           name: "Chicken Burrito Bowl",
+          description:
+            "Sliced grilled chicken layered over rice and black beans with cheese, salsa, lettuce and lime.",
+          category: "Dinner",
+          cuisine: "Mexican",
           image: { src: "/meals/chicken-burrito-bowl.jpg", width: 1408, height: 768 },
           protein: 50,
           serves: "Serves 1",
@@ -45,6 +50,9 @@ export default function FiftyGramMealsPage() {
         },
         {
           name: "Steak with Roasted Vegetables",
+          description:
+            "Grilled lean steak with roasted potato, pumpkin, zucchini and capsicum, plus a side salad.",
+          category: "Dinner",
           image: { src: "/meals/steak-roasted-vegetables.jpg", width: 1408, height: 768 },
           protein: 50,
           serves: "Serves 1",
@@ -61,6 +69,9 @@ export default function FiftyGramMealsPage() {
         },
         {
           name: "Tuna and Egg Salad",
+          description:
+            "A filling salad of tuna and boiled eggs with greens, cucumber and tomato.",
+          category: "Lunch",
           image: { src: "/meals/tuna-egg-salad.jpg", width: 1408, height: 768 },
           protein: 50,
           serves: "Serves 1",
