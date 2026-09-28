@@ -121,7 +121,7 @@ export default function ProteinForMuscleGainGuide() {
         },
       ]}
       ctaHeading="Building muscle and want meal ideas to match?"
-      ctaBody="See our 40g and 50g protein meal ideas, or let HitProtein's Protein Coach suggest meals based on your goal."
+      ctaBody="See our 40g, 50g and 60g protein meal ideas, or let HitProtein's Protein Coach suggest meals based on your goal."
     />
   );
 }

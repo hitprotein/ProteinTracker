@@ -11,21 +11,40 @@ export interface MealIdea {
   // Only where the dish clearly belongs to one (e.g. "Mexican") — leave unset
   // rather than guess.
   cuisine?: string;
+  // Whole-meal figures: every listed ingredient, not just the main protein.
+  // Estimates from standard per-100g values — check against AUSNUT.
   protein: number;
+  calories: number;
+  prepMinutes: number;
+  // Leave unset for no-cook meals.
+  cookMinutes?: number;
   serves: string;
   ingredients: string[];
   method: string;
   substitutions: string;
   // Path under /public, e.g. "/meals/tuna-cottage-cheese-salad.jpg". Google
-  // only shows a Recipe rich result when the schema includes an image, so
-  // every meal should get one; the card simply renders without it until then.
+  // treats a Recipe without an image as invalid, so a meal only gets Recipe
+  // JSON-LD once it has one; until then the card renders without a photo.
   image?: { src: string; width: number; height: number };
 }
 
 const SITE_URL = "https://proteintracker.com.au";
 
+const isoMinutes = (m: number) => `PT${m}M`;
+
+// Serves, calories and times as separate chunks so a narrow card wraps
+// between them rather than mid-chunk ("Cook 40 / min").
+function metaChunks(meal: MealIdea): string[] {
+  return [
+    meal.serves,
+    `~${meal.calories} kcal`,
+    `Prep ${meal.prepMinutes} min`,
+    meal.cookMinutes ? `Cook ${meal.cookMinutes} min` : "No cooking",
+  ];
+}
+
 // Built from the meal's own fields so the keywords can't drift from the page.
-// Uses the page's target (30/40/50g), not the meal's exact figure — people
+// Uses the page's target (30/40/50/60g), not the meal's exact figure — people
 // search "40g protein dinner", not "39g".
 function mealKeywords(meal: MealIdea, targetProtein: number): string {
   return [
@@ -85,7 +104,14 @@ export default function MealsPageTemplate({
                   ~{meal.protein}g protein
                 </span>
               </div>
-              <p className="mt-1 text-sm text-pt-black/50">{meal.serves}</p>
+              <p className="mt-1 flex flex-wrap gap-x-2 text-sm text-pt-black/50">
+                {metaChunks(meal).map((chunk, j) => (
+                  <span key={chunk} className="whitespace-nowrap">
+                    {j > 0 && <span aria-hidden="true">· </span>}
+                    {chunk}
+                  </span>
+                ))}
+              </p>
               <p className="mt-3 text-pt-black/80">{meal.description}</p>
 
               <div className="mt-4 grid gap-6 sm:grid-cols-2">
@@ -128,7 +154,7 @@ export default function MealsPageTemplate({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
-            meals.map((meal) => ({
+            meals.filter((meal) => meal.image).map((meal) => ({
               "@context": "https://schema.org",
               "@type": "Recipe",
               name: meal.name,
@@ -141,12 +167,16 @@ export default function MealsPageTemplate({
               recipeCategory: meal.category,
               ...(meal.cuisine && { recipeCuisine: meal.cuisine }),
               keywords: mealKeywords(meal, targetProtein),
-              ...(meal.image && { image: [`${SITE_URL}${meal.image.src}`] }),
+              prepTime: isoMinutes(meal.prepMinutes),
+              ...(meal.cookMinutes && { cookTime: isoMinutes(meal.cookMinutes) }),
+              totalTime: isoMinutes(meal.prepMinutes + (meal.cookMinutes ?? 0)),
+              image: [`${SITE_URL}${meal.image!.src}`],
               recipeYield: meal.serves,
               recipeIngredient: meal.ingredients,
               recipeInstructions: meal.method,
               nutrition: {
                 "@type": "NutritionInformation",
+                calories: `${meal.calories} calories`,
                 proteinContent: `${meal.protein}g`,
               },
             }))

@@ -67,7 +67,7 @@ export default function HowMuchProteinPerMealGuide() {
               your daily total split across 3–4 meals, and check it against
               real food combinations. Our{" "}
               <Link href="/protein-meals" className="font-semibold text-pt-black underline">
-                30g, 40g and 50g protein meal pages
+                30g, 40g, 50g and 60g protein meal pages
               </Link>{" "}
               show exactly what that looks like with real ingredients, and
               the{" "}

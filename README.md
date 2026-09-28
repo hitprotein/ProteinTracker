@@ -66,6 +66,16 @@ For every food/meal/guide page:
    cited source before merge.
 3. Note the source under each data table/footnote.
 
+Meal pages (`app/protein-meals/`):
+- Protein and calories are **whole-meal** totals — every listed
+  ingredient, not just the main protein source. A meal goes on the page
+  whose target (30/40/50/60g) its total is closest to.
+- Meat and fish amounts are **cooked weight**, matching the per-100g
+  figures on the food pages; say so in the ingredient line.
+- A meal only gets Recipe schema once it has a photo (Google treats a
+  Recipe without an image as invalid). Add photos to `public/meals/` at
+  1408×768 and set the meal's `image`.
+
 ## Calculator
 
 `lib/protein-calculator.ts` is the single source of truth for protein

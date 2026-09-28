@@ -27,62 +27,69 @@ export default function FortyGramMealsPage() {
       }
       meals={[
         {
-          name: "Chicken and Rice Bowl",
+          name: "Cottage Cheese Scrambled Eggs on Toast",
           description:
-            "Grilled chicken breast over rice with capsicum, broccoli and carrot — an easy meal-prep staple.",
-          category: "Dinner",
-          image: { src: "/meals/chicken-rice-bowl.jpg", width: 1408, height: 768 },
-          protein: 40,
+            "Soft scrambled eggs with cottage cheese and spinach folded through, served on wholegrain toast.",
+          category: "Breakfast",
+          protein: 39,
+          calories: 555,
+          prepMinutes: 5,
+          cookMinutes: 5,
           serves: "Serves 1",
           ingredients: [
-            "130g grilled chicken breast",
+            "3 large eggs",
+            "100g cottage cheese",
+            "2 slices wholegrain toast",
+            "Handful spinach",
+            "1 tsp butter",
+          ],
+          method:
+            "Whisk the eggs, cook gently in butter over low heat, then stir through the cottage cheese and spinach just before they set. Serve on toast.",
+          substitutions:
+            "Ricotta works in place of cottage cheese but has a little less protein; any bread works in place of wholegrain.",
+        },
+        {
+          name: "Chicken Salad Wrap",
+          description:
+            "A quick no-cook lunch of sliced chicken breast and crunchy salad rolled in a wholemeal wrap.",
+          category: "Lunch",
+          protein: 41,
+          calories: 420,
+          prepMinutes: 10,
+          serves: "Serves 1",
+          ingredients: [
+            "110g chicken breast (cooked weight), sliced",
+            "1 large wholemeal wrap",
+            "Lettuce, tomato and cucumber",
+            "1 tbsp light mayonnaise",
+          ],
+          method:
+            "Spread the mayonnaise over the wrap, layer the salad and chicken down the middle, then fold in the ends and roll up.",
+          substitutions:
+            "Leftover roast chicken works well; swap the mayonnaise for Greek yoghurt to add a little more protein.",
+        },
+        {
+          name: "Tofu and Edamame Stir-Fry",
+          description:
+            "A plant-based stir-fry of crispy tofu and edamame with vegetables over rice.",
+          category: "Dinner",
+          protein: 39,
+          calories: 650,
+          prepMinutes: 10,
+          cookMinutes: 15,
+          serves: "Serves 1",
+          ingredients: [
+            "170g firm tofu, cubed",
+            "100g shelled edamame",
             "1 cup cooked rice",
-            "Mixed vegetables (capsicum, broccoli, carrot)",
-            "Soy sauce or a sauce of your choice",
+            "Stir-fry vegetables (broccoli, capsicum, snow peas)",
+            "1 tbsp soy sauce",
+            "1 tsp oil",
           ],
           method:
-            "Grill or pan-fry chicken breast, serve over rice with steamed or stir-fried vegetables.",
+            "Pan-fry the tofu in oil until golden, add the vegetables and edamame and stir-fry for a few minutes, then toss with soy sauce and serve over rice.",
           substitutions:
-            "Swap chicken for turkey breast; swap rice for quinoa or noodles without changing the protein much.",
-        },
-        {
-          name: "Beef Mince Tacos",
-          description:
-            "Two tacos filled with seasoned lean beef mince, salsa, lettuce, tomato and cheese.",
-          category: "Dinner",
-          cuisine: "Mexican",
-          image: { src: "/meals/beef-mince-tacos.jpg", width: 1408, height: 768 },
-          protein: 39,
-          serves: "Serves 1 (2–3 tacos)",
-          ingredients: [
-            "150g lean beef mince, cooked",
-            "2 small tortillas",
-            "Lettuce, tomato, salsa",
-            "20g shredded cheese",
-          ],
-          method:
-            "Brown mince with taco seasoning, fill tortillas with mince, lettuce, tomato, salsa and cheese.",
-          substitutions:
-            "Swap beef mince for chicken mince or lentils for a lower-fat or plant-based version.",
-        },
-        {
-          name: "Grilled Salmon with Quinoa",
-          description:
-            "Grilled salmon on quinoa with steamed greens and a squeeze of lemon.",
-          category: "Dinner",
-          image: { src: "/meals/grilled-salmon-quinoa.jpg", width: 1408, height: 768 },
-          protein: 39,
-          serves: "Serves 1",
-          ingredients: [
-            "170g salmon fillet",
-            "3/4 cup cooked quinoa",
-            "Steamed greens (broccolini, beans or spinach)",
-            "Lemon wedge",
-          ],
-          method:
-            "Grill or bake salmon skin-side down until just cooked through, serve over quinoa with steamed greens.",
-          substitutions:
-            "Swap salmon for any firm white fish; swap quinoa for rice or couscous.",
+            "Extra-firm tofu has more protein per 100g than firm; frozen edamame works straight from the freezer.",
         },
       ]}
     />

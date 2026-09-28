@@ -69,7 +69,7 @@ export default function MuscleGainCalculatorPage() {
               muscle also usually means eating in a slight calorie surplus.
               See{" "}
               <Link href="/protein-meals" className="font-semibold text-pt-black underline">
-                40g and 50g protein meal ideas
+                40g, 50g and 60g protein meal ideas
               </Link>{" "}
               for meals sized around a muscle-building target.
             </p>

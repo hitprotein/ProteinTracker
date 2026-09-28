@@ -18,7 +18,7 @@ const foods = [
   { name: "Salmon", href: "/protein-foods/salmon", protein: "23g / 100g" },
   { name: "Cottage Cheese", href: "/protein-foods/cottage-cheese", protein: "11g / 100g" },
   { name: "Milk", href: "/protein-foods/milk", protein: "3.4g / 100ml" },
-  { name: "Tofu", href: "/protein-foods/tofu", protein: "8g / 100g" },
+  { name: "Tofu", href: "/protein-foods/tofu", protein: "12g / 100g" },
 ];
 
 export default function ProteinFoodsPage() {
