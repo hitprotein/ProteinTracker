@@ -26,64 +26,6 @@ export default function FortyGramMealsPage() {
         </p>
       }
       meals={[
-        {
-          name: "Chicken and Rice Bowl",
-          description:
-            "Grilled chicken breast over rice with capsicum, broccoli and carrot — an easy meal-prep staple.",
-          category: "Dinner",
-          image: { src: "/meals/chicken-rice-bowl.jpg", width: 1408, height: 768 },
-          protein: 40,
-          serves: "Serves 1",
-          ingredients: [
-            "130g grilled chicken breast",
-            "1 cup cooked rice",
-            "Mixed vegetables (capsicum, broccoli, carrot)",
-            "Soy sauce or a sauce of your choice",
-          ],
-          method:
-            "Grill or pan-fry chicken breast, serve over rice with steamed or stir-fried vegetables.",
-          substitutions:
-            "Swap chicken for turkey breast; swap rice for quinoa or noodles without changing the protein much.",
-        },
-        {
-          name: "Beef Mince Tacos",
-          description:
-            "Two tacos filled with seasoned lean beef mince, salsa, lettuce, tomato and cheese.",
-          category: "Dinner",
-          cuisine: "Mexican",
-          image: { src: "/meals/beef-mince-tacos.jpg", width: 1408, height: 768 },
-          protein: 39,
-          serves: "Serves 1 (2–3 tacos)",
-          ingredients: [
-            "150g lean beef mince, cooked",
-            "2 small tortillas",
-            "Lettuce, tomato, salsa",
-            "20g shredded cheese",
-          ],
-          method:
-            "Brown mince with taco seasoning, fill tortillas with mince, lettuce, tomato, salsa and cheese.",
-          substitutions:
-            "Swap beef mince for chicken mince or lentils for a lower-fat or plant-based version.",
-        },
-        {
-          name: "Grilled Salmon with Quinoa",
-          description:
-            "Grilled salmon on quinoa with steamed greens and a squeeze of lemon.",
-          category: "Dinner",
-          image: { src: "/meals/grilled-salmon-quinoa.jpg", width: 1408, height: 768 },
-          protein: 39,
-          serves: "Serves 1",
-          ingredients: [
-            "170g salmon fillet",
-            "3/4 cup cooked quinoa",
-            "Steamed greens (broccolini, beans or spinach)",
-            "Lemon wedge",
-          ],
-          method:
-            "Grill or bake salmon skin-side down until just cooked through, serve over quinoa with steamed greens.",
-          substitutions:
-            "Swap salmon for any firm white fish; swap quinoa for rice or couscous.",
-        },
       ]}
     />
   );

@@ -34,9 +34,11 @@ export default function ThirtyGramMealsPage() {
           category: "Breakfast",
           image: { src: "/meals/greek-yoghurt-protein-bowl.jpg", width: 1408, height: 768 },
           protein: 30,
+          calories: 460,
+          prepMinutes: 5,
           serves: "Serves 1",
           ingredients: [
-            "250g plain Greek yoghurt",
+            "250g plain Greek yoghurt (full-fat)",
             "1 tbsp peanut butter",
             "Handful of berries",
             "1 tsp honey (optional)",
@@ -44,7 +46,7 @@ export default function ThirtyGramMealsPage() {
           method:
             "Spoon yoghurt into a bowl, swirl through peanut butter, and top with berries.",
           substitutions:
-            "Swap peanut butter for any nut butter; swap berries for any fruit without changing the protein much.",
+            "Swap peanut butter for any nut butter; swap berries for any fruit without changing the protein much. Reduced-fat yoghurt has the same protein and about 135 fewer calories.",
         },
         {
           name: "3-Egg Veggie Omelette with Cheddar",
@@ -52,13 +54,17 @@ export default function ThirtyGramMealsPage() {
             "A quick omelette with an extra egg white, spinach, mushrooms and melted cheddar.",
           category: "Breakfast",
           image: { src: "/meals/3-egg-veggie-omelette.jpg", width: 1408, height: 768 },
-          protein: 30,
+          protein: 32,
+          calories: 415,
+          prepMinutes: 5,
+          cookMinutes: 10,
           serves: "Serves 1",
           ingredients: [
             "3 large eggs + 1 extra egg white",
             "30g shredded cheddar",
             "Handful spinach",
             "2–3 mushrooms, sliced",
+            "1 tsp olive oil",
           ],
           method:
             "Whisk eggs and egg white, cook spinach and mushrooms briefly, pour in egg mixture, top with cheddar and fold once set.",
@@ -71,13 +77,15 @@ export default function ThirtyGramMealsPage() {
             "A no-cook salad of tuna and cottage cheese over mixed greens with a lemon and olive oil dressing.",
           category: "Lunch",
           image: { src: "/meals/tuna-cottage-cheese-salad.jpg", width: 1408, height: 768 },
-          protein: 30,
+          protein: 32,
+          calories: 320,
+          prepMinutes: 10,
           serves: "Serves 1",
           ingredients: [
             "80g tuna, drained",
             "100g cottage cheese",
             "Mixed salad greens",
-            "Olive oil and lemon dressing",
+            "1 tbsp olive oil and a squeeze of lemon",
           ],
           method:
             "Toss salad greens with olive oil and lemon, top with tuna and cottage cheese.",

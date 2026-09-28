@@ -11,7 +11,13 @@ export interface MealIdea {
   // Only where the dish clearly belongs to one (e.g. "Mexican") — leave unset
   // rather than guess.
   cuisine?: string;
+  // Whole-meal figures: every listed ingredient, not just the main protein.
+  // Estimates from standard per-100g values — check against AUSNUT.
   protein: number;
+  calories: number;
+  prepMinutes: number;
+  // Leave unset for no-cook meals.
+  cookMinutes?: number;
   serves: string;
   ingredients: string[];
   method: string;
@@ -23,6 +29,19 @@ export interface MealIdea {
 }
 
 const SITE_URL = "https://proteintracker.com.au";
+
+const isoMinutes = (m: number) => `PT${m}M`;
+
+// Serves, calories and times as separate chunks so a narrow card wraps
+// between them rather than mid-chunk ("Cook 40 / min").
+function metaChunks(meal: MealIdea): string[] {
+  return [
+    meal.serves,
+    `~${meal.calories} kcal`,
+    `Prep ${meal.prepMinutes} min`,
+    meal.cookMinutes ? `Cook ${meal.cookMinutes} min` : "No cooking",
+  ];
+}
 
 // Built from the meal's own fields so the keywords can't drift from the page.
 // Uses the page's target (30/40/50g), not the meal's exact figure — people
@@ -85,7 +104,14 @@ export default function MealsPageTemplate({
                   ~{meal.protein}g protein
                 </span>
               </div>
-              <p className="mt-1 text-sm text-pt-black/50">{meal.serves}</p>
+              <p className="mt-1 flex flex-wrap gap-x-2 text-sm text-pt-black/50">
+                {metaChunks(meal).map((chunk, j) => (
+                  <span key={chunk} className="whitespace-nowrap">
+                    {j > 0 && <span aria-hidden="true">· </span>}
+                    {chunk}
+                  </span>
+                ))}
+              </p>
               <p className="mt-3 text-pt-black/80">{meal.description}</p>
 
               <div className="mt-4 grid gap-6 sm:grid-cols-2">
@@ -141,12 +167,16 @@ export default function MealsPageTemplate({
               recipeCategory: meal.category,
               ...(meal.cuisine && { recipeCuisine: meal.cuisine }),
               keywords: mealKeywords(meal, targetProtein),
+              prepTime: isoMinutes(meal.prepMinutes),
+              ...(meal.cookMinutes && { cookTime: isoMinutes(meal.cookMinutes) }),
+              totalTime: isoMinutes(meal.prepMinutes + (meal.cookMinutes ?? 0)),
               ...(meal.image && { image: [`${SITE_URL}${meal.image.src}`] }),
               recipeYield: meal.serves,
               recipeIngredient: meal.ingredients,
               recipeInstructions: meal.method,
               nutrition: {
                 "@type": "NutritionInformation",
+                calories: `${meal.calories} calories`,
                 proteinContent: `${meal.protein}g`,
               },
             }))
