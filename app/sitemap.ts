@@ -33,6 +33,7 @@ const routes: { path: string; priority: number; changeFrequency: "weekly" | "mon
   { path: "/protein-meals/30g-protein", priority: 0.7, changeFrequency: "monthly" },
   { path: "/protein-meals/40g-protein", priority: 0.7, changeFrequency: "monthly" },
   { path: "/protein-meals/50g-protein", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/protein-meals/60g-protein", priority: 0.7, changeFrequency: "monthly" },
   { path: "/protein-meal-calculator", priority: 0.8, changeFrequency: "monthly" },
 
   { path: "/protein-guides", priority: 0.7, changeFrequency: "monthly" },

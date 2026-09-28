@@ -20,7 +20,7 @@ const sections = [
   {
     name: "High Protein Meals",
     href: "/protein-meals",
-    body: "Simple 30g, 40g and 50g protein meals, with ingredients, method and swaps.",
+    body: "Simple 30g, 40g, 50g and 60g protein meals, with ingredients, method and swaps.",
   },
   {
     name: "Protein Guides",

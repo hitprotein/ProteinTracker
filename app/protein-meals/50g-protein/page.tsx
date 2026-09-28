@@ -140,30 +140,6 @@ export default function FiftyGramMealsPage() {
           substitutions:
             "Swap steak for a thick salmon fillet at a similar weight for a similar protein total.",
         },
-        {
-          name: "Chicken Burrito Bowl",
-          description:
-            "Sliced grilled chicken layered over rice and black beans with cheese, salsa, lettuce and lime.",
-          category: "Dinner",
-          cuisine: "Mexican",
-          image: { src: "/meals/chicken-burrito-bowl.jpg", width: 1408, height: 768 },
-          protein: 65,
-          calories: 640,
-          prepMinutes: 10,
-          cookMinutes: 15,
-          serves: "Serves 1",
-          ingredients: [
-            "160g grilled chicken breast",
-            "3/4 cup cooked rice",
-            "1/2 cup black beans",
-            "20g shredded cheese",
-            "Salsa, lettuce, lime",
-          ],
-          method:
-            "Grill chicken and slice, layer rice, beans, chicken, cheese and toppings in a bowl.",
-          substitutions:
-            "Swap chicken for beef mince or firm tofu; swap black beans for kidney beans.",
-        },
       ]}
     />
   );

@@ -44,7 +44,7 @@ function metaChunks(meal: MealIdea): string[] {
 }
 
 // Built from the meal's own fields so the keywords can't drift from the page.
-// Uses the page's target (30/40/50g), not the meal's exact figure — people
+// Uses the page's target (30/40/50/60g), not the meal's exact figure — people
 // search "40g protein dinner", not "39g".
 function mealKeywords(meal: MealIdea, targetProtein: number): string {
   return [

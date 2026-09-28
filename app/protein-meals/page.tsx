@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "High Protein Meal Ideas — 30g, 40g and 50g Protein Meals",
+  title: "High Protein Meal Ideas — 30g, 40g, 50g and 60g Protein Meals",
   description:
-    "Real meal ideas built around specific protein targets, with ingredients, method and protein per serving. Find meals for 30g, 40g and 50g of protein.",
+    "Real meal ideas built around specific protein targets, with ingredients, method and protein per serving. Find meals for 30g, 40g, 50g and 60g of protein.",
   alternates: { canonical: "/protein-meals" },
 };
 
@@ -12,6 +12,7 @@ const targets = [
   { name: "30g Protein Meals", href: "/protein-meals/30g-protein", body: "Lighter meals and snacks-sized portions" },
   { name: "40g Protein Meals", href: "/protein-meals/40g-protein", body: "Standard main-meal protein target" },
   { name: "50g Protein Meals", href: "/protein-meals/50g-protein", body: "Larger meals for higher daily targets" },
+  { name: "60g Protein Meals", href: "/protein-meals/60g-protein", body: "The biggest meals, for high targets and heavy training days" },
 ];
 
 export default function ProteinMealsPage() {
@@ -28,7 +29,7 @@ export default function ProteinMealsPage() {
       </section>
 
       <section className="mx-auto max-w-3xl px-6 py-16">
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2">
           {targets.map((t) => (
             <Link
               key={t.href}
