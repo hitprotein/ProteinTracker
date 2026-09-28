@@ -3,6 +3,14 @@ import CtaButton from "@/components/CtaButton";
 
 export interface MealIdea {
   name: string;
+  // One-sentence summary, shown on the card and used as the Recipe
+  // description. Avoid numbers other than protein — those need fact-checking.
+  description: string;
+  // Recipe schema category, e.g. "Breakfast", "Lunch", "Dinner".
+  category: string;
+  // Only where the dish clearly belongs to one (e.g. "Mexican") — leave unset
+  // rather than guess.
+  cuisine?: string;
   protein: number;
   serves: string;
   ingredients: string[];
@@ -16,11 +24,23 @@ export interface MealIdea {
 
 const SITE_URL = "https://proteintracker.com.au";
 
+// Built from the meal's own fields so the keywords can't drift from the page.
+// Uses the page's target (30/40/50g), not the meal's exact figure — people
+// search "40g protein dinner", not "39g".
+function mealKeywords(meal: MealIdea, targetProtein: number): string {
+  return [
+    `${targetProtein}g protein ${meal.category.toLowerCase()}`,
+    `high protein ${meal.category.toLowerCase()}`,
+    meal.name.toLowerCase(),
+  ].join(", ");
+}
+
 interface MealsPageTemplateProps {
   h1: string;
   subtitle: string;
   intro: React.ReactNode;
   meals: MealIdea[];
+  targetProtein: number;
 }
 
 export default function MealsPageTemplate({
@@ -28,6 +48,7 @@ export default function MealsPageTemplate({
   subtitle,
   intro,
   meals,
+  targetProtein,
 }: MealsPageTemplateProps) {
   return (
     <>
@@ -65,6 +86,7 @@ export default function MealsPageTemplate({
                 </span>
               </div>
               <p className="mt-1 text-sm text-pt-black/50">{meal.serves}</p>
+              <p className="mt-3 text-pt-black/80">{meal.description}</p>
 
               <div className="mt-4 grid gap-6 sm:grid-cols-2">
                 <div>
@@ -110,6 +132,15 @@ export default function MealsPageTemplate({
               "@context": "https://schema.org",
               "@type": "Recipe",
               name: meal.name,
+              description: meal.description,
+              author: {
+                "@type": "Organization",
+                name: "ProteinTracker.com.au",
+                url: SITE_URL,
+              },
+              recipeCategory: meal.category,
+              ...(meal.cuisine && { recipeCuisine: meal.cuisine }),
+              keywords: mealKeywords(meal, targetProtein),
               ...(meal.image && { image: [`${SITE_URL}${meal.image.src}`] }),
               recipeYield: meal.serves,
               recipeIngredient: meal.ingredients,

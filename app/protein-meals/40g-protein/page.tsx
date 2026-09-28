@@ -13,6 +13,7 @@ export default function FortyGramMealsPage() {
   return (
     <MealsPageTemplate
       h1="40g Protein Meals"
+      targetProtein={40}
       subtitle="A solid main-meal protein target — enough to make real progress toward most people's daily goal in one sitting."
       intro={
         <p>
@@ -27,6 +28,9 @@ export default function FortyGramMealsPage() {
       meals={[
         {
           name: "Chicken and Rice Bowl",
+          description:
+            "Grilled chicken breast over rice with capsicum, broccoli and carrot — an easy meal-prep staple.",
+          category: "Dinner",
           image: { src: "/meals/chicken-rice-bowl.jpg", width: 1408, height: 768 },
           protein: 40,
           serves: "Serves 1",
@@ -43,6 +47,10 @@ export default function FortyGramMealsPage() {
         },
         {
           name: "Beef Mince Tacos",
+          description:
+            "Two tacos filled with seasoned lean beef mince, salsa, lettuce, tomato and cheese.",
+          category: "Dinner",
+          cuisine: "Mexican",
           image: { src: "/meals/beef-mince-tacos.jpg", width: 1408, height: 768 },
           protein: 39,
           serves: "Serves 1 (2–3 tacos)",
@@ -59,6 +67,9 @@ export default function FortyGramMealsPage() {
         },
         {
           name: "Grilled Salmon with Quinoa",
+          description:
+            "Grilled salmon on quinoa with steamed greens and a squeeze of lemon.",
+          category: "Dinner",
           image: { src: "/meals/grilled-salmon-quinoa.jpg", width: 1408, height: 768 },
           protein: 39,
           serves: "Serves 1",
