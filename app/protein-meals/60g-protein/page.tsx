@@ -62,7 +62,7 @@ export default function SixtyGramMealsPage() {
           cookMinutes: 15,
           serves: "Serves 1",
           ingredients: [
-            "140g chicken breast, diced",
+            "140g chicken breast (cooked weight), diced",
             "80g dry pasta",
             "150g tomato passata",
             "15g grated parmesan",
@@ -84,7 +84,7 @@ export default function SixtyGramMealsPage() {
           cookMinutes: 10,
           serves: "Serves 1",
           ingredients: [
-            "170g lean beef strips (rump or sirloin)",
+            "170g lean beef strips, rump or sirloin (cooked weight)",
             "150g broccoli florets",
             "1 cup cooked rice",
             "1 tbsp soy sauce",
@@ -108,7 +108,7 @@ export default function SixtyGramMealsPage() {
           cookMinutes: 15,
           serves: "Serves 1",
           ingredients: [
-            "160g grilled chicken breast",
+            "160g chicken breast (cooked weight)",
             "3/4 cup cooked rice",
             "1/2 cup black beans",
             "20g shredded cheese",

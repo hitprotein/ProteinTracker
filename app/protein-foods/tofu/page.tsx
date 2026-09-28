@@ -4,7 +4,7 @@ import FoodPageTemplate from "../FoodPageTemplate";
 export const metadata: Metadata = {
   title: "Protein in Tofu — Per 100g and by Firmness",
   description:
-    "How much protein is in tofu? Around 8g per 100g for firm tofu. See protein by serving size and how firmness changes the number.",
+    "How much protein is in tofu? Around 12g per 100g for firm tofu. See protein by serving size and how firmness changes the number.",
   alternates: { canonical: "/protein-foods/tofu" },
 };
 
@@ -12,7 +12,7 @@ export default function TofuPage() {
   return (
     <FoodPageTemplate
       h1="Protein in Tofu"
-      proteinPer100g={8}
+      proteinPer100g={12}
       prepDescription="firm tofu, raw"
       servings={[
         { label: "100g", grams: 100 },
@@ -41,10 +41,10 @@ export default function TofuPage() {
             you, choose firm or extra-firm.
           </p>
           <p>
-            Some brands, particularly higher-protein or "high-protein" firm
-            tofu products, press out even more water and can reach 12g or
-            more per 100g — worth checking the label if you're buying
-            specifically for protein content.
+            Some brands, particularly extra-firm or "high-protein" tofu
+            products, press out even more water and come in higher again —
+            worth checking the label if you're buying specifically for
+            protein content.
           </p>
         </>
       }
@@ -62,7 +62,7 @@ export default function TofuPage() {
       faqs={[
         {
           q: "How much protein is in 200g of tofu?",
-          a: "Around 16g for firm tofu — roughly 8g per 100g scaled up. Higher-protein firm tofu brands can reach closer to 24g for the same weight.",
+          a: "Around 24g for firm tofu — roughly 12g per 100g scaled up. Extra-firm and high-protein brands can be higher again, so check the label.",
         },
         {
           q: "Does silken tofu have less protein than firm tofu?",

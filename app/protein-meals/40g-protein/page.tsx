@@ -58,7 +58,7 @@ export default function FortyGramMealsPage() {
           prepMinutes: 10,
           serves: "Serves 1",
           ingredients: [
-            "110g cooked chicken breast, sliced",
+            "110g chicken breast (cooked weight), sliced",
             "1 large wholemeal wrap",
             "Lettuce, tomato and cucumber",
             "1 tbsp light mayonnaise",
@@ -74,12 +74,12 @@ export default function FortyGramMealsPage() {
             "A plant-based stir-fry of crispy tofu and edamame with vegetables over rice.",
           category: "Dinner",
           protein: 39,
-          calories: 645,
+          calories: 650,
           prepMinutes: 10,
           cookMinutes: 15,
           serves: "Serves 1",
           ingredients: [
-            "250g firm tofu, cubed",
+            "170g firm tofu, cubed",
             "100g shelled edamame",
             "1 cup cooked rice",
             "Stir-fry vegetables (broccoli, capsicum, snow peas)",

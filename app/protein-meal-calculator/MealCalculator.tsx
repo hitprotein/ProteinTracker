@@ -11,7 +11,7 @@ const PRIMARY_FOODS = [
   { value: "beef_mince", label: "Lean beef mince", proteinPer100g: 26 },
   { value: "salmon", label: "Salmon", proteinPer100g: 23 },
   { value: "tuna", label: "Tuna (drained)", proteinPer100g: 25 },
-  { value: "tofu", label: "Firm tofu", proteinPer100g: 8 },
+  { value: "tofu", label: "Firm tofu", proteinPer100g: 12 },
 ] as const;
 
 const SECONDARY = { label: "Greek yoghurt", proteinPer100g: 10 };
@@ -131,8 +131,9 @@ export default function MealCalculator() {
               ≈{result.total}g protein
             </p>
             <p className="mt-2 text-xs text-pt-white/50">
-              Rice and vegetables add a small amount of protein too — this
-              estimate is based on the two main protein sources above.
+              Meat and fish weights are cooked weight. Rice and vegetables
+              add a small amount of protein too — this estimate is based on
+              the two main protein sources above.
             </p>
 
             <div className="mt-6 border-t border-pt-white/10 pt-6">

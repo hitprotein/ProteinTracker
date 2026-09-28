@@ -23,8 +23,8 @@ export interface MealIdea {
   method: string;
   substitutions: string;
   // Path under /public, e.g. "/meals/tuna-cottage-cheese-salad.jpg". Google
-  // only shows a Recipe rich result when the schema includes an image, so
-  // every meal should get one; the card simply renders without it until then.
+  // treats a Recipe without an image as invalid, so a meal only gets Recipe
+  // JSON-LD once it has one; until then the card renders without a photo.
   image?: { src: string; width: number; height: number };
 }
 
@@ -154,7 +154,7 @@ export default function MealsPageTemplate({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
-            meals.map((meal) => ({
+            meals.filter((meal) => meal.image).map((meal) => ({
               "@context": "https://schema.org",
               "@type": "Recipe",
               name: meal.name,
@@ -170,7 +170,7 @@ export default function MealsPageTemplate({
               prepTime: isoMinutes(meal.prepMinutes),
               ...(meal.cookMinutes && { cookTime: isoMinutes(meal.cookMinutes) }),
               totalTime: isoMinutes(meal.prepMinutes + (meal.cookMinutes ?? 0)),
-              ...(meal.image && { image: [`${SITE_URL}${meal.image.src}`] }),
+              image: [`${SITE_URL}${meal.image!.src}`],
               recipeYield: meal.serves,
               recipeIngredient: meal.ingredients,
               recipeInstructions: meal.method,

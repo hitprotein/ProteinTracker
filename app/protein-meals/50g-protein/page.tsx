@@ -39,7 +39,7 @@ export default function FiftyGramMealsPage() {
           cookMinutes: 15,
           serves: "Serves 1",
           ingredients: [
-            "130g grilled chicken breast",
+            "130g chicken breast (cooked weight)",
             "1 cup cooked rice",
             "Mixed vegetables (capsicum, broccoli, carrot)",
             "Soy sauce or a sauce of your choice",
@@ -62,7 +62,7 @@ export default function FiftyGramMealsPage() {
           cookMinutes: 15,
           serves: "Serves 1",
           ingredients: [
-            "170g salmon fillet",
+            "170g salmon fillet (cooked weight)",
             "3/4 cup cooked quinoa",
             "Steamed greens (broccolini, beans or spinach)",
             "Lemon wedge",
@@ -85,7 +85,7 @@ export default function FiftyGramMealsPage() {
           cookMinutes: 10,
           serves: "Serves 1 (2 tacos)",
           ingredients: [
-            "150g lean beef mince, cooked",
+            "150g lean beef mince (cooked weight)",
             "2 small tortillas",
             "Lettuce, tomato, salsa",
             "20g shredded cheese",
@@ -129,7 +129,7 @@ export default function FiftyGramMealsPage() {
           cookMinutes: 40,
           serves: "Serves 1",
           ingredients: [
-            "160g lean steak (rump or eye fillet)",
+            "160g lean steak, rump or eye fillet (cooked weight)",
             "Roasted potato or sweet potato",
             "Roasted vegetables (pumpkin, zucchini, capsicum)",
             "Side salad",
