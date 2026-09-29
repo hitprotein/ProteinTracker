@@ -77,6 +77,7 @@ export default function SixtyGramMealsPage() {
         },
         {
           name: "Beef and Broccoli Stir-Fry",
+          image: { src: "/meals/beef-broccoli-stir-fry.jpg", width: 1408, height: 768 },
           description:
             "Quick-seared lean beef strips and broccoli in a soy glaze, served over rice.",
           category: "Dinner",
