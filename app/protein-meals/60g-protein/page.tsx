@@ -30,6 +30,7 @@ export default function SixtyGramMealsPage() {
       meals={[
         {
           name: "Smoked Salmon, Eggs and Cottage Cheese on Toast",
+          image: { src: "/meals/smoked-salmon-eggs-toast.jpg", width: 1408, height: 768 },
           description:
             "A big weekend breakfast of scrambled eggs, smoked salmon and cottage cheese on wholegrain toast.",
           category: "Breakfast",
@@ -52,6 +53,7 @@ export default function SixtyGramMealsPage() {
         },
         {
           name: "Chicken and Tomato Pasta",
+          image: { src: "/meals/chicken-tomato-pasta.jpg", width: 1408, height: 768 },
           description:
             "Pan-fried chicken breast tossed through pasta with a simple tomato sauce and parmesan.",
           category: "Dinner",

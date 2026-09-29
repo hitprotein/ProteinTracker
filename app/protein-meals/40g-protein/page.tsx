@@ -28,6 +28,7 @@ export default function FortyGramMealsPage() {
       meals={[
         {
           name: "Cottage Cheese Scrambled Eggs on Toast",
+          image: { src: "/meals/cottage-cheese-scrambled-eggs.jpg", width: 1408, height: 768 },
           description:
             "Soft scrambled eggs with cottage cheese and spinach folded through, served on wholegrain toast.",
           category: "Breakfast",
@@ -50,6 +51,7 @@ export default function FortyGramMealsPage() {
         },
         {
           name: "Chicken Salad Wrap",
+          image: { src: "/meals/chicken-salad-wrap.jpg", width: 1408, height: 768 },
           description:
             "A quick no-cook lunch of sliced chicken breast and crunchy salad rolled in a wholemeal wrap.",
           category: "Lunch",
@@ -70,6 +72,7 @@ export default function FortyGramMealsPage() {
         },
         {
           name: "Tofu and Edamame Stir-Fry",
+          image: { src: "/meals/tofu-edamame-stir-fry.jpg", width: 1408, height: 768 },
           description:
             "A plant-based stir-fry of crispy tofu and edamame with vegetables over rice.",
           category: "Dinner",
