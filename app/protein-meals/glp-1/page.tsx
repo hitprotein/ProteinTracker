@@ -116,7 +116,7 @@ export default function Glp1MealsPage() {
         },
         {
           name: "Smoked Salmon and Cottage Cheese Crispbreads",
-          image: { src: "/meals/smoked-salmon-cottage-cheese-crispbreads.jpg", width: 1408, height: 768 },
+          image: { src: "/meals/smoked-salmon-crispbreads-small.jpg", width: 1408, height: 768 },
           description:
             "Rye crispbreads topped with cottage cheese, smoked salmon and cucumber — a protein-packed snack or light meal.",
           category: "Snack",
