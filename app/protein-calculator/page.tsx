@@ -149,6 +149,11 @@ export default function ProteinCalculatorPage() {
                   Protein calculator over 50
                 </Link>
               </li>
+              <li>
+                <Link href="/protein-calculator/glp-1" className="font-semibold text-pt-black underline">
+                  GLP-1 protein calculator
+                </Link>
+              </li>
             </ul>
           ),
         },

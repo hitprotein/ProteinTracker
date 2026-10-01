@@ -4,9 +4,9 @@ import GuidePageTemplate from "../GuidePageTemplate";
 import Glp1References from "@/components/Glp1References";
 
 export const metadata: Metadata = {
-  title: "Protein and GLP-1: A Practical Guide for Australians",
+  title: { absolute: "Protein and GLP-1: A Practical Guide for Australians" },
   description:
-    "How much protein published guidance suggests on GLP-1-based medicines, how to hit it when your appetite is smaller, and when to involve your doctor or dietitian. Fully referenced.",
+    "How much protein published guidance suggests on GLP-1-based medicines, how to reach it with a smaller appetite, and when to see your GP or dietitian.",
   alternates: { canonical: "/protein-guides/protein-and-glp-1" },
 };
 
@@ -130,7 +130,7 @@ export default function ProteinAndGlp1Guide() {
           a: "Your prescriber or GP, or an Accredited Practising Dietitian, who can set a personal target, especially if you have kidney disease or another health condition.",
         },
       ]}
-      footer={<Glp1References />}
+      footer={<Glp1References path="/protein-guides/protein-and-glp-1" />}
       ctaHeading="Want to see where your protein actually lands?"
       ctaBody="HitProtein tracks your daily protein and can estimate it from a photo of your meal. It's a food-tracking app, not medical advice."
     />
