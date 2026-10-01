@@ -80,6 +80,23 @@ export default function WeightLossCalculatorPage() {
             </p>
           ),
         },
+        {
+          heading: "On a GLP-1-based medicine?",
+          body: (
+            <p>
+              If you&apos;re eating much less than usual on a prescribed GLP-1-based medicine, published guidance uses
+              different protein ranges. See our{" "}
+              <Link href="/protein-calculator/glp-1" className="font-semibold text-pt-black underline">
+                GLP-1 protein calculator
+              </Link>{" "}
+              and{" "}
+              <Link href="/protein-guides/protein-and-glp-1" className="font-semibold text-pt-black underline">
+                guide to protein and GLP-1
+              </Link>
+              , and check with your healthcare team.
+            </p>
+          ),
+        },
       ]}
       faqs={[
         {

@@ -12,6 +12,7 @@ const CALCULATE_LINKS = [
   { label: "For Women", href: "/protein-calculator/women" },
   { label: "For Men", href: "/protein-calculator/men" },
   { label: "Over 50", href: "/protein-calculator/over-50" },
+  { label: "GLP-1 Protein", href: "/protein-calculator/glp-1" },
   { label: "Meal Calculator", href: "/protein-meal-calculator" },
 ];
 

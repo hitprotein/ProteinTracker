@@ -13,6 +13,7 @@ const routes: { path: string; priority: number; changeFrequency: "weekly" | "mon
   { path: "/protein-calculator/women", priority: 0.7, changeFrequency: "monthly" },
   { path: "/protein-calculator/men", priority: 0.7, changeFrequency: "monthly" },
   { path: "/protein-calculator/over-50", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/protein-calculator/glp-1", priority: 0.8, changeFrequency: "monthly" },
 
   { path: "/protein-tracker", priority: 0.9, changeFrequency: "monthly" },
   { path: "/ai-protein-tracker", priority: 0.8, changeFrequency: "monthly" },
@@ -41,6 +42,7 @@ const routes: { path: string; priority: number; changeFrequency: "weekly" | "mon
   { path: "/protein-guides/protein-for-muscle-gain", priority: 0.6, changeFrequency: "monthly" },
   { path: "/protein-guides/protein-for-weight-loss", priority: 0.6, changeFrequency: "monthly" },
   { path: "/protein-guides/how-much-protein-per-meal", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/protein-guides/protein-and-glp-1", priority: 0.7, changeFrequency: "monthly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
