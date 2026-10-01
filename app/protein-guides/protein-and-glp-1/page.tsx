@@ -78,6 +78,11 @@ export default function ProteinAndGlp1Guide() {
                 low [1]. Check with your doctor first if you have kidney problems.
               </li>
               <li>
+                For recipes, see our{" "}
+                <Link href="/protein-meals/glp-1" className={linkCls}>small high-protein meals</Link>, each with 20–30g
+                of protein in a smaller portion.
+              </li>
+              <li>
                 Track for a few days to see where you&apos;re actually landing. Most people are surprised how far short
                 they are.
               </li>

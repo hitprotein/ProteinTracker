@@ -44,11 +44,11 @@ function metaChunks(meal: MealIdea): string[] {
 }
 
 // Built from the meal's own fields so the keywords can't drift from the page.
-// Uses the page's target (30/40/50/60g), not the meal's exact figure — people
-// search "40g protein dinner", not "39g".
-function mealKeywords(meal: MealIdea, targetProtein: number): string {
+// `base` is the page's keyword phrase: by default its target (30/40/50/60g),
+// not the meal's exact figure — people search "40g protein dinner", not "39g".
+function mealKeywords(meal: MealIdea, base: string): string {
   return [
-    `${targetProtein}g protein ${meal.category.toLowerCase()}`,
+    `${base} ${meal.category.toLowerCase()}`,
     `high protein ${meal.category.toLowerCase()}`,
     meal.name.toLowerCase(),
   ].join(", ");
@@ -60,6 +60,9 @@ interface MealsPageTemplateProps {
   intro: React.ReactNode;
   meals: MealIdea[];
   targetProtein: number;
+  // Overrides the "<target>g protein" keyword phrase, for pages not built
+  // around a gram target (e.g. "small high protein").
+  keywordBase?: string;
 }
 
 export default function MealsPageTemplate({
@@ -68,6 +71,7 @@ export default function MealsPageTemplate({
   intro,
   meals,
   targetProtein,
+  keywordBase = `${targetProtein}g protein`,
 }: MealsPageTemplateProps) {
   return (
     <>
@@ -166,7 +170,7 @@ export default function MealsPageTemplate({
               },
               recipeCategory: meal.category,
               ...(meal.cuisine && { recipeCuisine: meal.cuisine }),
-              keywords: mealKeywords(meal, targetProtein),
+              keywords: mealKeywords(meal, keywordBase),
               prepTime: isoMinutes(meal.prepMinutes),
               ...(meal.cookMinutes && { cookTime: isoMinutes(meal.cookMinutes) }),
               totalTime: isoMinutes(meal.prepMinutes + (meal.cookMinutes ?? 0)),
