@@ -52,6 +52,7 @@ export default function Glp1MealsPage() {
       meals={[
         {
           name: "Greek Yoghurt Berry Pot",
+          image: { src: "/meals/greek-yoghurt-berry-pot.jpg", width: 1408, height: 768 },
           description:
             "A small no-cook breakfast of thick Greek yoghurt topped with berries and chopped almonds.",
           category: "Breakfast",
@@ -71,6 +72,7 @@ export default function Glp1MealsPage() {
         },
         {
           name: "Tuna and White Bean Salad",
+          image: { src: "/meals/tuna-white-bean-salad.jpg", width: 1408, height: 768 },
           description:
             "A light, no-cook lunch of tuna and cannellini beans tossed with crunchy salad and lemon.",
           category: "Lunch",
@@ -91,6 +93,7 @@ export default function Glp1MealsPage() {
         },
         {
           name: "Mini Chicken and Veg Stir-Fry",
+          image: { src: "/meals/mini-chicken-veg-stir-fry.jpg", width: 1408, height: 768 },
           description:
             "A smaller stir-fry of chicken and vegetables over a half serve of rice.",
           category: "Dinner",
@@ -113,6 +116,7 @@ export default function Glp1MealsPage() {
         },
         {
           name: "Smoked Salmon and Cottage Cheese Crispbreads",
+          image: { src: "/meals/smoked-salmon-cottage-cheese-crispbreads.jpg", width: 1408, height: 768 },
           description:
             "Rye crispbreads topped with cottage cheese, smoked salmon and cucumber — a protein-packed snack or light meal.",
           category: "Snack",
