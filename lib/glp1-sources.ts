@@ -29,5 +29,11 @@ export const GLP1_SOURCES = [
   },
 ] as const;
 
+// Bump whenever the GLP-1 pages' guidance, numbers or sources change. Shown
+// on both pages as "Last updated" and output as the page's dateModified.
+// Switch the label to "Reviewed by <name>, APD" once an Accredited Practising
+// Dietitian has actually reviewed the pages.
+export const GLP1_LAST_UPDATED = "2026-10-01";
+
 export const GLP1_DISCLAIMER =
   "General information only, not medical advice. ProteinTracker.com.au doesn't recommend, prescribe or supply any medicine and isn't affiliated with any pharmaceutical company. If you take a prescribed medicine, talk to your prescriber, GP or an Accredited Practising Dietitian before changing how you eat.";

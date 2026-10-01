@@ -5,9 +5,11 @@ import Glp1References from "@/components/Glp1References";
 import FaqSection from "@/components/FaqSection";
 
 export const metadata: Metadata = {
-  title: "GLP-1 Protein Calculator: How Much Protein Do I Need on GLP-1?",
+  // Absolute so the site-name suffix doesn't push the key phrase past ~60
+  // characters, where Google truncates titles.
+  title: { absolute: "GLP-1 Protein Calculator: How Much Protein Do You Need?" },
   description:
-    "Free GLP-1 protein calculator for Australians. See the daily protein range published guidance suggests when you're eating less on a GLP-1-based medicine, with sources and per-meal targets.",
+    "Free GLP-1 protein calculator for Australians. See the daily protein range published guidance suggests when you're eating less, with per-meal targets.",
   alternates: { canonical: "/protein-calculator/glp-1" },
 };
 
@@ -112,7 +114,7 @@ export default function Glp1CalculatorPage() {
         </div>
 
         <FaqSection faqs={faqs} />
-        <Glp1References />
+        <Glp1References path="/protein-calculator/glp-1" />
       </article>
     </>
   );

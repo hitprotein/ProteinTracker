@@ -32,6 +32,7 @@ const sections = [
 const popular = [
   { name: "Protein for weight loss", href: "/protein-calculator/weight-loss" },
   { name: "Protein for muscle gain", href: "/protein-calculator/muscle-gain" },
+  { name: "GLP-1 protein calculator", href: "/protein-calculator/glp-1" },
   { name: "Protein meal calculator", href: "/protein-meal-calculator" },
   { name: "Protein in chicken breast", href: "/protein-foods/chicken-breast" },
   { name: "Protein in eggs", href: "/protein-foods/eggs" },
