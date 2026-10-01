@@ -29,6 +29,11 @@ const guides = [
     href: "/protein-guides/how-much-protein-per-meal",
     body: "The leucine threshold, meal spacing, and why one big meal falls short",
   },
+  {
+    name: "Protein and GLP-1",
+    href: "/protein-guides/protein-and-glp-1",
+    body: "Referenced guidance on protein when you're eating less on a GLP-1-based medicine",
+  },
 ];
 
 export default function ProteinGuidesPage() {

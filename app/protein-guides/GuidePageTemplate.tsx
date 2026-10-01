@@ -14,6 +14,7 @@ interface GuidePageTemplateProps {
   faqs: FAQItem[];
   ctaHeading?: string;
   ctaBody?: string;
+  footer?: React.ReactNode; // e.g. references, rendered after FAQs
 }
 
 export default function GuidePageTemplate({
@@ -23,6 +24,7 @@ export default function GuidePageTemplate({
   faqs,
   ctaHeading = "Ready to know your own number?",
   ctaBody = "HitProtein sets your personalised target automatically and tracks it as you eat.",
+  footer,
 }: GuidePageTemplateProps) {
   return (
     <>
@@ -42,6 +44,7 @@ export default function GuidePageTemplate({
         ))}
 
         <FaqSection faqs={faqs} />
+        {footer}
 
         <div className="mt-12 rounded-card bg-pt-black p-8 text-center text-pt-white">
           <p className="font-heading text-xl font-bold">{ctaHeading}</p>
