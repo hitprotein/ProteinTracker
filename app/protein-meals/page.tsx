@@ -13,6 +13,7 @@ const targets = [
   { name: "40g Protein Meals", href: "/protein-meals/40g-protein", body: "Standard main-meal protein target" },
   { name: "50g Protein Meals", href: "/protein-meals/50g-protein", body: "Larger meals for higher daily targets" },
   { name: "60g Protein Meals", href: "/protein-meals/60g-protein", body: "The biggest meals, for high targets and heavy training days" },
+  { name: "Small Meals for GLP-1", href: "/protein-meals/glp-1", body: "20–30g of protein in smaller portions, for when you're eating less" },
 ];
 
 export default function ProteinMealsPage() {

@@ -91,6 +91,10 @@ export default function Glp1CalculatorPage() {
               Our <Link href="/protein-meal-calculator" className={linkCls}>protein meal calculator</Link> can help
               you plan meals that hit a per-meal target.
             </li>
+            <li>
+              For ideas, see our <Link href="/protein-meals/glp-1" className={linkCls}>small high-protein meals</Link>,
+              each with 20–30g of protein in a smaller portion.
+            </li>
           </ul>
         </div>
 
