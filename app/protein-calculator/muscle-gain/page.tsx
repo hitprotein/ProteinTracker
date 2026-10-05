@@ -71,7 +71,12 @@ export default function MuscleGainCalculatorPage() {
               <Link href="/protein-meals" className="font-semibold text-pt-black underline">
                 40g, 50g and 60g protein meal ideas
               </Link>{" "}
-              for meals sized around a muscle-building target.
+              for meals sized around a muscle-building target. If you use a
+              shake to top up, our{" "}
+              <Link href="/protein-guides/protein-powder-types" className="font-semibold text-pt-black underline">
+                protein powder comparison
+              </Link>{" "}
+              covers which types suit muscle gain.
             </p>
           ),
         },
