@@ -174,7 +174,9 @@ export default function ProteinPowderTypesGuide() {
               Powder helps when you&apos;re short on time or struggling to reach your number. Find yours with the{" "}
               <Link href="/protein-calculator" className={linkCls}>protein calculator</Link>, and see what a 20–40g
               serve looks like in food on our{" "}
-              <Link href="/protein-meals" className={linkCls}>high-protein meals</Link> pages.
+              <Link href="/protein-meals" className={linkCls}>high-protein meals</Link> pages. Wondering about
+              creatine too? See{" "}
+              <Link href="/protein-guides/creatine-and-protein" className={linkCls}>creatine vs protein</Link>.
             </p>
           ),
         },
