@@ -39,6 +39,11 @@ const guides = [
     href: "/protein-guides/protein-powder-types",
     body: "Whey concentrate vs isolate, casein, soy, pea, plant blends and collagen",
   },
+  {
+    name: "Creatine vs Protein",
+    href: "/protein-guides/creatine-and-protein",
+    body: "What creatine is, how it differs from protein, and whether to take both",
+  },
 ];
 
 export default function ProteinGuidesPage() {
