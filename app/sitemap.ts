@@ -44,6 +44,7 @@ const routes: { path: string; priority: number; changeFrequency: "weekly" | "mon
   { path: "/protein-guides/protein-for-weight-loss", priority: 0.6, changeFrequency: "monthly" },
   { path: "/protein-guides/how-much-protein-per-meal", priority: 0.6, changeFrequency: "monthly" },
   { path: "/protein-guides/protein-and-glp-1", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/protein-guides/protein-powder-types", priority: 0.7, changeFrequency: "monthly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

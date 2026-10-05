@@ -34,6 +34,11 @@ const guides = [
     href: "/protein-guides/protein-and-glp-1",
     body: "Referenced guidance on protein when you're eating less on a GLP-1-based medicine",
   },
+  {
+    name: "Protein Powder Types Compared",
+    href: "/protein-guides/protein-powder-types",
+    body: "Whey concentrate vs isolate, casein, soy, pea, plant blends and collagen",
+  },
 ];
 
 export default function ProteinGuidesPage() {
