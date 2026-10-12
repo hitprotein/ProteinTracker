@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { PUBLISHED_FOODS } from "@/data/foods";
 
 const BASE_URL = "https://proteintracker.com.au";
 
@@ -19,16 +20,13 @@ const routes: { path: string; priority: number; changeFrequency: "weekly" | "mon
   { path: "/ai-protein-tracker", priority: 0.8, changeFrequency: "monthly" },
 
   { path: "/protein-foods", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/protein-foods/chicken-breast", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/protein-foods/eggs", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/protein-foods/greek-yoghurt", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/protein-foods/steak", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/protein-foods/beef-mince", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/protein-foods/tuna", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/protein-foods/salmon", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/protein-foods/cottage-cheese", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/protein-foods/milk", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/protein-foods/tofu", priority: 0.7, changeFrequency: "monthly" },
+  // Food pages come from data/foods.ts: only published foods (with a protein
+  // figure) are listed, so drafts appear here automatically once filled in.
+  ...PUBLISHED_FOODS.map((f) => ({
+    path: `/protein-foods/${f.slug}`,
+    priority: 0.7,
+    changeFrequency: "monthly" as const,
+  })),
 
   { path: "/protein-meals", priority: 0.8, changeFrequency: "monthly" },
   { path: "/protein-meals/30g-protein", priority: 0.7, changeFrequency: "monthly" },

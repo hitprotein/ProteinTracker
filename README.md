@@ -66,6 +66,16 @@ For every food/meal/guide page:
    cited source before merge.
 3. Note the source under each data table/footnote.
 
+Food pages (`app/protein-foods/`):
+- All food data lives in `data/foods.ts`; the hub, every food page and the
+  sitemap are generated from it. Don't hard-code figures in pages.
+- Every figure needs a `source` (FSANZ AUSNUT/NUTTAB dataset + food name/ID,
+  or "Brand panel" for brand items) and stays `verified: false` until
+  checked. Unknown figures are `null` with a `todo` note, never estimated.
+- A food is only published (page, hub row, sitemap) once `proteinPer100g` is
+  filled in. Calories, and so protein per 100 calories, show only when
+  `caloriesPer100g` is filled in.
+
 Meal pages (`app/protein-meals/`):
 - Protein and calories are **whole-meal** totals — every listed
   ingredient, not just the main protein source. A meal goes on the page
