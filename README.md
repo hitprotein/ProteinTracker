@@ -66,6 +66,23 @@ For every food/meal/guide page:
    cited source before merge.
 3. Note the source under each data table/footnote.
 
+Food pages (`app/protein-foods/`):
+- All food data lives in `data/foods.ts`; the hub, every food page and the
+  sitemap are generated from it. Don't hard-code figures in pages.
+- AFCD figures live in `data/afcd-foods.json`, exactly as captured from FSANZ
+  AFCD Release 3.0 (food key, name, link, raw/cooked/as-sold/dry state).
+  Don't retype them in `foods.ts`: an entry picks which value to lead with via
+  `primaryState`, and the rest show as "other forms". Foods not in AFCD use
+  `manual` (brand panel figures).
+- Page copy uses tokens such as `{p}`, `{p:raw}`, `{p@slug}` and `{g:150}`
+  instead of typed numbers (see the top of `data/foods.ts`).
+- Every figure needs a `source` (dataset + food name/ID, or "Brand panel" for
+  brand items) and stays `verified: false` until checked against
+  `foods-factcheck.csv`. Unknown figures are `null` with a `todo` note, never
+  estimated.
+- A food is only published (page, hub row, sitemap) once it has a protein
+  figure. Every page says which form (raw, cooked, as sold, dry) it shows.
+
 Meal pages (`app/protein-meals/`):
 - Protein and calories are **whole-meal** totals — every listed
   ingredient, not just the main protein source. A meal goes on the page

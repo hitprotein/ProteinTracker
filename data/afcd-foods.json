@@ -1,0 +1,1342 @@
+{
+  "_note": "Figures captured from FSANZ Australian Food Composition Database Release 3.0 on 13 Oct 2026. All verified:false until MJ checks each against the linked page. Values are per 100g edible portion. 'state' = raw / cooked / as-sold / dry. Greek yoghurt, edamame and tempeh are NOT in AFCD - need brand nutrition panels.",
+  "foods": [
+    {
+      "slug": "chicken-breast",
+      "name": "Chicken Breast",
+      "category": "Meat",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 22.5,
+          "energyKjPer100g": 412.0,
+          "caloriesPer100g": 98,
+          "proteinPer100kcal": 22.8,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002594",
+            "foodName": "Chicken, breast, lean flesh, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002594"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 29.8,
+          "energyKjPer100g": 598.0,
+          "caloriesPer100g": 143,
+          "proteinPer100kcal": 20.9,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002593",
+            "foodName": "Chicken, breast, lean flesh, grilled, no added fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002593"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked-alt",
+          "proteinPer100g": 29.0,
+          "energyKjPer100g": 637.0,
+          "caloriesPer100g": 152,
+          "proteinPer100kcal": 19.0,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002590",
+            "foodName": "Chicken, breast, lean flesh, baked, no added fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002590"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "chicken-thigh",
+      "name": "Chicken Thigh",
+      "category": "Meat",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 19.1,
+          "energyKjPer100g": 436.0,
+          "caloriesPer100g": 104,
+          "proteinPer100kcal": 18.3,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002806",
+            "foodName": "Chicken, thigh, lean flesh, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002806"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 24.2,
+          "energyKjPer100g": 733.0,
+          "caloriesPer100g": 175,
+          "proteinPer100kcal": 13.8,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002804",
+            "foodName": "Chicken, thigh, lean flesh, baked, no added fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002804"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "chicken-mince",
+      "name": "Chicken Mince",
+      "category": "Meat",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 21.4,
+          "energyKjPer100g": 404.0,
+          "caloriesPer100g": 97,
+          "proteinPer100kcal": 22.2,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002739",
+            "foodName": "Chicken, mince, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002739"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "steak",
+      "name": "Steak (Rump)",
+      "category": "Meat",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 20.4,
+          "energyKjPer100g": 450.0,
+          "caloriesPer100g": 108,
+          "proteinPer100kcal": 19.0,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F000739",
+            "foodName": "Beef, rump steak, lean, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F000739"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 32.0,
+          "energyKjPer100g": 710.0,
+          "caloriesPer100g": 170,
+          "proteinPer100kcal": 18.9,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F000738",
+            "foodName": "Beef, rump steak, lean, grilled, no added fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F000738"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "sirloin-steak",
+      "name": "Sirloin Steak",
+      "category": "Meat",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 24.1,
+          "energyKjPer100g": 480.0,
+          "caloriesPer100g": 115,
+          "proteinPer100kcal": 21.0,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F000810",
+            "foodName": "Beef, sirloin steak, lean, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F000810"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 30.5,
+          "energyKjPer100g": 659.0,
+          "caloriesPer100g": 158,
+          "proteinPer100kcal": 19.4,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F000809",
+            "foodName": "Beef, sirloin steak, lean, grilled, no added fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F000809"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "beef-mince",
+      "name": "Beef Mince (Regular)",
+      "category": "Meat",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 22.4,
+          "energyKjPer100g": 710.0,
+          "caloriesPer100g": 170,
+          "proteinPer100kcal": 13.2,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F000678",
+            "foodName": "Beef, mince, regular fat, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F000678"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 29.5,
+          "energyKjPer100g": 1108.0,
+          "caloriesPer100g": 265,
+          "proteinPer100kcal": 11.1,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F000679",
+            "foodName": "Beef, mince, regular fat, stir-fried, no added fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F000679"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "lean-beef-mince",
+      "name": "Beef Mince (Lean)",
+      "category": "Meat",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 22.9,
+          "energyKjPer100g": 541.0,
+          "caloriesPer100g": 129,
+          "proteinPer100kcal": 17.7,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F000666",
+            "foodName": "Beef, mince, lower fat, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F000666"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 32.3,
+          "energyKjPer100g": 849.0,
+          "caloriesPer100g": 203,
+          "proteinPer100kcal": 15.9,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F000667",
+            "foodName": "Beef, mince, lower fat, stir-fried, no added fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F000667"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "kangaroo",
+      "name": "Kangaroo",
+      "category": "Meat",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 21.4,
+          "energyKjPer100g": 397.0,
+          "caloriesPer100g": 95,
+          "proteinPer100kcal": 22.6,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F004787",
+            "foodName": "Kangaroo, loin fillet, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F004787"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 30.1,
+          "energyKjPer100g": 556.0,
+          "caloriesPer100g": 133,
+          "proteinPer100kcal": 22.7,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F004786",
+            "foodName": "Kangaroo, loin fillet, grilled, no added fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F004786"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "lamb",
+      "name": "Lamb (Leg)",
+      "category": "Meat",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 21.1,
+          "energyKjPer100g": 477.0,
+          "caloriesPer100g": 114,
+          "proteinPer100kcal": 18.5,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F005013",
+            "foodName": "Lamb, leg roast, lean, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F005013"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 30.6,
+          "energyKjPer100g": 742.0,
+          "caloriesPer100g": 177,
+          "proteinPer100kcal": 17.3,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F005014",
+            "foodName": "Lamb, leg roast, lean, roasted, no added fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F005014"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "lamb-mince",
+      "name": "Lamb Mince",
+      "category": "Meat",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 20.4,
+          "energyKjPer100g": 602.0,
+          "caloriesPer100g": 144,
+          "proteinPer100kcal": 14.2,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F005049",
+            "foodName": "Lamb, mince, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F005049"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "pork-fillet",
+      "name": "Pork Fillet",
+      "category": "Meat",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 23.1,
+          "energyKjPer100g": 433.0,
+          "caloriesPer100g": 103,
+          "proteinPer100kcal": 22.3,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F006899",
+            "foodName": "Pork, fillet, lean, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F006899"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "pork-loin",
+      "name": "Pork Loin",
+      "category": "Meat",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 23.3,
+          "energyKjPer100g": 478.0,
+          "caloriesPer100g": 114,
+          "proteinPer100kcal": 20.4,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007037",
+            "foodName": "Pork, loin roast, lean, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007037"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 31.9,
+          "energyKjPer100g": 860.0,
+          "caloriesPer100g": 206,
+          "proteinPer100kcal": 15.5,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007036",
+            "foodName": "Pork, loin roast, lean, baked, no added fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007036"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "turkey-breast",
+      "name": "Turkey Breast",
+      "category": "Meat",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 21.6,
+          "energyKjPer100g": 490.0,
+          "caloriesPer100g": 117,
+          "proteinPer100kcal": 18.4,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F009307",
+            "foodName": "Turkey, breast, lean flesh, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F009307"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 29.4,
+          "energyKjPer100g": 648.0,
+          "caloriesPer100g": 155,
+          "proteinPer100kcal": 19.0,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F009306",
+            "foodName": "Turkey, breast, lean flesh, baked, no added fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F009306"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "ham",
+      "name": "Ham",
+      "category": "Meat",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 17.0,
+          "energyKjPer100g": 467.0,
+          "caloriesPer100g": 112,
+          "proteinPer100kcal": 15.2,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F004299",
+            "foodName": "Ham, leg, lean",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F004299"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "prawns",
+      "name": "Prawns",
+      "category": "Seafood",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 13.2,
+          "energyKjPer100g": 247.0,
+          "caloriesPer100g": 59,
+          "proteinPer100kcal": 22.4,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007422",
+            "foodName": "Prawn, banana, wild, flesh, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007422"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 27.1,
+          "energyKjPer100g": 507.0,
+          "caloriesPer100g": 121,
+          "proteinPer100kcal": 22.4,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007432",
+            "foodName": "Prawn, flesh, cooked from raw, no added fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007432"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "tuna",
+      "name": "Tuna (Canned)",
+      "category": "Seafood",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 26.1,
+          "energyKjPer100g": 540.0,
+          "caloriesPer100g": 129,
+          "proteinPer100kcal": 20.2,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F009300",
+            "foodName": "Tuna, unflavoured, canned in water, drained",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F009300"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "tuna-steak",
+      "name": "Tuna Steak",
+      "category": "Seafood",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 23.4,
+          "energyKjPer100g": 435.0,
+          "caloriesPer100g": 104,
+          "proteinPer100kcal": 22.5,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F009303",
+            "foodName": "Tuna, yellowfin, fillet, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F009303"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "salmon",
+      "name": "Salmon",
+      "category": "Seafood",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 20.5,
+          "energyKjPer100g": 965.0,
+          "caloriesPer100g": 231,
+          "proteinPer100kcal": 8.9,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007827",
+            "foodName": "Salmon, Atlantic, fillet, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007827"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 22.9,
+          "energyKjPer100g": 1078.0,
+          "caloriesPer100g": 258,
+          "proteinPer100kcal": 8.9,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007826",
+            "foodName": "Salmon, Atlantic, fillet, grilled, no added fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007826"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "sardines",
+      "name": "Sardines",
+      "category": "Seafood",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 19.7,
+          "energyKjPer100g": 442.0,
+          "caloriesPer100g": 106,
+          "proteinPer100kcal": 18.6,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007973",
+            "foodName": "Sardine, Australian, whole, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007973"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "barramundi",
+      "name": "Barramundi",
+      "category": "Seafood",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 19.2,
+          "energyKjPer100g": 523.0,
+          "caloriesPer100g": 125,
+          "proteinPer100kcal": 15.4,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F000386",
+            "foodName": "Barramundi, aquacultured, fillet, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F000386"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 26.4,
+          "energyKjPer100g": 717.0,
+          "caloriesPer100g": 171,
+          "proteinPer100kcal": 15.4,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F000385",
+            "foodName": "Barramundi, aquacultured, fillet, grilled, no added fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F000385"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "eggs",
+      "name": "Eggs",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 12.6,
+          "energyKjPer100g": 533.0,
+          "caloriesPer100g": 127,
+          "proteinPer100kcal": 9.9,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F003729",
+            "foodName": "Egg, chicken, whole, raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F003729"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 12.4,
+          "energyKjPer100g": 569.0,
+          "caloriesPer100g": 136,
+          "proteinPer100kcal": 9.1,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F003721",
+            "foodName": "Egg, chicken, whole, hard-boiled",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F003721"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "cottage-cheese",
+      "name": "Cottage Cheese",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 17.0,
+          "energyKjPer100g": 556.0,
+          "caloriesPer100g": 133,
+          "proteinPer100kcal": 12.8,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002435",
+            "foodName": "Cheese, cottage",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002435"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "cheddar-cheese",
+      "name": "Cheddar Cheese",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 24.6,
+          "energyKjPer100g": 1686.0,
+          "caloriesPer100g": 403,
+          "proteinPer100kcal": 6.1,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002414",
+            "foodName": "Cheese, cheddar, natural, regular fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002414"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "light-cheddar",
+      "name": "Cheddar Cheese (Reduced Fat)",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 27.9,
+          "energyKjPer100g": 1356.0,
+          "caloriesPer100g": 324,
+          "proteinPer100kcal": 8.6,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002413",
+            "foodName": "Cheese, cheddar, natural, reduced fat (~25%)",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002413"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "ricotta",
+      "name": "Ricotta",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 10.4,
+          "energyKjPer100g": 636.0,
+          "caloriesPer100g": 152,
+          "proteinPer100kcal": 6.8,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002488",
+            "foodName": "Cheese, ricotta",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002488"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "mozzarella",
+      "name": "Mozzarella",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 22.2,
+          "energyKjPer100g": 1212.0,
+          "caloriesPer100g": 290,
+          "proteinPer100kcal": 7.7,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002472",
+            "foodName": "Cheese, mozzarella",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002472"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "parmesan",
+      "name": "Parmesan",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 32.0,
+          "energyKjPer100g": 1565.0,
+          "caloriesPer100g": 374,
+          "proteinPer100kcal": 8.6,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002479",
+            "foodName": "Cheese, parmesan, fresh, regular fat",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002479"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "haloumi",
+      "name": "Haloumi",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 20.5,
+          "energyKjPer100g": 1277.0,
+          "caloriesPer100g": 305,
+          "proteinPer100kcal": 6.7,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002466",
+            "foodName": "Cheese, haloumi (halloumi)",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002466"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "milk",
+      "name": "Milk (Full Cream)",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 3.4,
+          "energyKjPer100g": 278.0,
+          "caloriesPer100g": 66,
+          "proteinPer100kcal": 5.1,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F005634",
+            "foodName": "Milk, cow, fluid, regular fat (~3.5%)",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F005634"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "light-milk",
+      "name": "Milk (Reduced Fat)",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 3.5,
+          "energyKjPer100g": 188.0,
+          "caloriesPer100g": 45,
+          "proteinPer100kcal": 7.8,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F005614",
+            "foodName": "Milk, cow, fluid, reduced fat (~1%)",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F005614"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "skim-milk",
+      "name": "Milk (Skim)",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 3.7,
+          "energyKjPer100g": 152.0,
+          "caloriesPer100g": 36,
+          "proteinPer100kcal": 10.2,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F005637",
+            "foodName": "Milk, cow, fluid, skim (~0.15% fat)",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F005637"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "natural-yoghurt",
+      "name": "Natural Yoghurt",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 5.3,
+          "energyKjPer100g": 318.0,
+          "caloriesPer100g": 76,
+          "proteinPer100kcal": 7.0,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F009694",
+            "foodName": "Yoghurt, natural, regular fat (~3%)",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F009694"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "high-protein-yoghurt",
+      "name": "High Protein Yoghurt",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 10.0,
+          "energyKjPer100g": 236.0,
+          "caloriesPer100g": 56,
+          "proteinPer100kcal": 17.7,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F009809",
+            "foodName": "Yoghurt, flavoured, low fat (0.2%), intense sweetened, increased protein",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F009809"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "soy-milk",
+      "name": "Soy Milk",
+      "category": "Plant-Based",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 4.5,
+          "energyKjPer100g": 265.0,
+          "caloriesPer100g": 63,
+          "proteinPer100kcal": 7.1,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F008720",
+            "foodName": "Soy beverage, regular fat (~3%), added Ca & vitamins",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F008720"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "tofu",
+      "name": "Tofu (Firm)",
+      "category": "Plant-Based",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 12.8,
+          "energyKjPer100g": 543.0,
+          "caloriesPer100g": 130,
+          "proteinPer100kcal": 9.9,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F009176",
+            "foodName": "Tofu (soy bean curd), firm, as purchased",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F009176"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "tvp",
+      "name": "TVP (Soy Granules)",
+      "category": "Plant-Based",
+      "values": [
+        {
+          "state": "dry",
+          "proteinPer100g": 51.5,
+          "energyKjPer100g": 1339.0,
+          "caloriesPer100g": 320,
+          "proteinPer100kcal": 16.1,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F009147",
+            "foodName": "Textured vegetable protein/soy granules",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F009147"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "plant-based-mince",
+      "name": "Plant-Based Meat",
+      "category": "Plant-Based",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 19.4,
+          "energyKjPer100g": 944.0,
+          "caloriesPer100g": 226,
+          "proteinPer100kcal": 8.6,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F009822",
+            "foodName": "Meat alternative, protein (soy/wheat/pea) base, as purchased",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F009822"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "lentils",
+      "name": "Lentils",
+      "category": "Plant-Based",
+      "values": [
+        {
+          "state": "cooked",
+          "proteinPer100g": 7.3,
+          "energyKjPer100g": 385.0,
+          "caloriesPer100g": 92,
+          "proteinPer100kcal": 7.9,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F005177",
+            "foodName": "Lentil, dried, boiled, drained",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F005177"
+          },
+          "verified": false
+        },
+        {
+          "state": "dry",
+          "proteinPer100g": 23.0,
+          "energyKjPer100g": 1364.0,
+          "caloriesPer100g": 326,
+          "proteinPer100kcal": 7.1,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F005184",
+            "foodName": "Lentil, red, hulled, dry",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F005184"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "chickpeas",
+      "name": "Chickpeas",
+      "category": "Plant-Based",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 6.3,
+          "energyKjPer100g": 474.0,
+          "caloriesPer100g": 113,
+          "proteinPer100kcal": 5.6,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002880",
+            "foodName": "Chickpea, canned, drained",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002880"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 7.2,
+          "energyKjPer100g": 499.0,
+          "caloriesPer100g": 119,
+          "proteinPer100kcal": 6.0,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F002882",
+            "foodName": "Chickpea, dried, boiled, drained",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F002882"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "kidney-beans",
+      "name": "Kidney Beans",
+      "category": "Plant-Based",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 6.6,
+          "energyKjPer100g": 441.0,
+          "caloriesPer100g": 105,
+          "proteinPer100kcal": 6.3,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F000448",
+            "foodName": "Bean, red kidney, canned, drained",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F000448"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "baked-beans",
+      "name": "Baked Beans",
+      "category": "Plant-Based",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 4.8,
+          "energyKjPer100g": 381.0,
+          "caloriesPer100g": 91,
+          "proteinPer100kcal": 5.3,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F000243",
+            "foodName": "Baked beans, canned in tomato sauce",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F000243"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "oats",
+      "name": "Oats",
+      "category": "Grains & Cereals",
+      "values": [
+        {
+          "state": "dry",
+          "proteinPer100g": 12.2,
+          "energyKjPer100g": 1564.0,
+          "caloriesPer100g": 374,
+          "proteinPer100kcal": 3.3,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F006143",
+            "foodName": "Oats, rolled, uncooked",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F006143"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 3.0,
+          "energyKjPer100g": 374.0,
+          "caloriesPer100g": 89,
+          "proteinPer100kcal": 3.4,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007164",
+            "foodName": "Porridge, rolled oats, prepared with water",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007164"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "weet-bix",
+      "name": "Weet-Bix",
+      "category": "Grains & Cereals",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 11.9,
+          "energyKjPer100g": 1418.0,
+          "caloriesPer100g": 339,
+          "proteinPer100kcal": 3.5,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F001844",
+            "foodName": "Breakfast cereal, whole wheat, biscuit, added vitamins & minerals (Sanitarium Weet Bix)",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F001844"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "quinoa",
+      "name": "Quinoa",
+      "category": "Grains & Cereals",
+      "values": [
+        {
+          "state": "dry",
+          "proteinPer100g": 12.9,
+          "energyKjPer100g": 1550.0,
+          "caloriesPer100g": 370,
+          "proteinPer100kcal": 3.5,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007598",
+            "foodName": "Quinoa, uncooked",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007598"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 3.6,
+          "energyKjPer100g": 432.0,
+          "caloriesPer100g": 103,
+          "proteinPer100kcal": 3.5,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007596",
+            "foodName": "Quinoa, cooked in water, no added salt",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007596"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "peanut-butter",
+      "name": "Peanut Butter",
+      "category": "Nuts & Seeds",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 24.3,
+          "energyKjPer100g": 2628.0,
+          "caloriesPer100g": 628,
+          "proteinPer100kcal": 3.9,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F006579",
+            "foodName": "Peanut butter, smooth & crunchy, no added sugar or salt",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F006579"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "almonds",
+      "name": "Almonds",
+      "category": "Nuts & Seeds",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 19.7,
+          "energyKjPer100g": 2386.0,
+          "caloriesPer100g": 570,
+          "proteinPer100kcal": 3.5,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F006081",
+            "foodName": "Nut, almond, with skin, raw, unsalted",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F006081"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "chia-seeds",
+      "name": "Chia Seeds",
+      "category": "Nuts & Seeds",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 23.8,
+          "energyKjPer100g": 1825.0,
+          "caloriesPer100g": 436,
+          "proteinPer100kcal": 5.5,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F008209",
+            "foodName": "Seed, chia, dried",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F008209"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "pumpkin-seeds",
+      "name": "Pumpkin Seeds (Pepitas)",
+      "category": "Nuts & Seeds",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 30.2,
+          "energyKjPer100g": 2249.0,
+          "caloriesPer100g": 538,
+          "proteinPer100kcal": 5.6,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F008212",
+            "foodName": "Seed, pumpkin, hulled & dried",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F008212"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "hemp-seeds",
+      "name": "Hemp Seeds",
+      "category": "Nuts & Seeds",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 29.8,
+          "energyKjPer100g": 2452.0,
+          "caloriesPer100g": 586,
+          "proteinPer100kcal": 5.1,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F009977",
+            "foodName": "Seed, hemp, dried",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F009977"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "whey-protein",
+      "name": "Whey Protein Powder",
+      "category": "Snacks & Supplements",
+      "values": [
+        {
+          "state": "dry",
+          "proteinPer100g": 85.0,
+          "energyKjPer100g": 1568.0,
+          "caloriesPer100g": 375,
+          "proteinPer100kcal": 22.7,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007493",
+            "foodName": "Protein powder, whey based, protein >70%, unfortified",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007493"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "hemp-protein",
+      "name": "Hemp Protein Powder",
+      "category": "Snacks & Supplements",
+      "values": [
+        {
+          "state": "dry",
+          "proteinPer100g": 35.8,
+          "energyKjPer100g": 1400.0,
+          "caloriesPer100g": 335,
+          "proteinPer100kcal": 10.7,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F010642",
+            "foodName": "Protein powder, hemp seed based",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F010642"
+          },
+          "verified": false
+        }
+      ]
+    }
+  ]
+}
