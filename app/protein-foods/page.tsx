@@ -132,7 +132,8 @@ export default function ProteinFoodsPage() {
         </div>
         <p className="mt-3 text-sm text-pt-black/50">
           Figures are approximate. Protein varies by brand, cut and preparation, so check the label for the product
-          you buy.
+          you buy. Calories are worked out from AFCD energy in kilojoules, which uses different conversion factors from
+          food labels, so they may differ slightly from the pack.
         </p>
 
         <h2 id="top-10" className="mt-14 scroll-mt-6 text-2xl font-bold">

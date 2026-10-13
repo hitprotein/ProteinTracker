@@ -12,7 +12,8 @@ export interface MealIdea {
   // rather than guess.
   cuisine?: string;
   // Whole-meal figures: every listed ingredient, not just the main protein.
-  // Estimates from standard per-100g values — check against AUSNUT.
+  // Main protein ingredients use the /protein-foods figures (AFCD or brand
+  // panels, data/foods.ts); the rest are estimates. Check before publishing.
   protein: number;
   calories: number;
   prepMinutes: number;

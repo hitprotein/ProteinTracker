@@ -3,29 +3,29 @@
 import { useEffect, useRef, useState } from "react";
 import CtaButton from "@/components/CtaButton";
 
-// Protein-per-100g figures match the individual food pages under
-// /protein-foods — keep these in sync if those numbers change.
-const PRIMARY_FOODS = [
-  { value: "chicken_breast", label: "Chicken breast", proteinPer100g: 31 },
-  { value: "steak", label: "Lean steak", proteinPer100g: 31 },
-  { value: "beef_mince", label: "Lean beef mince", proteinPer100g: 26 },
-  { value: "salmon", label: "Salmon", proteinPer100g: 23 },
-  { value: "tuna", label: "Tuna (drained)", proteinPer100g: 25 },
-  { value: "tofu", label: "Firm tofu", proteinPer100g: 12 },
-] as const;
-
-const SECONDARY = { label: "Greek yoghurt", proteinPer100g: 10 };
-const SECONDARY_ALT = { label: "Cottage cheese", proteinPer100g: 11 };
+// Foods and their protein-per-100g figures come from data/foods.ts via the
+// page, so they always match the /protein-foods pages.
+export interface CalculatorFood {
+  value: string;
+  label: string;
+  proteinPer100g: number;
+}
 
 function roundToNearest(value: number, step: number) {
   return Math.max(step, Math.round(value / step) * step);
 }
 
-export default function MealCalculator() {
+export default function MealCalculator({
+  primaryFoods,
+  secondary,
+  secondaryAlt,
+}: {
+  primaryFoods: CalculatorFood[];
+  secondary: CalculatorFood;
+  secondaryAlt: CalculatorFood;
+}) {
   const [target, setTarget] = useState("45");
-  const [primaryKey, setPrimaryKey] = useState<(typeof PRIMARY_FOODS)[number]["value"]>(
-    "chicken_breast"
-  );
+  const [primaryKey, setPrimaryKey] = useState(primaryFoods[0].value);
   const [result, setResult] = useState<{
     targetGrams: number;
     primaryLabel: string;
@@ -46,8 +46,8 @@ export default function MealCalculator() {
     const targetGrams = parseFloat(target);
     if (!targetGrams || targetGrams <= 0) return;
 
-    const primary = PRIMARY_FOODS.find((f) => f.value === primaryKey)!;
-    const secondary = primary.label === SECONDARY.label ? SECONDARY_ALT : SECONDARY;
+    const primary = primaryFoods.find((f) => f.value === primaryKey)!;
+    const side = primary.value === secondary.value ? secondaryAlt : secondary;
 
     // Primary food covers roughly 75% of the target, secondary tops up the rest.
     const primaryGrams = roundToNearest(
@@ -57,14 +57,14 @@ export default function MealCalculator() {
     const primaryProtein = (primaryGrams * primary.proteinPer100g) / 100;
 
     const remaining = Math.max(targetGrams - primaryProtein, 0);
-    const secondaryGrams = roundToNearest(remaining / (secondary.proteinPer100g / 100), 10);
-    const secondaryProtein = (secondaryGrams * secondary.proteinPer100g) / 100;
+    const secondaryGrams = roundToNearest(remaining / (side.proteinPer100g / 100), 10);
+    const secondaryProtein = (secondaryGrams * side.proteinPer100g) / 100;
 
     setResult({
       targetGrams,
       primaryLabel: primary.label,
       primaryGrams,
-      secondaryLabel: secondary.label,
+      secondaryLabel: side.label,
       secondaryGrams,
       total: Math.round(primaryProtein + secondaryProtein),
     });
@@ -92,10 +92,10 @@ export default function MealCalculator() {
           Main protein source
           <select
             value={primaryKey}
-            onChange={(e) => setPrimaryKey(e.target.value as typeof primaryKey)}
+            onChange={(e) => setPrimaryKey(e.target.value)}
             className="rounded-lg border border-pt-black/20 px-3 py-2 font-normal"
           >
-            {PRIMARY_FOODS.map((f) => (
+            {primaryFoods.map((f) => (
               <option key={f.value} value={f.value}>
                 {f.label}
               </option>

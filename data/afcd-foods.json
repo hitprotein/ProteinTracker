@@ -1,5 +1,5 @@
 {
-  "_note": "Figures captured from FSANZ Australian Food Composition Database Release 3.0 on 13 Oct 2026. All verified:false until MJ checks each against the linked page. Values are per 100g edible portion. 'state' = raw / cooked / as-sold / dry. Greek yoghurt, edamame and tempeh are NOT in AFCD - need brand nutrition panels.",
+  "_note": "AFCD figures captured from FSANZ AFCD Release 3.0; brand figures from Australian nutrition panels shown on Woolworths online, 13 Oct 2026. All verified:false until MJ checks. Per 100g. Brand labels change, so re-check before publishing.",
   "foods": [
     {
       "slug": "chicken-breast",
@@ -918,7 +918,7 @@
           "source": {
             "dataset": "FSANZ AFCD Release 3.0",
             "foodKey": "F008720",
-            "foodName": "Soy beverage, regular fat (~3%), added Ca & vitamins",
+            "foodName": "Soy beverage, regular fat (~3%), added Ca & vitamins A, B1, B2 & B12",
             "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F008720"
           },
           "verified": false
@@ -1335,6 +1335,609 @@
             "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F010642"
           },
           "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "canned-salmon",
+      "name": "Canned Salmon",
+      "category": "Seafood",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 20.7,
+          "energyKjPer100g": 579.0,
+          "caloriesPer100g": 138,
+          "proteinPer100kcal": 15.0,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007853",
+            "foodName": "Salmon, pink, canned in brine, drained",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007853"
+          },
+          "verified": false
+        },
+        {
+          "state": "as-sold-alt",
+          "proteinPer100g": 24.4,
+          "energyKjPer100g": 617.0,
+          "caloriesPer100g": 147,
+          "proteinPer100kcal": 16.5,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007860",
+            "foodName": "Salmon, red, canned in brine, drained",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007860"
+          },
+          "verified": false,
+          "note": "Red salmon variant"
+        }
+      ]
+    },
+    {
+      "slug": "egg-whites",
+      "name": "Egg Whites",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "raw",
+          "proteinPer100g": 11.2,
+          "energyKjPer100g": 196.0,
+          "caloriesPer100g": 47,
+          "proteinPer100kcal": 23.9,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F003706",
+            "foodName": "Egg, chicken, white (albumen), raw",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F003706"
+          },
+          "verified": false
+        },
+        {
+          "state": "cooked",
+          "proteinPer100g": 11.6,
+          "energyKjPer100g": 204.0,
+          "caloriesPer100g": 49,
+          "proteinPer100kcal": 23.8,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F003705",
+            "foodName": "Egg, chicken, white (albumen), hard-boiled",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F003705"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "black-beans",
+      "name": "Black Beans",
+      "category": "Plant-Based",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 7.9,
+          "energyKjPer100g": 454.0,
+          "caloriesPer100g": 109,
+          "proteinPer100kcal": 7.3,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "907377",
+            "product": "Woolworths Black Beans 420g (canned)",
+            "url": "https://www.woolworths.com.au/shop/productdetails/907377"
+          },
+          "verified": false,
+          "note": "Not in AFCD. Check drained vs undrained basis on label"
+        },
+        {
+          "state": "as-sold-alt",
+          "proteinPer100g": 7.2,
+          "energyKjPer100g": 460.0,
+          "caloriesPer100g": 110,
+          "proteinPer100kcal": 6.5,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "930176",
+            "product": "Edgell Black Beans Plant Protein 400g (canned)",
+            "url": "https://www.woolworths.com.au/shop/productdetails/930176"
+          },
+          "verified": false,
+          "note": "Not in AFCD"
+        },
+        {
+          "state": "dry",
+          "proteinPer100g": 19.9,
+          "energyKjPer100g": 1180.0,
+          "caloriesPer100g": 282,
+          "proteinPer100kcal": 7.1,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "874927",
+            "product": "McKenzie's Black Beans 375g (dried)",
+            "url": "https://www.woolworths.com.au/shop/productdetails/874927"
+          },
+          "verified": false,
+          "note": "Not in AFCD"
+        }
+      ]
+    },
+    {
+      "slug": "wholemeal-bread",
+      "name": "Wholemeal Bread",
+      "category": "Grains & Cereals",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 10.4,
+          "energyKjPer100g": 993.0,
+          "caloriesPer100g": 237,
+          "proteinPer100kcal": 4.4,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F001553",
+            "foodName": "Bread, from wholemeal flour",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F001553"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "brown-rice",
+      "name": "Brown Rice",
+      "category": "Grains & Cereals",
+      "values": [
+        {
+          "state": "cooked",
+          "proteinPer100g": 4.1,
+          "energyKjPer100g": 693.0,
+          "caloriesPer100g": 166,
+          "proteinPer100kcal": 2.5,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007641",
+            "foodName": "Rice, brown, boiled, no added salt",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007641"
+          },
+          "verified": false
+        },
+        {
+          "state": "dry",
+          "proteinPer100g": 7.6,
+          "energyKjPer100g": 1452.0,
+          "caloriesPer100g": 347,
+          "proteinPer100kcal": 2.2,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F007648",
+            "foodName": "Rice, brown, uncooked",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F007648"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "pasta",
+      "name": "Pasta",
+      "category": "Grains & Cereals",
+      "values": [
+        {
+          "state": "cooked",
+          "proteinPer100g": 5.3,
+          "energyKjPer100g": 572.0,
+          "caloriesPer100g": 137,
+          "proteinPer100kcal": 3.9,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F006456",
+            "foodName": "Pasta, white wheat flour, boiled from dry, no added salt",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F006456"
+          },
+          "verified": false
+        },
+        {
+          "state": "dry",
+          "proteinPer100g": 12.7,
+          "energyKjPer100g": 1458.0,
+          "caloriesPer100g": 348,
+          "proteinPer100kcal": 3.6,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F006458",
+            "foodName": "Pasta, white wheat flour, dry",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F006458"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "peanuts",
+      "name": "Peanuts",
+      "category": "Nuts & Seeds",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 24.7,
+          "energyKjPer100g": 2376.0,
+          "caloriesPer100g": 568,
+          "proteinPer100kcal": 4.3,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F006107",
+            "foodName": "Nut, peanut, with skin, raw, unsalted",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F006107"
+          },
+          "verified": false
+        },
+        {
+          "state": "as-sold-alt",
+          "proteinPer100g": 25.1,
+          "energyKjPer100g": 2667.0,
+          "caloriesPer100g": 637,
+          "proteinPer100kcal": 3.9,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F006110",
+            "foodName": "Nut, peanut, without skin, roasted, with oil, unsalted",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F006110"
+          },
+          "verified": false,
+          "note": "Roasted variant"
+        }
+      ]
+    },
+    {
+      "slug": "cashews",
+      "name": "Cashews",
+      "category": "Nuts & Seeds",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 17.0,
+          "energyKjPer100g": 2540.0,
+          "caloriesPer100g": 607,
+          "proteinPer100kcal": 2.8,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F006088",
+            "foodName": "Nut, cashew, raw, unsalted",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F006088"
+          },
+          "verified": false
+        },
+        {
+          "state": "as-sold-alt",
+          "proteinPer100g": 17.0,
+          "energyKjPer100g": 2530.0,
+          "caloriesPer100g": 605,
+          "proteinPer100kcal": 2.8,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F006092",
+            "foodName": "Nut, cashew, roasted, unsalted",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F006092"
+          },
+          "verified": false,
+          "note": "Roasted variant"
+        }
+      ]
+    },
+    {
+      "slug": "walnuts",
+      "name": "Walnuts",
+      "category": "Nuts & Seeds",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 14.4,
+          "energyKjPer100g": 2904.0,
+          "caloriesPer100g": 694,
+          "proteinPer100kcal": 2.1,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F006116",
+            "foodName": "Nut, walnut, raw, unsalted",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F006116"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "beef-jerky",
+      "name": "Beef Jerky",
+      "category": "Snacks & Supplements",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 34.0,
+          "energyKjPer100g": 1100.0,
+          "caloriesPer100g": 263,
+          "proteinPer100kcal": 12.9,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "267889",
+            "product": "Jack Link's Original Beef Jerky 50g",
+            "url": "https://www.woolworths.com.au/shop/productdetails/267889"
+          },
+          "verified": false,
+          "note": "Not in AFCD. Brands range widely (34-51g)"
+        },
+        {
+          "state": "as-sold-alt",
+          "proteinPer100g": 35.7,
+          "energyKjPer100g": 1130.0,
+          "caloriesPer100g": 270,
+          "proteinPer100kcal": 13.2,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "851730",
+            "product": "Woolworths Beef Jerky Original 180g",
+            "url": "https://www.woolworths.com.au/shop/productdetails/851730"
+          },
+          "verified": false,
+          "note": "Not in AFCD"
+        },
+        {
+          "state": "as-sold-alt",
+          "proteinPer100g": 50.6,
+          "energyKjPer100g": 1270.0,
+          "caloriesPer100g": 304,
+          "proteinPer100kcal": 16.7,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "662379",
+            "product": "Byron Beef Jerky Chargrill 40g",
+            "url": "https://www.woolworths.com.au/shop/productdetails/662379"
+          },
+          "verified": false,
+          "note": "Not in AFCD"
+        }
+      ]
+    },
+    {
+      "slug": "hummus",
+      "name": "Hummus",
+      "category": "Plant-Based",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 6.9,
+          "energyKjPer100g": 1039.0,
+          "caloriesPer100g": 248,
+          "proteinPer100kcal": 2.8,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F003539",
+            "foodName": "Dip, hummus (hommus), commercial",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F003539"
+          },
+          "verified": false
+        }
+      ]
+    },
+    {
+      "slug": "popcorn",
+      "name": "Popcorn",
+      "category": "Snacks & Supplements",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 9.1,
+          "energyKjPer100g": 2053.0,
+          "caloriesPer100g": 491,
+          "proteinPer100kcal": 1.9,
+          "source": {
+            "dataset": "FSANZ AFCD Release 3.0",
+            "foodKey": "F006844",
+            "foodName": "Popcorn, commercial, butter flavoured, salted",
+            "url": "https://www.foodstandards.gov.au/science-data/food-nutrient-databases/afcd/search/food/F006844"
+          },
+          "verified": false,
+          "note": "Only popcorn in AFCD is butter-flavoured; plain air-popped needs a brand label"
+        }
+      ]
+    },
+    {
+      "slug": "tempeh",
+      "name": "Tempeh",
+      "category": "Plant-Based",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 12.4,
+          "energyKjPer100g": 469.0,
+          "caloriesPer100g": 112,
+          "proteinPer100kcal": 11.1,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "88186",
+            "product": "Macro Plain Tempeh 300g",
+            "url": "https://www.woolworths.com.au/shop/productdetails/88186"
+          },
+          "verified": false,
+          "note": "Not in AFCD"
+        }
+      ]
+    },
+    {
+      "slug": "edamame",
+      "name": "Edamame",
+      "category": "Plant-Based",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 12.6,
+          "energyKjPer100g": 483.0,
+          "caloriesPer100g": 115,
+          "proteinPer100kcal": 10.9,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "386006",
+            "product": "Umami Frozen Edamame Whole Baby Soy Beans 1kg",
+            "url": "https://www.woolworths.com.au/shop/productdetails/386006"
+          },
+          "verified": false,
+          "note": "Not in AFCD. Check label: per 100g in pod or shelled?"
+        },
+        {
+          "state": "as-sold-alt",
+          "proteinPer100g": 12.6,
+          "energyKjPer100g": 536.0,
+          "caloriesPer100g": 128,
+          "proteinPer100kcal": 9.8,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "536096",
+            "product": "Bell Farms Frozen Salted Edamame 400g",
+            "url": "https://www.woolworths.com.au/shop/productdetails/536096"
+          },
+          "verified": false,
+          "note": "Not in AFCD"
+        }
+      ]
+    },
+    {
+      "slug": "greek-yoghurt",
+      "name": "Greek Yoghurt",
+      "category": "Dairy & Eggs",
+      "values": [
+        {
+          "state": "as-sold",
+          "proteinPer100g": 9.3,
+          "energyKjPer100g": 234.0,
+          "caloriesPer100g": 56,
+          "proteinPer100kcal": 16.6,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "717518",
+            "product": "Chobani Greek Yoghurt Natural Light Plain 907g",
+            "url": "https://www.woolworths.com.au/shop/productdetails/717518"
+          },
+          "verified": false,
+          "note": "Strained. Ingredients: skim milk + cultures"
+        },
+        {
+          "state": "as-sold-alt",
+          "proteinPer100g": 8.6,
+          "energyKjPer100g": 360.0,
+          "caloriesPer100g": 86,
+          "proteinPer100kcal": 10.0,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "463666",
+            "product": "Chobani Greek Yoghurt Natural Whole Milk 907g",
+            "url": "https://www.woolworths.com.au/shop/productdetails/463666"
+          },
+          "verified": false,
+          "note": "Strained"
+        },
+        {
+          "state": "as-sold-alt",
+          "proteinPer100g": 10.6,
+          "energyKjPer100g": 251.0,
+          "caloriesPer100g": 60,
+          "proteinPer100kcal": 17.7,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "686218",
+            "product": "YoPRO Protein Yoghurt Plain 700g",
+            "url": "https://www.woolworths.com.au/shop/productdetails/686218"
+          },
+          "verified": false,
+          "note": "High-protein yoghurt (not labelled Greek)"
+        },
+        {
+          "state": "greek-style",
+          "proteinPer100g": 4.2,
+          "energyKjPer100g": 500.0,
+          "caloriesPer100g": 120,
+          "proteinPer100kcal": 3.5,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "31547",
+            "product": "Farmers Union Greek Style Natural Yoghurt 1kg",
+            "url": "https://www.woolworths.com.au/shop/productdetails/31547"
+          },
+          "verified": false,
+          "note": "Greek-STYLE (not strained)"
+        },
+        {
+          "state": "greek-style",
+          "proteinPer100g": 5.0,
+          "energyKjPer100g": 489.0,
+          "caloriesPer100g": 117,
+          "proteinPer100kcal": 4.3,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "571487",
+            "product": "Woolworths Natural Greek Style Yoghurt 1kg",
+            "url": "https://www.woolworths.com.au/shop/productdetails/571487"
+          },
+          "verified": false,
+          "note": "Greek-STYLE"
+        },
+        {
+          "state": "greek-style",
+          "proteinPer100g": 3.3,
+          "energyKjPer100g": 480.0,
+          "caloriesPer100g": 115,
+          "proteinPer100kcal": 2.9,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "331963",
+            "product": "Jalna Pot Set Greek Style Natural Yoghurt 1kg",
+            "url": "https://www.woolworths.com.au/shop/productdetails/331963"
+          },
+          "verified": false,
+          "note": "Greek-STYLE"
+        },
+        {
+          "state": "greek-style",
+          "proteinPer100g": 5.0,
+          "energyKjPer100g": 528.0,
+          "caloriesPer100g": 126,
+          "proteinPer100kcal": 4.0,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "622935",
+            "product": "Tamar Valley Dairy Greek Style Yoghurt Natural 1kg",
+            "url": "https://www.woolworths.com.au/shop/productdetails/622935"
+          },
+          "verified": false,
+          "note": "Greek-STYLE"
+        },
+        {
+          "state": "greek-style",
+          "proteinPer100g": 3.6,
+          "energyKjPer100g": 446.0,
+          "caloriesPer100g": 107,
+          "proteinPer100kcal": 3.4,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "249086",
+            "product": "Woolworths Pot Set Greek Style Yoghurt 1kg",
+            "url": "https://www.woolworths.com.au/shop/productdetails/249086"
+          },
+          "verified": false,
+          "note": "Greek-STYLE"
+        },
+        {
+          "state": "greek-style-high-protein",
+          "proteinPer100g": 8.3,
+          "energyKjPer100g": 232.0,
+          "caloriesPer100g": 55,
+          "proteinPer100kcal": 15.0,
+          "source": {
+            "dataset": "Brand nutrition panel (via Woolworths online)",
+            "stockcode": "84338",
+            "product": "Farmers Union Greek Style High Protein Yoghurt 500g",
+            "url": "https://www.woolworths.com.au/shop/productdetails/84338"
+          },
+          "verified": false,
+          "note": "Greek-style with added milk solids"
         }
       ]
     }

@@ -73,7 +73,8 @@ Food pages (`app/protein-foods/`):
   AFCD Release 3.0 (food key, name, link, raw/cooked/as-sold/dry state).
   Don't retype them in `foods.ts`: an entry picks which value to lead with via
   `primaryState`, and the rest show as "other forms". Foods not in AFCD use
-  `manual` (brand panel figures).
+  Australian brand nutrition panels kept in the same JSON; those show in an
+  "Australian brands compared" table with the product name.
 - Page copy uses tokens such as `{p}`, `{p:raw}`, `{p@slug}` and `{g:150}`
   instead of typed numbers (see the top of `data/foods.ts`).
 - Every figure needs a `source` (dataset + food name/ID, or "Brand panel" for
@@ -89,6 +90,10 @@ Meal pages (`app/protein-meals/`):
   whose target (30/40/50/60g) its total is closest to.
 - Meat and fish amounts are **cooked weight**, matching the per-100g
   figures on the food pages; say so in the ingredient line.
+- Main protein ingredients (meat, fish, eggs, dairy, tofu) use the same
+  per-100g figures as the food pages (`data/foods.ts`). If a food page
+  figure changes, recalculate the meals that use it. The protein meal
+  calculator reads its figures from `data/foods.ts` directly.
 - A meal only gets Recipe schema once it has a photo (Google treats a
   Recipe without an image as invalid). Add photos to `public/meals/` at
   1408×768 and set the meal's `image`.

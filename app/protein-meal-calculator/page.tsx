@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import MealCalculator from "./MealCalculator";
+import MealCalculator, { type CalculatorFood } from "./MealCalculator";
+import { getFood, isPublished } from "@/data/foods";
 
 export const metadata: Metadata = {
   title: "Protein Meal Calculator — What Can I Eat For X Grams of Protein?",
@@ -8,6 +9,23 @@ export const metadata: Metadata = {
     "Enter a protein target and get a food combination that gets you there. A meal calculator for a specific per-meal protein goal.",
   alternates: { canonical: "/protein-meal-calculator" },
 };
+
+// Figures come straight from data/foods.ts (the same figures as the
+// /protein-foods pages). Meat and fish use their cooked figure.
+function calcFood(slug: string, label: string): CalculatorFood {
+  const food = getFood(slug);
+  if (!food || !isPublished(food)) throw new Error(`meal calculator: no published food "${slug}"`);
+  return { value: slug, label, proteinPer100g: food.proteinPer100g };
+}
+
+const PRIMARY_FOODS = [
+  calcFood("chicken-breast", "Chicken breast"),
+  calcFood("steak", "Lean rump steak"),
+  calcFood("lean-beef-mince", "Lean beef mince"),
+  calcFood("salmon", "Salmon"),
+  calcFood("tuna", "Tuna (canned, drained)"),
+  calcFood("tofu", "Firm tofu"),
+];
 
 export default function ProteinMealCalculatorPage() {
   return (
@@ -25,7 +43,11 @@ export default function ProteinMealCalculatorPage() {
       </section>
 
       <section className="mx-auto -mt-10 max-w-2xl px-6 pb-24">
-        <MealCalculator />
+        <MealCalculator
+          primaryFoods={PRIMARY_FOODS}
+          secondary={calcFood("greek-yoghurt", "Greek yoghurt")}
+          secondaryAlt={calcFood("cottage-cheese", "Cottage cheese")}
+        />
 
         <div className="mt-10 space-y-4 text-pt-black/80">
           <h2 className="text-2xl font-bold">How this works</h2>

@@ -5,6 +5,7 @@ import type { FAQItem } from "@/lib/content-types";
 import {
   PUBLISHED_FOODS,
   categoryAnchor,
+  isBrandValue,
   proteinForServe,
   relatedFoods,
   stateLabel,
@@ -35,15 +36,21 @@ function pageFaqs(food: PublishedFood): FAQItem[] {
   }
   const serve = typicalServe(food);
   if (serve && serve.grams !== 100 && !asked(serve.label.toLowerCase())) {
-    // "150g of chicken breast", but "1 egg (50g)" on its own.
-    const serveName = /^\d+(g|ml|kg)$/.test(serve.label) ? `${serve.label} of ${name}` : serve.label;
+    // "150g of chicken breast", "1 slice (25g) of ham", but "1 egg (47g)" on its own.
+    const serveName = serve.label.toLowerCase().includes(name.slice(0, 3)) ? serve.label : `${serve.label} of ${name}`;
     candidates.push({
       q: `How much protein is in ${serveName}?`,
       a: `About ${proteinForServe(food, serve.grams)}g of protein, based on ${food.proteinPer100g}g per ${per}.`,
     });
   }
   // One FAQ for the food's other form, e.g. raw when the page leads with cooked.
-  const other = food.otherValues.find((v) => v.state !== "cooked-alt" && v.proteinPer100g !== null);
+  const other = food.otherValues.find(
+    (v) =>
+      !isBrandValue(v) &&
+      (v.state === "raw" || v.state === "cooked" || v.state === "dry") &&
+      stateLabel(v.state) !== stateLabel(food.state) &&
+      v.proteinPer100g !== null,
+  );
   if (other && !asked(stateLabel(other.state))) {
     candidates.push({
       q: `How much protein is in ${formName(other.state, name)}?`,
@@ -79,12 +86,53 @@ function pageFaqs(food: PublishedFood): FAQItem[] {
 
 // "raw chicken breast", "cooked lentils", "dry oats", "chickpeas as sold".
 function formName(state: FoodState, name: string): string {
-  return state === "as-sold" ? `${name} as sold` : `${stateLabel(state)} ${name}`;
+  return stateLabel(state) === "as sold" ? `${name} as sold` : `${stateLabel(state)} ${name}`;
 }
 
 // "Weighed cooked", "As sold", ... so every page says which form it shows.
 function weighedLabel(state: FoodState): string {
-  return state === "as-sold" ? "As sold" : `Weighed ${stateLabel(state)}`;
+  return stateLabel(state) === "as sold" ? "As sold" : `Weighed ${stateLabel(state)}`;
+}
+
+// "Cooked", or the entry's own label where the state alone isn't clear.
+function rowLabel(food: Food, v: FoodValue): string {
+  const label = (v.source.foodId && food.valueLabels?.[v.source.foodId]) || stateLabel(v.state);
+  return label.charAt(0).toUpperCase() + label.slice(1);
+}
+
+// Brand panel figures, one row per product, linked to where they were read.
+function BrandTable({ values, primary, per }: { values: FoodValue[]; primary: FoodValue; per: string }) {
+  return (
+    <div className="mt-3 overflow-x-auto rounded-card border border-pt-black/10 bg-pt-white">
+      <table className="w-full text-left text-sm">
+        <thead className="bg-pt-offwhite">
+          <tr>
+            <th scope="col" className="px-2 py-2 font-semibold sm:px-3">Product</th>
+            <th scope="col" className="px-2 py-2 font-semibold sm:px-3">Protein per {per}</th>
+            <th scope="col" className="px-2 py-2 font-semibold sm:px-3">Calories per {per}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {values.map((v) => (
+            <tr key={v.source.url ?? v.source.foodName} className="border-t border-pt-black/10">
+              <th scope="row" className="px-2 py-2 font-normal sm:px-3">
+                {v.source.url ? (
+                  <a href={v.source.url} className="font-semibold underline" rel="noopener" target="_blank">
+                    {v.source.foodName}
+                  </a>
+                ) : (
+                  <span className="font-semibold">{v.source.foodName}</span>
+                )}
+                {v === primary && <span className="text-pt-black/50"> (shown above)</span>}
+              </th>
+              <td className="px-2 py-2 sm:px-3">{v.proteinPer100g}g</td>
+              <td className="px-2 py-2 sm:px-3">{v.caloriesPer100g ?? "—"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
 function Source({ value }: { value: FoodValue }) {
@@ -112,7 +160,11 @@ export default function FoodPageTemplate({ food }: { food: PublishedFood }) {
   const related = relatedFoods(food);
   const hasSource = food.source.dataset !== "TODO";
   const allValues: FoodValue[] = [food, ...food.otherValues];
-  const brands = (food.brands ?? []).filter((b) => b.proteinPer100g !== null);
+  const formValues = allValues.filter((v) => !isBrandValue(v));
+  const brandValues = allValues.filter(isBrandValue);
+  const brandGroups = (food.brandGroups ?? [{ heading: "", states: brandValues.map((v) => v.state) }])
+    .map((g) => ({ heading: g.heading, values: brandValues.filter((v) => g.states.includes(v.state)) }))
+    .filter((g) => g.values.length > 0);
   const intro = food.intro ?? [
     `${food.name} has about ${food.proteinPer100g}g of protein per ${per} ${stateLabel(food.state)} (${food.prepDescription}). The table above shows what that works out to for common serves.`,
   ];
@@ -151,7 +203,9 @@ export default function FoodPageTemplate({ food }: { food: PublishedFood }) {
           )}
           <p className="mt-4 text-xs text-pt-black/50">
             Figures are per {per} {stateLabel(food.state)} ({food.prepDescription}). Protein content varies by
-            brand, cut and exact preparation — see the note below.
+            brand, cut and exact preparation — see the note below. Calories are worked out from the source&apos;s
+            energy in kilojoules, and AFCD uses different conversion factors from food labels, so they may differ
+            slightly from the pack.
           </p>
           {hasSource && (
             <p className="mt-2 text-xs text-pt-black/50">
@@ -166,12 +220,12 @@ export default function FoodPageTemplate({ food }: { food: PublishedFood }) {
           ))}
         </div>
 
-        {food.otherValues.length > 0 && (
+        {formValues.length > 1 && (
           <>
-            <h2 className="mt-10 text-2xl font-bold">Raw, cooked and other forms</h2>
+            <h2 className="mt-10 text-2xl font-bold">Other forms and varieties</h2>
             <p className="mt-2 text-pt-black/80">
-              Weigh your food the same way as the figure you use. Cooking changes the water content, so protein per{" "}
-              {per} changes too.
+              Use the figure that matches how you weigh your food. Cooking changes the water content, so raw and cooked
+              figures differ.
             </p>
             <div className="mt-3 overflow-x-auto rounded-card border border-pt-black/10 bg-pt-white">
               <table className="w-full text-left text-sm">
@@ -183,11 +237,11 @@ export default function FoodPageTemplate({ food }: { food: PublishedFood }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {allValues.map((v, i) => (
+                  {formValues.map((v) => (
                     <tr key={v.source.foodId ?? v.state} className="border-t border-pt-black/10">
                       <th scope="row" className="px-2 py-2 font-normal sm:px-3">
-                        <span className="font-semibold capitalize">{stateLabel(v.state)}</span>
-                        {i === 0 && <span className="text-pt-black/50"> (shown above)</span>}
+                        <span className="font-semibold">{rowLabel(food, v)}</span>
+                        {v === allValues[0] && <span className="text-pt-black/50"> (shown above)</span>}
                         <span className="block text-xs text-pt-black/50">
                           <Source value={v} />
                         </span>
@@ -213,33 +267,18 @@ export default function FoodPageTemplate({ food }: { food: PublishedFood }) {
           </div>
         )}
 
-        {brands.length > 0 && (
+        {brandGroups.length > 0 && (
           <>
             <h2 className="mt-10 text-2xl font-bold">Australian brands compared</h2>
-            <div className="mt-3 overflow-x-auto rounded-card border border-pt-black/10 bg-pt-white">
-              <table className="w-full text-left text-sm">
-                <thead className="bg-pt-offwhite">
-                  <tr>
-                    <th scope="col" className="px-3 py-2 font-semibold">Brand</th>
-                    <th scope="col" className="px-3 py-2 font-semibold">Protein per {per}</th>
-                    <th scope="col" className="px-3 py-2 font-semibold">Calories per {per}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {brands.map((b) => (
-                    <tr key={`${b.brand}-${b.product}`} className="border-t border-pt-black/10">
-                      <th scope="row" className="px-3 py-2 font-semibold">
-                        {b.brand} {b.product}
-                      </th>
-                      <td className="px-3 py-2">{b.proteinPer100g}g</td>
-                      <td className="px-3 py-2">{b.caloriesPer100g ?? "—"}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            {brandGroups.map((g) => (
+              <div key={g.heading || "brands"}>
+                {g.heading && <h3 className="mt-6 text-lg font-bold">{g.heading}</h3>}
+                <BrandTable values={g.values} primary={allValues[0]} per={per} />
+              </div>
+            ))}
             <p className="mt-2 text-xs text-pt-black/50">
-              From each brand&apos;s Australian nutrition panel. Recipes change, so check the pack.
+              Per {per} as sold, from each product&apos;s Australian nutrition panel as listed on Woolworths online.
+              Recipes and labels change, so check the pack.
             </p>
           </>
         )}
