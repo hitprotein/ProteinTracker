@@ -1,5 +1,5 @@
 import Link from "next/link";
-import CtaButton from "@/components/CtaButton";
+import TrackProteinCta, { HITPROTEIN_DOWNLOAD } from "@/components/TrackProteinCta";
 import FaqSection from "@/components/FaqSection";
 import type { FAQItem } from "@/lib/content-types";
 import {
@@ -237,6 +237,11 @@ export default function FoodPageTemplate({ food }: { food: PublishedFood }) {
             </p>
           )}
         </div>
+        <p className="mt-4 text-sm">
+          <a href={HITPROTEIN_DOWNLOAD} className="font-semibold text-pt-black underline">
+            Log {food.name.toLowerCase()} in HitProtein →
+          </a>
+        </p>
 
         <div className="mt-10 space-y-3 text-pt-black/80">
           {intro.map((p) => (
@@ -357,15 +362,7 @@ export default function FoodPageTemplate({ food }: { food: PublishedFood }) {
 
         <FaqSection faqs={faqs} />
 
-        <div className="mt-12 rounded-card bg-pt-black p-8 text-center text-pt-white">
-          <p className="font-heading text-xl font-bold">Know what you&apos;re eating. Know your protein.</p>
-          <p className="mt-2 text-sm text-pt-white/70">
-            HitProtein logs your food and tracks it against your daily target automatically.
-          </p>
-          <div className="mt-5 flex justify-center">
-            <CtaButton href="https://hitprotein.com.au/download">Track Your Protein With HitProtein</CtaButton>
-          </div>
-        </div>
+        <TrackProteinCta />
       </article>
 
       {!food.range && (

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import FaqSection from "@/components/FaqSection";
+import TrackProteinCta, { HITPROTEIN_DOWNLOAD } from "@/components/TrackProteinCta";
 import type { FAQItem } from "@/lib/content-types";
 import FoodTable, { type FoodTableRow } from "./FoodTable";
 import {
@@ -139,6 +140,13 @@ export default function ProteinFoodsPage() {
           you buy. Calories are worked out from AFCD energy in kilojoules. AFCD uses different conversion factors from those
           required on food labels (Food Standards Code Standard 1.2.8), so they may differ slightly from the pack.
         </p>
+        <p className="mt-4 text-pt-black/80">
+          Tracking these foods?{" "}
+          <a href={HITPROTEIN_DOWNLOAD} className={linkCls}>
+            HitProtein
+          </a>{" "}
+          logs them for you and shows how close you are to your daily protein target.
+        </p>
 
         <h2 id="top-10" className="mt-14 scroll-mt-6 text-2xl font-bold">
           Top {top10.length} highest protein foods
@@ -230,6 +238,8 @@ export default function ProteinFoodsPage() {
             .
           </p>
         </div>
+
+        <TrackProteinCta />
 
         <FaqSection faqs={faqs} />
       </section>
