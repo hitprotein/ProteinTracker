@@ -8,6 +8,7 @@ export interface FoodTableRow {
   name: string;
   category: string;
   per: string; // "100g" or "100ml"
+  form: string; // "cooked", "raw", "as sold", "dry"
   proteinPer100: number;
   serveLabel: string;
   proteinPerServe: number;
@@ -62,7 +63,7 @@ export default function FoodTable({ rows }: { rows: FoodTableRow[] }) {
 
   return (
     <div className="overflow-x-auto rounded-card border border-pt-black/10 bg-pt-white">
-      <table className="w-full text-left text-sm">
+      <table className="w-full text-left text-xs sm:text-sm">
         <caption className="sr-only">
           High protein foods. Select a column heading to sort.
         </caption>
@@ -85,6 +86,7 @@ export default function FoodTable({ rows }: { rows: FoodTableRow[] }) {
               </th>
               <td className="px-2 py-2 sm:px-3">
                 {r.proteinPer100}g{r.per === "100ml" && <span className="text-pt-black/50"> per 100ml</span>}
+                <span className="block text-xs text-pt-black/50">{r.form}</span>
               </td>
               <td className="px-2 py-2 sm:px-3">
                 {r.proteinPerServe}g <span className="block text-xs text-pt-black/50 sm:inline sm:text-sm">({r.serveLabel})</span>

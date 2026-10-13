@@ -8,6 +8,7 @@ import {
   PUBLISHED_FOODS,
   categoryAnchor,
   proteinForServe,
+  stateLabel,
   typicalServe,
   unitLabel,
 } from "@/data/foods";
@@ -32,6 +33,7 @@ const rows: FoodTableRow[] = PUBLISHED_FOODS.map((f) => {
     name: f.name,
     category: f.category,
     per: unitLabel(f),
+    form: stateLabel(f.state),
     proteinPer100: f.proteinPer100g,
     serveLabel: serve.label,
     proteinPerServe: proteinForServe(f, serve.grams),
@@ -39,8 +41,12 @@ const rows: FoodTableRow[] = PUBLISHED_FOODS.map((f) => {
   };
 });
 
-// Ranked per 100g, so liquids measured per 100ml are left out of the top 10.
-const byProtein = PUBLISHED_FOODS.filter((f) => f.unit !== "ml").sort((a, b) => b.proteinPer100g - a.proteinPer100g);
+// Ranked per 100g of food as eaten: liquids measured per 100ml, protein
+// powders and foods weighed dry (like TVP or oats, which take on water before
+// eating) are left out so they don't crowd the top 10.
+const byProtein = PUBLISHED_FOODS.filter(
+  (f) => f.unit !== "ml" && f.category !== "Snacks & Supplements" && f.state !== "dry",
+).sort((a, b) => b.proteinPer100g - a.proteinPer100g);
 const top10 = byProtein.slice(0, 10);
 const categoriesWithFoods = CATEGORIES.filter((c) => PUBLISHED_FOODS.some((f) => f.category === c));
 const topServe = [...rows].sort((a, b) => b.proteinPerServe - a.proteinPerServe)[0];
@@ -51,7 +57,7 @@ const faqs: FAQItem[] = [
     ? [
         {
           q: "Which food has the most protein per 100g?",
-          a: `Of the foods on this page, ${byProtein[0].name.toLowerCase()} has the most, at about ${byProtein[0].proteinPer100g}g of protein per 100g (${byProtein[0].prepDescription}). Lean meat and fish generally top the list per 100g.`,
+          a: `Leaving out protein powders and foods weighed dry, ${byProtein[0].name.toLowerCase()} has the most of the foods on this page, at about ${byProtein[0].proteinPer100g}g of protein per 100g ${stateLabel(byProtein[0].state)} (${byProtein[0].prepDescription}). Lean cooked meat and hard cheese sit at the top of this list per 100g.`,
         },
       ]
     : []),
@@ -67,17 +73,17 @@ const faqs: FAQItem[] = [
     ? [
         {
           q: "What is the highest protein plant-based food?",
-          a: `Of the plant-based foods on this page, ${topPlant.name.toLowerCase()} is highest, at about ${topPlant.proteinPer100g}g of protein per 100g (${topPlant.prepDescription}).`,
+          a: `Of the plant-based foods on this page, ${topPlant.name.toLowerCase()} is highest as eaten, at about ${topPlant.proteinPer100g}g of protein per 100g ${stateLabel(topPlant.state)} (${topPlant.prepDescription}).`,
         },
       ]
     : []),
   {
     q: "Are these figures for cooked or raw food?",
-    a: "Each food page says exactly what its figure refers to, for example cooked and skinless, or canned and drained. Meat and fish figures are for cooked weight. Cooking removes water, so cooked meat has more protein per 100g than the same meat weighed raw.",
+    a: "Each food is labelled with the form its figure refers to: cooked, raw, as sold or dry. Meat and fish are shown cooked where the database has a cooked figure, and each food page also lists its other forms. Cooking removes water, so cooked meat has more protein per 100g than the same meat weighed raw.",
   },
   {
     q: "Where do the protein figures come from?",
-    a: "Figures come from Australian food composition data published by Food Standards Australia New Zealand (AUSNUT and NUTTAB), or from a brand's Australian nutrition panel for branded products. Products vary, so the label on your pack is always the final word.",
+    a: "Figures come from the Australian Food Composition Database (AFCD, Release 3.0) published by Food Standards Australia New Zealand, or from a brand's Australian nutrition panel for branded products. Each food page names the exact database entry. Products vary, so the label on your pack is always the final word.",
   },
   {
     q: "How much protein do I need a day?",
@@ -132,7 +138,10 @@ export default function ProteinFoodsPage() {
         <h2 id="top-10" className="mt-14 scroll-mt-6 text-2xl font-bold">
           Top {top10.length} highest protein foods
         </h2>
-        <p className="mt-2 text-pt-black/80">Ranked by protein per 100g, from the foods on this page.</p>
+        <p className="mt-2 text-pt-black/80">
+          Ranked by protein per 100g, from the foods on this page. Protein powders and foods weighed dry, such as TVP
+          and oats, are left out because they're eaten with added water or as a small scoop.
+        </p>
         <ol className="mt-4 space-y-2">
           {top10.map((f, i) => (
             <li
@@ -144,7 +153,9 @@ export default function ProteinFoodsPage() {
                 <Link href={`/protein-foods/${f.slug}`} className={linkCls}>
                   {f.name}
                 </Link>
-                <span className="ml-2 text-sm text-pt-black/50">{f.prepDescription}</span>
+                <span className="ml-2 text-sm text-pt-black/50">
+                  {stateLabel(f.state)}, {f.prepDescription}
+                </span>
               </span>
               <span className="whitespace-nowrap font-heading font-bold">{f.proteinPer100g}g</span>
             </li>
@@ -163,7 +174,7 @@ export default function ProteinFoodsPage() {
                 >
                   <p className="font-heading text-lg font-bold">{f.name}</p>
                   <p className="mt-1 text-sm text-pt-black/60">
-                    {f.proteinPer100g}g / {unitLabel(f)}
+                    {f.proteinPer100g}g / {unitLabel(f)} {stateLabel(f.state)}
                   </p>
                 </Link>
               ))}
