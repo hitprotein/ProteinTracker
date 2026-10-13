@@ -8,6 +8,8 @@ import {
   PUBLISHED_FOODS,
   categoryAnchor,
   proteinForServe,
+  proteinText,
+  serveProteinText,
   stateLabel,
   typicalServe,
   unitLabel,
@@ -34,10 +36,12 @@ const rows: FoodTableRow[] = PUBLISHED_FOODS.map((f) => {
     category: f.category,
     per: unitLabel(f),
     form: stateLabel(f.state),
-    proteinPer100: f.proteinPer100g,
+    proteinPer100: f.range ? f.range.min : f.proteinPer100g,
+    proteinText: proteinText(f),
     serveLabel: serve.label,
-    proteinPerServe: proteinForServe(f, serve.grams),
-    proteinPer100kcal: f.proteinPer100kcal,
+    proteinPerServe: proteinForServe(f.range ? { proteinPer100g: f.range.min } : f, serve.grams),
+    serveText: serveProteinText(f, serve.grams),
+    proteinPer100kcal: f.range ? null : f.proteinPer100kcal,
   };
 });
 
@@ -132,8 +136,8 @@ export default function ProteinFoodsPage() {
         </div>
         <p className="mt-3 text-sm text-pt-black/50">
           Figures are approximate. Protein varies by brand, cut and preparation, so check the label for the product
-          you buy. Calories are worked out from AFCD energy in kilojoules, which uses different conversion factors from
-          food labels, so they may differ slightly from the pack.
+          you buy. Calories are worked out from AFCD energy in kilojoules. AFCD uses different conversion factors from those
+          required on food labels (Food Standards Code Standard 1.2.8), so they may differ slightly from the pack.
         </p>
 
         <h2 id="top-10" className="mt-14 scroll-mt-6 text-2xl font-bold">
@@ -175,7 +179,7 @@ export default function ProteinFoodsPage() {
                 >
                   <p className="font-heading text-lg font-bold">{f.name}</p>
                   <p className="mt-1 text-sm text-pt-black/60">
-                    {f.proteinPer100g}g / {unitLabel(f)} {stateLabel(f.state)}
+                    {proteinText(f)}g / {unitLabel(f)} {stateLabel(f.state)}
                   </p>
                 </Link>
               ))}
