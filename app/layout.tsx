@@ -149,8 +149,9 @@ export default function RootLayout({
               Composition Database (FSANZ AFCD), Australian brand nutrition
               panels and Eat for Health where available, and are approximate
               — actual values vary by brand, cut and preparation. Calories
-              are worked out from AFCD kilojoules and may differ slightly from
-              food labels. This site does not provide medical advice.
+              are worked out from AFCD kilojoules, which use different
+              conversion factors from food labels (Standard 1.2.8), so they
+              may differ slightly from the pack. This site does not provide medical advice.
             </p>
             <a
               href="https://hitprotein.com.au"

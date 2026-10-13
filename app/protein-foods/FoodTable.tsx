@@ -9,9 +9,11 @@ export interface FoodTableRow {
   category: string;
   per: string; // "100g" or "100ml"
   form: string; // "cooked", "raw", "as sold", "dry"
-  proteinPer100: number;
+  proteinPer100: number; // for sorting (lowest brand for brand ranges)
+  proteinText: string; // "29.8", or "34–50.6" for brand ranges
   serveLabel: string;
   proteinPerServe: number;
+  serveText: string;
   proteinPer100kcal: number | null;
 }
 
@@ -85,11 +87,11 @@ export default function FoodTable({ rows }: { rows: FoodTableRow[] }) {
                 <span className="block text-xs font-normal text-pt-black/50">{r.category}</span>
               </th>
               <td className="px-2 py-2 sm:px-3">
-                {r.proteinPer100}g{r.per === "100ml" && <span className="text-pt-black/50"> per 100ml</span>}
+                {r.proteinText}g{r.per === "100ml" && <span className="text-pt-black/50"> per 100ml</span>}
                 <span className="block text-xs text-pt-black/50">{r.form}</span>
               </td>
               <td className="px-2 py-2 sm:px-3">
-                {r.proteinPerServe}g <span className="block text-xs text-pt-black/50 sm:inline sm:text-sm">({r.serveLabel})</span>
+                {r.serveText}g <span className="block text-xs text-pt-black/50 sm:inline sm:text-sm">({r.serveLabel})</span>
               </td>
               {showKcal && <td className="px-2 py-2 sm:px-3">{r.proteinPer100kcal !== null ? `${r.proteinPer100kcal}g` : "—"}</td>}
             </tr>

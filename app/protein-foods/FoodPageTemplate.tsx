@@ -6,8 +6,9 @@ import {
   PUBLISHED_FOODS,
   categoryAnchor,
   isBrandValue,
-  proteinForServe,
+  proteinText,
   relatedFoods,
+  serveProteinText,
   stateLabel,
   typicalServe,
   unitLabel,
@@ -31,7 +32,9 @@ function pageFaqs(food: PublishedFood): FAQItem[] {
   if (!asked(`${per} of`) && !asked(`per ${per}`)) {
     candidates.push({
       q: `How much protein is in ${per} of ${name}?`,
-      a: `About ${food.proteinPer100g}g of protein per ${per} ${stateLabel(food.state)} (${food.prepDescription}).`,
+      a: food.range
+        ? `${proteinText(food)}g of protein per ${per} across the Australian brands we compared, so check the label of the one you buy.`
+        : `About ${food.proteinPer100g}g of protein per ${per} ${stateLabel(food.state)} (${food.prepDescription}).`,
     });
   }
   const serve = typicalServe(food);
@@ -40,7 +43,7 @@ function pageFaqs(food: PublishedFood): FAQItem[] {
     const serveName = serve.label.toLowerCase().includes(name.slice(0, 3)) ? serve.label : `${serve.label} of ${name}`;
     candidates.push({
       q: `How much protein is in ${serveName}?`,
-      a: `About ${proteinForServe(food, serve.grams)}g of protein, based on ${food.proteinPer100g}g per ${per}.`,
+      a: `About ${serveProteinText(food, serve.grams)}g of protein, based on ${proteinText(food)}g per ${per}.`,
     });
   }
   // One FAQ for the food's other form, e.g. raw when the page leads with cooked.
@@ -57,7 +60,12 @@ function pageFaqs(food: PublishedFood): FAQItem[] {
       a: `About ${other.proteinPer100g}g of protein per ${per} (${other.source.foodName}), compared with ${food.proteinPer100g}g per ${per} ${stateLabel(food.state)}.`,
     });
   }
-  if (food.caloriesPer100g !== null && food.proteinPer100kcal !== null) {
+  if (food.range) {
+    candidates.push({
+      q: `How many calories are in ${name}?`,
+      a: `${food.range.kcalMin}–${food.range.kcalMax} calories per ${per} across the Australian brands we compared.`,
+    });
+  } else if (food.caloriesPer100g !== null && food.proteinPer100kcal !== null) {
     candidates.push({
       q: `How many calories are in ${name}?`,
       a: `About ${food.caloriesPer100g} calories per ${per}, which works out to ${food.proteinPer100kcal}g of protein per 100 calories.`,
@@ -65,7 +73,7 @@ function pageFaqs(food: PublishedFood): FAQItem[] {
   }
   const sameCategory = PUBLISHED_FOODS.filter((f) => f.category === food.category && f.unit === food.unit)
     .sort((a, b) => b.proteinPer100g - a.proteinPer100g);
-  if (sameCategory.length >= 2) {
+  if (sameCategory.length >= 2 && !food.range) {
     const rank = sameCategory.findIndex((f) => f.slug === food.slug) + 1;
     candidates.push({
       q: `How does ${name} compare with other ${food.category.toLowerCase()} foods?`,
@@ -101,7 +109,7 @@ function rowLabel(food: Food, v: FoodValue): string {
 }
 
 // Brand panel figures, one row per product, linked to where they were read.
-function BrandTable({ values, primary, per }: { values: FoodValue[]; primary: FoodValue; per: string }) {
+function BrandTable({ values, primary, per }: { values: FoodValue[]; primary: FoodValue | null; per: string }) {
   return (
     <div className="mt-3 overflow-x-auto rounded-card border border-pt-black/10 bg-pt-white">
       <table className="w-full text-left text-sm">
@@ -162,11 +170,20 @@ export default function FoodPageTemplate({ food }: { food: PublishedFood }) {
   const allValues: FoodValue[] = [food, ...food.otherValues];
   const formValues = allValues.filter((v) => !isBrandValue(v));
   const brandValues = allValues.filter(isBrandValue);
-  const brandGroups = (food.brandGroups ?? [{ heading: "", states: brandValues.map((v) => v.state) }])
-    .map((g) => ({ heading: g.heading, values: brandValues.filter((v) => g.states.includes(v.state)) }))
+  const brandGroups = (food.brandGroups ?? [{ heading: "", states: brandValues.map((v) => v.state), names: undefined }])
+    .map((g) => ({
+      heading: g.heading,
+      values: brandValues.filter(
+        (v) =>
+          g.states.includes(v.state) &&
+          (!g.names || g.names.some((n) => v.source.foodName?.includes(n))),
+      ),
+    }))
     .filter((g) => g.values.length > 0);
   const intro = food.intro ?? [
-    `${food.name} has about ${food.proteinPer100g}g of protein per ${per} ${stateLabel(food.state)} (${food.prepDescription}). The table above shows what that works out to for common serves.`,
+    food.range
+      ? `${food.name} has ${proteinText(food)}g of protein per ${per} across the Australian brands we compared below. The table above shows what that works out to for common serves.`
+      : `${food.name} has about ${food.proteinPer100g}g of protein per ${per} ${stateLabel(food.state)} (${food.prepDescription}). The table above shows what that works out to for common serves.`,
   ];
 
   return (
@@ -175,7 +192,7 @@ export default function FoodPageTemplate({ food }: { food: PublishedFood }) {
         <div className="mx-auto max-w-3xl px-6 text-center">
           <h1 className="text-3xl font-extrabold md:text-5xl">Protein in {food.name}</h1>
           <p className="mx-auto mt-4 max-w-xl text-pt-white/70">
-            {food.proteinPer100g}g of protein per {per} ({food.prepDescription})
+            {proteinText(food)}g of protein per {per} ({food.prepDescription})
           </p>
           <p className="mt-3 inline-block rounded-full bg-pt-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-pt-white/80">
             {weighedLabel(food.state)}
@@ -191,12 +208,17 @@ export default function FoodPageTemplate({ food }: { food: PublishedFood }) {
               <div key={s.label} className="rounded-lg bg-pt-offwhite p-3 text-center">
                 <p className="text-xs text-pt-black/60">{s.label}</p>
                 <p className="mt-1 font-heading text-xl font-extrabold text-pt-black">
-                  {proteinForServe(food, s.grams)}g
+                  {serveProteinText(food, s.grams)}g
                 </p>
               </div>
             ))}
           </div>
-          {food.caloriesPer100g !== null && food.proteinPer100kcal !== null && (
+          {food.range && (
+            <p className="mt-4 text-sm text-pt-black/70">
+              {food.range.kcalMin}–{food.range.kcalMax} calories per {per}, depending on the brand
+            </p>
+          )}
+          {!food.range && food.caloriesPer100g !== null && food.proteinPer100kcal !== null && (
             <p className="mt-4 text-sm text-pt-black/70">
               {food.caloriesPer100g} calories per {per} · {food.proteinPer100kcal}g protein per 100 calories
             </p>
@@ -204,10 +226,12 @@ export default function FoodPageTemplate({ food }: { food: PublishedFood }) {
           <p className="mt-4 text-xs text-pt-black/50">
             Figures are per {per} {stateLabel(food.state)} ({food.prepDescription}). Protein content varies by
             brand, cut and exact preparation — see the note below. Calories are worked out from the source&apos;s
-            energy in kilojoules, and AFCD uses different conversion factors from food labels, so they may differ
-            slightly from the pack.
+            energy in kilojoules
+            {food.range || isBrandValue(food)
+              ? "."
+              : ". AFCD uses different conversion factors from those required on food labels (Food Standards Code Standard 1.2.8), so they may differ slightly from the pack."}
           </p>
-          {hasSource && (
+          {hasSource && !food.range && (
             <p className="mt-2 text-xs text-pt-black/50">
               Source: <Source value={food} />
             </p>
@@ -273,7 +297,7 @@ export default function FoodPageTemplate({ food }: { food: PublishedFood }) {
             {brandGroups.map((g) => (
               <div key={g.heading || "brands"}>
                 {g.heading && <h3 className="mt-6 text-lg font-bold">{g.heading}</h3>}
-                <BrandTable values={g.values} primary={allValues[0]} per={per} />
+                <BrandTable values={g.values} primary={food.range ? null : allValues[0]} per={per} />
               </div>
             ))}
             <p className="mt-2 text-xs text-pt-black/50">
@@ -344,19 +368,21 @@ export default function FoodPageTemplate({ food }: { food: PublishedFood }) {
         </div>
       </article>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "NutritionInformation",
-            name: `${food.name} (${stateLabel(food.state)}, ${food.prepDescription})`,
-            servingSize: food.unit === "ml" ? "100 ml" : "100 g",
-            proteinContent: `${food.proteinPer100g} g`,
-            ...(food.caloriesPer100g !== null && { calories: `${food.caloriesPer100g} calories` }),
-          }),
-        }}
-      />
+      {!food.range && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "NutritionInformation",
+              name: `${food.name} (${stateLabel(food.state)}, ${food.prepDescription})`,
+              servingSize: food.unit === "ml" ? "100 ml" : "100 g",
+              proteinContent: `${food.proteinPer100g} g`,
+              ...(food.caloriesPer100g !== null && { calories: `${food.caloriesPer100g} calories` }),
+            }),
+          }}
+        />
+      )}
     </>
   );
 }

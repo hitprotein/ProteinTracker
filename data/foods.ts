@@ -115,7 +115,12 @@ export interface FoodEntry {
   watchOut?: { heading: string; body: string[] };
   // Brand values split into labelled tables (e.g. strained Greek vs
   // Greek-style). Without it, all brand values share one table.
-  brandGroups?: { heading: string; states: FoodState[] }[];
+  // A group takes values in `states`, narrowed to product names containing
+  // one of `names` when given.
+  brandGroups?: { heading: string; states: FoodState[]; names?: string[] }[];
+  // Brand-panel foods whose brands vary a lot: show the lowest–highest brand
+  // figure everywhere instead of one product's number.
+  brandRange?: boolean;
   // Labels for rows in the "other forms" table, keyed by AFCD food key, where
   // the state alone isn't clear (e.g. "red lentils, dry").
   valueLabels?: Record<string, string>;
@@ -642,14 +647,16 @@ const RAW_FOODS: FoodEntry[] = [
       "Add real Australian tub sizes (single-serve tubs) to commonServes if wanted.",
     ],
     brandGroups: [
-      { heading: "Strained Greek and high-protein yoghurt", states: ["as-sold", "as-sold-alt"] },
-      { heading: "Greek-style yoghurt", states: ["greek-style", "greek-style-high-protein"] },
+      { heading: "Strained Greek yoghurt", states: ["as-sold", "as-sold-alt"], names: ["Chobani"] },
+      { heading: "Greek-style yoghurt", states: ["greek-style"] },
+      { heading: "Greek-style, high protein", states: ["greek-style-high-protein"] },
+      { heading: "High-protein yoghurt (not labelled Greek)", states: ["as-sold-alt"], names: ["YoPRO"] },
     ],
     title: "Protein in Greek Yoghurt — Per 100g and Per Serving",
     metaDescription:
-      "How much protein is in Greek yoghurt? {pmin:as-sold+as-sold-alt}–{pmax:as-sold+as-sold-alt}g per 100g for strained plain Greek yoghurt, but Greek-style can be as low as {pmin:greek-style}g. Compare Australian brands.",
+      "How much protein is in Greek yoghurt? {p:as-sold-alt}–{p}g per 100g for strained plain Greek yoghurt, but Greek-style can be as low as {pmin:greek-style}g. Compare Australian brands.",
     intro: [
-      "Greek yoghurt is strained more than regular yoghurt, which removes much of the liquid whey and concentrates the protein. Plain natural yoghurt is {p@natural-yoghurt}g of protein per 100ml in Australian food composition data, while the strained Greek yoghurts below are {pmin:as-sold+as-sold-alt}–{pmax:as-sold+as-sold-alt}g per 100g. A 200g serve of strained Greek yoghurt has about {g:200}g of protein.",
+      "Greek yoghurt is strained more than regular yoghurt, which removes much of the liquid whey and concentrates the protein. Plain natural yoghurt is {p@natural-yoghurt}g of protein per 100ml in Australian food composition data, while the strained Greek yoghurts below are {p:as-sold-alt}–{p}g per 100g. A 200g serve of strained Greek yoghurt has about {g:200}g of protein.",
     ],
     whyVaries: [
       "The {p}g/100g figure is for a plain, unsweetened, reduced-fat strained Greek yoghurt. Flavoured varieties often have less protein per 100g because fruit, sugar or flavouring syrup displaces some of the yoghurt — check the label rather than assuming a flavoured tub matches plain.",
@@ -658,8 +665,8 @@ const RAW_FOODS: FoodEntry[] = [
     watchOut: {
       heading: "Greek vs Greek-style: check the label",
       body: [
-        "In Australia, a lot of yoghurt sold as \"Greek-style\" isn't strained. Traditional Greek yoghurt is strained to remove liquid whey, which makes it thicker and concentrates the protein. Greek-style yoghurt is often made thick in other ways, so its protein can sit much closer to regular yoghurt: the Greek-style yoghurts below are {pmin:greek-style}–{pmax:greek-style}g per 100g, against {pmin:as-sold+as-sold-alt}–{pmax:as-sold+as-sold-alt}g for the strained ones.",
-        "Some Greek-style yoghurts are sold as high protein, with added milk solids. Both kinds can be good choices, but they aren't interchangeable for protein, so check the nutrition panel for protein per 100g rather than going by the name on the tub.",
+        "In Australia, a lot of yoghurt sold as \"Greek-style\" isn't strained. Traditional Greek yoghurt is strained to remove liquid whey, which makes it thicker and concentrates the protein. Greek-style yoghurt is often made thick in other ways, so its protein can sit much closer to regular yoghurt: the Greek-style yoghurts below are {pmin:greek-style}–{pmax:greek-style}g per 100g, against {p:as-sold-alt}–{p}g per 100g for the strained ones.",
+        "Some Greek-style yoghurts are sold as high protein, with added milk solids: Farmers Union High Protein is {p:greek-style-high-protein}g per 100g. High-protein yoghurts such as YoPRO ({pmax:as-sold-alt}g per 100g) aren't labelled Greek at all. Both kinds can be good choices, but they aren't interchangeable for protein, so check the nutrition panel for protein per 100g rather than going by the name on the tub.",
       ],
     },
     usageTips: [
@@ -672,7 +679,7 @@ const RAW_FOODS: FoodEntry[] = [
     faqs: [
       {
         q: "Is Greek yoghurt higher in protein than regular yoghurt?",
-        a: "Strained Greek yoghurt is. Plain natural yoghurt is {p@natural-yoghurt}g of protein per 100ml, while the strained Greek yoghurts we compared are {pmin:as-sold+as-sold-alt}–{pmax:as-sold+as-sold-alt}g. Greek-style yoghurt isn't always strained, and the ones we compared are {pmin:greek-style}–{pmax:greek-style}g.",
+        a: "Strained Greek yoghurt is. Plain natural yoghurt is {p@natural-yoghurt}g of protein per 100ml, while the strained Greek yoghurts we compared are {p:as-sold-alt}–{p}g per 100g. Greek-style yoghurt isn't always strained, and the ones we compared are {pmin:greek-style}–{pmax:greek-style}g per 100g.",
       },
       {
         q: "Does low-fat Greek yoghurt have less protein?",
@@ -1321,7 +1328,7 @@ const RAW_FOODS: FoodEntry[] = [
     ],
     related: ["hemp-protein", "milk", "greek-yoghurt"],
     intro: [
-      "Whey protein powder is the most concentrated protein on this list: {p}g per 100g in Australian food composition data, for whey-based powders with over 70% protein. Brands range roughly from 70% to 90% protein, so check the tub for the one you use.",
+      "Whey protein powder is the most concentrated protein on this list: {p}g per 100g in Australian food composition data, for whey-based powders with over 70% protein. Protein varies by brand, so check the tub for the one you use.",
     ],
     faqs: [],
   },
@@ -1344,13 +1351,14 @@ const RAW_FOODS: FoodEntry[] = [
     name: "Beef Jerky",
     category: "Snacks & Supplements",
     primaryState: "as-sold",
-    prepDescription: "original flavour, Jack Link's brand label",
+    prepDescription: "Australian brands, original or chargrill flavour",
+    brandRange: true,
     commonServes: [
       { label: "25g", grams: 25 },
       { label: "50g", grams: 50 },
       { label: "100g", grams: 100 },
     ],
-    todo: ["Not in AFCD. Brands range widely, so the headline is one brand (Jack Link's Original); check you're happy with that choice."],
+    todo: ["Not in AFCD. Shown as a brand range; re-check the labels before publishing."],
     related: ["steak", "almonds", "cheddar-cheese"],
     faqs: [
       {
@@ -1441,6 +1449,8 @@ function valuesFor(entry: FoodEntry): FoodValue[] {
 // ─────────────────────────── Derived data ───────────────────────────
 
 export interface Food extends FoodEntry, Omit<FoodValue, "state"> {
+  // Lowest–highest brand figures, for `brandRange` foods.
+  range: { min: number; max: number; kcalMin: number; kcalMax: number } | null;
   state: FoodState;
   // The food's other AFCD values (e.g. raw when the page leads with cooked).
   otherValues: FoodValue[];
@@ -1477,6 +1487,13 @@ function fill(text: string, entry: FoodEntry, values: FoodValue[]): string {
   });
 }
 
+function brandRangeOf(values: FoodValue[]): Food["range"] {
+  const b = values.filter((v) => v.source.dataset.startsWith("Brand"));
+  const p = b.map((v) => v.proteinPer100g as number);
+  const k = b.map((v) => v.caloriesPer100g as number);
+  return { min: Math.min(...p), max: Math.max(...p), kcalMin: Math.min(...k), kcalMax: Math.max(...k) };
+}
+
 function resolve(entry: FoodEntry): Food {
   const [primary, ...otherValues] = valuesFor(entry);
   const f = (t: string) => fill(t, entry, [primary, ...otherValues]);
@@ -1487,6 +1504,7 @@ function resolve(entry: FoodEntry): Food {
     ...entry,
     ...primary,
     otherValues,
+    range: entry.brandRange ? brandRangeOf([primary, ...otherValues]) : null,
     title: entry.title && published ? f(entry.title) : entry.title,
     metaDescription: entry.metaDescription && published ? f(entry.metaDescription) : entry.metaDescription,
     intro: fillList(entry.intro),
@@ -1551,6 +1569,19 @@ export function isBrandValue(v: FoodValue): boolean {
 
 export function proteinForServe(f: { proteinPer100g: number }, grams: number): number {
   return Math.round((f.proteinPer100g * grams) / 100);
+}
+
+// "29.8", or "34–50.6" for foods shown as a brand range.
+export function proteinText(f: Food & { proteinPer100g: number }): string {
+  return f.range ? `${f.range.min}–${f.range.max}` : String(f.proteinPer100g);
+}
+
+// Protein in a serve, as text: "45", or "9–13" for brand-range foods.
+export function serveProteinText(f: Food & { proteinPer100g: number }, grams: number): string {
+  if (!f.range) return String(proteinForServe(f, grams));
+  const lo = proteinForServe({ proteinPer100g: f.range.min }, grams);
+  const hi = proteinForServe({ proteinPer100g: f.range.max }, grams);
+  return lo === hi ? String(lo) : `${lo}–${hi}`;
 }
 
 // The serve shown as "typical" in tables: the first non-100 serve if there is
