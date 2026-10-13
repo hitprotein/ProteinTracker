@@ -1,6 +1,7 @@
 import Link from "next/link";
 import TrackProteinCta, { HITPROTEIN_DOWNLOAD } from "@/components/TrackProteinCta";
 import FaqSection from "@/components/FaqSection";
+import { articlesFor } from "@/lib/hitprotein-blog";
 import type { FAQItem } from "@/lib/content-types";
 import {
   PUBLISHED_FOODS,
@@ -358,6 +359,17 @@ export default function FoodPageTemplate({ food }: { food: PublishedFood }) {
               More {food.category.toLowerCase()} foods
             </Link>
           </li>
+        </ul>
+
+        <h2 className="mt-10 text-2xl font-bold">From the HitProtein blog</h2>
+        <ul className="mt-3 list-disc space-y-2 pl-6 text-pt-black/80">
+          {articlesFor(food.slug).map((a) => (
+            <li key={a.href}>
+              <a href={a.href} className="font-semibold text-pt-black underline" rel="noopener" target="_blank">
+                {a.title}
+              </a>
+            </li>
+          ))}
         </ul>
 
         <FaqSection faqs={faqs} />

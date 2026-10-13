@@ -3,6 +3,7 @@ import Link from "next/link";
 import FaqSection from "@/components/FaqSection";
 import TrackProteinCta, { HITPROTEIN_DOWNLOAD } from "@/components/TrackProteinCta";
 import type { FAQItem } from "@/lib/content-types";
+import { HP_ARTICLES } from "@/lib/hitprotein-blog";
 import FoodTable, { type FoodTableRow } from "./FoodTable";
 import {
   CATEGORIES,
@@ -200,7 +201,12 @@ export default function ProteinFoodsPage() {
           <p>
             <strong>Per 100g is for comparing foods.</strong> It puts every food on the same footing, so you can see
             which ones pack the most protein into the same weight. Lean meat, fish and some dairy usually sit near the
-            top. Grains and most snacks sit lower, but they can still add up over a day.
+            top. Grains and most snacks sit lower, but they can still add up over a day. To compare by energy instead,
+            see{" "}
+            <a href={HP_ARTICLES.ranked.href} className="underline" rel="noopener" target="_blank">
+              high protein foods ranked by protein per calorie
+            </a>{" "}
+            on the HitProtein blog.
           </p>
           <p>
             <strong>Per serve is for planning meals.</strong> Nobody eats 100g of parmesan or 100g of chia seeds in one
@@ -210,7 +216,11 @@ export default function ProteinFoodsPage() {
           <p>
             <strong>Check what the figure refers to.</strong> Cooked meat has more protein per 100g than raw, because
             cooking drives off water. Canned fish figures are for drained weight. Each food page says exactly which form
-            its number describes, so you can match it to how you weigh your food.
+            its number describes, so you can match it to how you weigh your food. For the raw and cooked figures side by
+            side, see{" "}
+            <a href={HP_ARTICLES.cooking.href} className="underline" rel="noopener" target="_blank">
+              does cooking increase protein?
+            </a>
           </p>
           <p>
             <strong>Brands and cuts vary.</strong> These are typical figures for Australian foods. A leaner cut, a
