@@ -32,14 +32,14 @@ export default function FortyGramMealsPage() {
           description:
             "Soft scrambled eggs with cottage cheese and spinach folded through, served on wholegrain toast.",
           category: "Breakfast",
-          protein: 39,
-          calories: 555,
+          protein: 40,
+          calories: 520,
           prepMinutes: 5,
           cookMinutes: 5,
           serves: "Serves 1",
           ingredients: [
             "3 large eggs",
-            "100g cottage cheese",
+            "70g cottage cheese",
             "2 slices wholegrain toast",
             "Handful spinach",
             "1 tsp butter",
@@ -47,7 +47,7 @@ export default function FortyGramMealsPage() {
           method:
             "Whisk the eggs, cook gently in butter over low heat, then stir through the cottage cheese and spinach just before they set. Serve on toast.",
           substitutions:
-            "Ricotta works in place of cottage cheese but has a little less protein; any bread works in place of wholegrain.",
+            "Ricotta works in place of cottage cheese but has noticeably less protein; any bread works in place of wholegrain.",
         },
         {
           name: "Chicken Salad Wrap",
@@ -55,8 +55,8 @@ export default function FortyGramMealsPage() {
           description:
             "A quick no-cook lunch of sliced chicken breast and crunchy salad rolled in a wholemeal wrap.",
           category: "Lunch",
-          protein: 41,
-          calories: 420,
+          protein: 40,
+          calories: 400,
           prepMinutes: 10,
           serves: "Serves 1",
           ingredients: [
@@ -76,8 +76,8 @@ export default function FortyGramMealsPage() {
           description:
             "A plant-based stir-fry of crispy tofu and edamame with vegetables over rice.",
           category: "Dinner",
-          protein: 39,
-          calories: 650,
+          protein: 40,
+          calories: 665,
           prepMinutes: 10,
           cookMinutes: 15,
           serves: "Serves 1",

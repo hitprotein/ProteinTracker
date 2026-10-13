@@ -17,7 +17,10 @@
 //   those numbers here: an entry is matched to the JSON by slug and
 //   `primaryState` picks which of its values the page leads with. The rest
 //   show as "other forms".
-// - Foods that aren't in AFCD (brand panels) put their figures in `manual`.
+// - Foods that aren't in AFCD use Australian brand nutrition panels, kept in
+//   the same JSON (dataset "Brand nutrition panel ..."). Brand values show in
+//   an "Australian brands" table, with the product name, instead of "other
+//   forms". `manual` is only for figures entered by hand outside the JSON.
 // - Page copy never types a number. Use tokens, filled from the data at
 //   build time (an unknown token fails the build):
 //     {p}              protein per 100g, primary value
@@ -26,6 +29,9 @@
 //     {p@slug:raw}     ...of another food's raw value
 //     {kcal} / {kcal:raw} / {kcal@slug}   calories per 100g, same rules
 //     {g:150}          protein in 150g of this food (primary value), rounded
+//     {g:198:cooked}   ...of this food's cooked value
+//     {pmin:a+b} / {pmax:a+b}  lowest / highest protein per 100g across this
+//                      food's values in states a or b
 
 import type { FAQItem } from "@/lib/content-types";
 import afcdData from "./afcd-foods.json";
@@ -41,11 +47,21 @@ export const CATEGORIES = [
 ] as const;
 export type Category = (typeof CATEGORIES)[number];
 
-// The form a figure refers to. "cooked-alt" is a second cooking method.
-export type FoodState = "raw" | "cooked" | "cooked-alt" | "as-sold" | "dry";
+// The form a figure refers to. "-alt" states are a second cooking method or
+// variety (e.g. red vs pink canned salmon, or another brand). The two
+// "greek-style" states are unstrained Greek-style yoghurts.
+export type FoodState =
+  | "raw"
+  | "cooked"
+  | "cooked-alt"
+  | "as-sold"
+  | "as-sold-alt"
+  | "dry"
+  | "greek-style"
+  | "greek-style-high-protein";
 
 export interface FoodSource {
-  // e.g. "FSANZ AFCD Release 3.0", or "Brand panel" for brand items.
+  // e.g. "FSANZ AFCD Release 3.0", or "Brand nutrition panel ..." for brand items.
   // "TODO" means no source has been recorded yet.
   dataset: string;
   foodName: string | null; // the dataset's food name, or the brand product name
@@ -69,20 +85,13 @@ export interface Serve {
   grams: number; // grams, or ml for foods with unit "ml"
 }
 
-export interface BrandRow {
-  brand: string;
-  product: string;
-  proteinPer100g: number | null;
-  caloriesPer100g: number | null;
-  source: FoodSource; // must be the brand's Australian nutrition panel
-  verified: boolean;
-}
-
 export interface FoodEntry {
   slug: string;
   name: string;
   category: Category;
-  unit?: "g" | "ml"; // default "g". AFCD figures are per 100g.
+  // Default "g". AFCD shows milks, soy milk and some yoghurts per 100mL, so
+  // those entries are "ml" and every figure and serve for them is per 100ml.
+  unit?: "g" | "ml";
   // Plain description of the form the main figure refers to, matching the
   // source's food name, e.g. "lean, skinless, grilled, no added fat".
   prepDescription: string;
@@ -104,23 +113,13 @@ export interface FoodEntry {
   whyVaries?: string[];
   usageTips?: string[];
   watchOut?: { heading: string; body: string[] };
-  brands?: BrandRow[];
+  // Brand values split into labelled tables (e.g. strained Greek vs
+  // Greek-style). Without it, all brand values share one table.
+  brandGroups?: { heading: string; states: FoodState[] }[];
+  // Labels for rows in the "other forms" table, keyed by AFCD food key, where
+  // the state alone isn't clear (e.g. "red lentils, dry").
+  valueLabels?: Record<string, string>;
 }
-
-const TODO_SOURCE: FoodSource = { dataset: "TODO", foodName: null, foodId: null };
-
-// A food with no figure yet.
-const draft = (state: FoodState): FoodValue => ({
-  state,
-  proteinPer100g: null,
-  energyKjPer100g: null,
-  caloriesPer100g: null,
-  proteinPer100kcal: null,
-  source: TODO_SOURCE,
-  verified: false,
-});
-
-const NOT_IN_AFCD = "Not in FSANZ AFCD Release 3.0. Use an Australian brand nutrition panel (dataset \"Brand panel\").";
 
 const RAW_FOODS: FoodEntry[] = [
   // ───────────────────────────── Meat ─────────────────────────────
@@ -151,6 +150,7 @@ const RAW_FOODS: FoodEntry[] = [
       "Slice into strips for stir-fries, wraps or salads",
       "Poach and shred for meal-prepped bowls or sandwiches",
     ],
+    valueLabels: { F002593: "cooked (grilled)", F002590: "cooked (baked)" },
     related: ["chicken-thigh", "turkey-breast", "beef-mince", "eggs", "tuna"],
     relatedMeal: { name: "40g Protein Meals", href: "/protein-meals/40g-protein" },
     faqs: [
@@ -395,9 +395,9 @@ const RAW_FOODS: FoodEntry[] = [
     category: "Meat",
     primaryState: "as-sold",
     prepDescription: "lean leg ham",
-    todo: ["Check typical slice weight and deli pack sizes for a per-slice serve."],
     commonServes: [
-      { label: "50g", grams: 50 },
+      { label: "1 slice (25g)", grams: 25 },
+      { label: "2 slices (50g)", grams: 50 },
       { label: "100g", grams: 100 },
     ],
     related: ["turkey-breast", "pork-loin", "chicken-breast"],
@@ -514,6 +514,7 @@ const RAW_FOODS: FoodEntry[] = [
       { label: "150g", grams: 150 },
       { label: "200g", grams: 200 },
     ],
+    valueLabels: { F007422: "banana prawn, raw" },
     related: ["barramundi", "tuna", "salmon"],
     faqs: [],
   },
@@ -549,15 +550,22 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "canned-salmon",
     name: "Canned Salmon",
     category: "Seafood",
-    manual: draft("as-sold"),
-    prepDescription: "pink or red salmon, canned in water or brine, drained",
+    primaryState: "as-sold",
+    prepDescription: "pink salmon, canned in brine, drained",
     commonServes: [
+      { label: "95g", grams: 95 },
       { label: "100g", grams: 100 },
       { label: "150g", grams: 150 },
     ],
-    todo: ["Not in the AFCD capture. Look up protein and calories (salmon, canned, drained) in AFCD or a brand panel.", "Check common Australian can sizes and their drained weights."],
+    todo: ["Check common Australian can sizes and their drained weights (the 95g serve is a weight, not a can claim)."],
+    valueLabels: { F007853: "pink salmon", F007860: "red salmon" },
     related: ["salmon", "tuna", "sardines"],
-    faqs: [],
+    faqs: [
+      {
+        q: "Is red salmon higher in protein than pink salmon?",
+        a: "Yes, in Australian food composition data: canned red salmon, drained, is {p:as-sold-alt}g of protein per 100g and canned pink salmon is {p}g.",
+      },
+    ],
   },
 
   // ─────────────────────────── Dairy & Eggs ───────────────────────────
@@ -568,20 +576,19 @@ const RAW_FOODS: FoodEntry[] = [
     primaryState: "cooked",
     prepDescription: "whole egg, hard-boiled",
     commonServes: [
-      { label: "1 egg (50g)", grams: 50 },
-      { label: "2 eggs (100g)", grams: 100 },
-      { label: "3 eggs (150g)", grams: 150 },
-      { label: "4 eggs (200g)", grams: 200 },
+      { label: "1 egg (47g)", grams: 47 },
+      { label: "2 eggs (94g)", grams: 94 },
+      { label: "3 eggs (141g)", grams: 141 },
+      { label: "4 eggs (188g)", grams: 188 },
     ],
-    todo: ["Serves assume a 50g egg (edible portion). Check this against the carton weights you want to reference."],
     title: "Protein in Eggs — Per Egg and Per 100g",
     metaDescription:
-      "How much protein is in eggs? {p}g per 100g hard-boiled, about {g:50}g in a 50g egg. See protein for 1, 2, 3 and 4 eggs.",
+      "How much protein is in eggs? {p}g per 100g hard-boiled, about {g:47}g in one egg. See protein for 1, 2, 3 and 4 eggs.",
     intro: [
-      "Eggs are one of the most complete and convenient protein sources — cheap, quick to prepare, and containing every essential amino acid your body needs. Hard-boiled egg has {p}g of protein per 100g, so a 50g egg gives you about {g:50}g and a two- or three-egg meal is a solid protein contribution without much effort.",
+      "Eggs are one of the most complete and convenient protein sources — cheap, quick to prepare, and containing every essential amino acid your body needs. Hard-boiled egg has {p}g of protein per 100g, so one hard-boiled egg (47g of edible egg in AFCD) gives you about {g:47}g and a two- or three-egg meal is a solid protein contribution without much effort.",
     ],
     whyVaries: [
-      "Egg size varies, and the serves above assume 50g of egg per egg. Bigger eggs give you more protein per egg, so if your carton lists a weight, use that rather than assuming every egg is the same.",
+      "Egg size varies. The serves above use AFCD's standard hard-boiled egg, 47g of edible egg; AFCD's raw egg is 51g. Bigger eggs give you more protein per egg, so if your carton lists a weight, use that rather than assuming every egg is the same.",
       "Cooking barely changes an egg's protein per 100g: raw whole egg is {p:raw}g per 100g and hard-boiled is {p}g.",
     ],
     usageTips: [
@@ -592,46 +599,38 @@ const RAW_FOODS: FoodEntry[] = [
     related: ["egg-whites", "greek-yoghurt", "cottage-cheese", "chicken-breast"],
     relatedMeal: { name: "30g Protein Meals", href: "/protein-meals/30g-protein" },
     faqs: [
-      { q: "How much protein is in 2 eggs?", a: "About {g:100}g, based on two 50g eggs, hard-boiled." },
-      { q: "How much protein is in 3 eggs?", a: "About {g:150}g, based on three 50g eggs, hard-boiled." },
+      { q: "How much protein is in 2 eggs?", a: "About {g:94}g for two hard-boiled eggs (94g of egg)." },
+      { q: "How much protein is in 3 eggs?", a: "About {g:141}g for three hard-boiled eggs (141g of egg)." },
     ],
   },
   {
     slug: "egg-whites",
     name: "Egg Whites",
     category: "Dairy & Eggs",
-    manual: draft("cooked"),
-    prepDescription: "egg white, cooked",
+    primaryState: "cooked",
+    prepDescription: "egg white, hard-boiled",
     commonServes: [
       { label: "100g", grams: 100 },
       { label: "150g", grams: 150 },
+      { label: "200g", grams: 200 },
     ],
-    todo: ["Not in the AFCD capture. Look up protein and calories in AFCD (egg, white, cooked).", "Check the weight of one egg white for a per-white serve."],
+    todo: ["Check the weight of one egg white if you want a per-white serve."],
     related: ["eggs", "cottage-cheese", "greek-yoghurt"],
-    faqs: [],
+    faqs: [
+      {
+        q: "Do egg whites have more protein than whole eggs?",
+        a: "Per 100g, no — hard-boiled egg white is {p}g of protein per 100g and hard-boiled whole egg is {p@eggs}g. Egg whites are much lower in calories, though: {kcal} calories per 100g against {kcal@eggs} for whole egg.",
+      },
+    ],
   },
   {
     slug: "greek-yoghurt",
     name: "Greek Yoghurt",
     category: "Dairy & Eggs",
-    // TODO(MJ): confirm this figure — and which product type it describes.
-    // Not in AFCD. Strained Greek yoghurt and unstrained "Greek-style"
-    // yoghurt differ, so check it against Australian brand panels.
-    manual: {
-      state: "as-sold",
-      proteinPer100g: 10,
-      energyKjPer100g: null,
-      caloriesPer100g: null,
-      proteinPer100kcal: null,
-      source: {
-        dataset: "TODO",
-        foodName: null,
-        foodId: null,
-        note: "Existing site figure carried over unchanged. " + NOT_IN_AFCD,
-      },
-      verified: false,
-    },
-    prepDescription: "plain, natural, unsweetened",
+    // Not in AFCD: figures are Australian brand nutrition panels in
+    // afcd-foods.json. The headline is strained Greek yoghurt.
+    primaryState: "as-sold",
+    prepDescription: "strained, plain, reduced fat",
     commonServes: [
       { label: "100g", grams: 100 },
       { label: "150g", grams: 150 },
@@ -639,26 +638,28 @@ const RAW_FOODS: FoodEntry[] = [
       { label: "300g", grams: 300 },
     ],
     todo: [
-      "Not in AFCD. Confirm proteinPer100g (currently the existing 10g) from an Australian brand panel and say whether it's strained Greek or Greek-style yoghurt.",
-      "Add caloriesPer100g from the same panel.",
-      "Add real Australian tub sizes (single-serve and large tubs) to commonServes once checked.",
-      "Watch-out block: add brand rows (strained vs Greek-style, e.g. Chobani, YoPro) from Australian nutrition panels to show the difference.",
+      "Brand labels change: re-check each brand row before publishing.",
+      "Add real Australian tub sizes (single-serve tubs) to commonServes if wanted.",
+    ],
+    brandGroups: [
+      { heading: "Strained Greek and high-protein yoghurt", states: ["as-sold", "as-sold-alt"] },
+      { heading: "Greek-style yoghurt", states: ["greek-style", "greek-style-high-protein"] },
     ],
     title: "Protein in Greek Yoghurt — Per 100g and Per Serving",
     metaDescription:
-      "How much protein is in Greek yoghurt? About {p}g per 100g for plain, natural Greek yoghurt. See protein by serving size.",
+      "How much protein is in Greek yoghurt? {pmin:as-sold+as-sold-alt}–{pmax:as-sold+as-sold-alt}g per 100g for strained plain Greek yoghurt, but Greek-style can be as low as {pmin:greek-style}g. Compare Australian brands.",
     intro: [
-      "Greek yoghurt is strained more than regular yoghurt, which removes much of the liquid whey and concentrates the protein. Plain natural yoghurt is {p@natural-yoghurt}g of protein per 100g in Australian food composition data, and strained Greek yoghurt sits above that. A 200g serve of plain Greek yoghurt has about {g:200}g of protein.",
+      "Greek yoghurt is strained more than regular yoghurt, which removes much of the liquid whey and concentrates the protein. Plain natural yoghurt is {p@natural-yoghurt}g of protein per 100ml in Australian food composition data, while the strained Greek yoghurts below are {pmin:as-sold+as-sold-alt}–{pmax:as-sold+as-sold-alt}g per 100g. A 200g serve of strained Greek yoghurt has about {g:200}g of protein.",
     ],
     whyVaries: [
-      "The {p}g/100g figure is for plain, unsweetened Greek yoghurt. Flavoured varieties often have less protein per 100g because fruit, sugar or flavouring syrup displaces some of the yoghurt — check the label rather than assuming a flavoured tub matches plain.",
-      "Full-fat, low-fat and non-fat Greek yoghurt all have similar protein content per 100g, since removing fat doesn't remove protein — the main difference between them is calories, not protein.",
+      "The {p}g/100g figure is for a plain, unsweetened, reduced-fat strained Greek yoghurt. Flavoured varieties often have less protein per 100g because fruit, sugar or flavouring syrup displaces some of the yoghurt — check the label rather than assuming a flavoured tub matches plain.",
+      "Fat content makes only a small difference to protein. Chobani's reduced-fat plain is {p}g per 100g and its whole-milk plain is {p:as-sold-alt}g; the bigger difference between them is calories.",
     ],
     watchOut: {
       heading: "Greek vs Greek-style: check the label",
       body: [
-        "In Australia, a lot of yoghurt sold as \"Greek-style\" isn't strained. Traditional Greek yoghurt is strained to remove liquid whey, which makes it thicker and concentrates the protein. Greek-style yoghurt is often made thick in other ways, such as with added milk solids or thickeners, so its protein can sit much closer to regular yoghurt.",
-        "Both can be good choices, but they aren't interchangeable for protein. Check the nutrition panel for protein per 100g rather than going by the name on the tub.",
+        "In Australia, a lot of yoghurt sold as \"Greek-style\" isn't strained. Traditional Greek yoghurt is strained to remove liquid whey, which makes it thicker and concentrates the protein. Greek-style yoghurt is often made thick in other ways, so its protein can sit much closer to regular yoghurt: the Greek-style yoghurts below are {pmin:greek-style}–{pmax:greek-style}g per 100g, against {pmin:as-sold+as-sold-alt}–{pmax:as-sold+as-sold-alt}g for the strained ones.",
+        "Some Greek-style yoghurts are sold as high protein, with added milk solids. Both kinds can be good choices, but they aren't interchangeable for protein, so check the nutrition panel for protein per 100g rather than going by the name on the tub.",
       ],
     },
     usageTips: [
@@ -668,19 +669,18 @@ const RAW_FOODS: FoodEntry[] = [
     ],
     related: ["high-protein-yoghurt", "cottage-cheese", "natural-yoghurt", "eggs", "milk"],
     relatedMeal: { name: "30g Protein Meals", href: "/protein-meals/30g-protein" },
-    brands: [],
     faqs: [
       {
         q: "Is Greek yoghurt higher in protein than regular yoghurt?",
-        a: "Yes — the straining process that makes Greek yoghurt thicker also concentrates the protein. Plain natural yoghurt is {p@natural-yoghurt}g of protein per 100g, while strained Greek yoghurt is higher. Check the panel, since Greek-style yoghurt isn't always strained.",
+        a: "Strained Greek yoghurt is. Plain natural yoghurt is {p@natural-yoghurt}g of protein per 100ml, while the strained Greek yoghurts we compared are {pmin:as-sold+as-sold-alt}–{pmax:as-sold+as-sold-alt}g. Greek-style yoghurt isn't always strained, and the ones we compared are {pmin:greek-style}–{pmax:greek-style}g.",
       },
       {
         q: "Does low-fat Greek yoghurt have less protein?",
-        a: "No — protein content stays similar across full-fat, low-fat and non-fat versions. The fat content mainly affects calories, not protein.",
+        a: "No. Chobani's reduced-fat plain Greek yoghurt is {p}g of protein per 100g and its whole-milk plain is {p:as-sold-alt}g. The fat content mainly changes the calories.",
       },
       {
         q: "What's the difference between Greek and Greek-style yoghurt?",
-        a: "Greek yoghurt is strained to remove liquid whey, which concentrates the protein. Greek-style yoghurt is often thickened in other ways and isn't necessarily strained, so it can have less protein. Check the nutrition panel rather than the name.",
+        a: "Greek yoghurt is strained to remove liquid whey, which concentrates the protein. Greek-style yoghurt is often thickened in other ways and isn't necessarily strained, so it can have much less protein. Check the nutrition panel rather than the name.",
       },
     ],
   },
@@ -688,13 +688,17 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "high-protein-yoghurt",
     name: "High Protein Yoghurt",
     category: "Dairy & Eggs",
+    unit: "ml",
     primaryState: "as-sold",
     prepDescription: "flavoured, low fat, intense sweetened, increased protein",
-    todo: ["Brand items (e.g. YoPro, Chobani) vary: add brand rows from Australian nutrition panels if wanted."],
+    todo: [
+      "Brand items vary: the Greek yoghurt page compares YoPRO and other brands.",
+      "AFCD displays this yoghurt per 100mL, so the page does too. Tubs are labelled by weight: switch to per 100g if you'd rather use a brand panel.",
+    ],
     commonServes: [
-      { label: "100g", grams: 100 },
-      { label: "150g", grams: 150 },
-      { label: "200g", grams: 200 },
+      { label: "100ml", grams: 100 },
+      { label: "150ml", grams: 150 },
+      { label: "200ml", grams: 200 },
     ],
     related: ["greek-yoghurt", "natural-yoghurt", "cottage-cheese"],
     faqs: [],
@@ -703,12 +707,15 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "natural-yoghurt",
     name: "Natural Yoghurt",
     category: "Dairy & Eggs",
+    unit: "ml",
     primaryState: "as-sold",
     prepDescription: "plain, regular fat",
     commonServes: [
-      { label: "100g", grams: 100 },
-      { label: "200g", grams: 200 },
+      { label: "100ml", grams: 100 },
+      { label: "150ml", grams: 150 },
+      { label: "200ml", grams: 200 },
     ],
+    todo: ["AFCD displays this yoghurt per 100mL, so the page does too. Tubs are labelled by weight: switch to per 100g if you'd rather use a brand panel."],
     related: ["greek-yoghurt", "high-protein-yoghurt", "milk", "cottage-cheese"],
     faqs: [],
   },
@@ -758,9 +765,8 @@ const RAW_FOODS: FoodEntry[] = [
     category: "Dairy & Eggs",
     primaryState: "as-sold",
     prepDescription: "regular fat",
-    todo: ["Check typical slice weight for a per-slice serve."],
     commonServes: [
-      { label: "20g", grams: 20 },
+      { label: "1 slice (21g)", grams: 21 },
       { label: "30g", grams: 30 },
       { label: "100g", grams: 100 },
     ],
@@ -774,7 +780,7 @@ const RAW_FOODS: FoodEntry[] = [
     primaryState: "as-sold",
     prepDescription: "reduced fat",
     commonServes: [
-      { label: "20g", grams: 20 },
+      { label: "1 slice (21g)", grams: 21 },
       { label: "30g", grams: 30 },
       { label: "100g", grams: 100 },
     ],
@@ -838,28 +844,24 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "milk",
     name: "Milk (Full Cream)",
     category: "Dairy & Eggs",
+    unit: "ml",
     primaryState: "as-sold",
     prepDescription: "cow's milk, regular fat",
-    // AFCD gives milk per 100g, so serves are by weight. A per-100ml figure
-    // would need a brand panel (Australian milk panels are per 100mL).
     commonServes: [
-      { label: "100g", grams: 100 },
-      { label: "250g", grams: 250 },
-      { label: "500g", grams: 500 },
-      { label: "1kg", grams: 1000 },
+      { label: "100ml", grams: 100 },
+      { label: "250ml (1 cup)", grams: 250 },
+      { label: "500ml", grams: 500 },
+      { label: "1 litre", grams: 1000 },
     ],
-    todo: [
-      "AFCD figures are per 100g, so this page now shows milk per 100g (it used to say per 100ml). To show per 100ml, per glass or per litre, take figures from an Australian brand panel.",
-    ],
-    title: "Protein in Milk — Per 100g and by Serving Size",
+    title: "Protein in Milk — Per 100ml, Per Glass and Per Litre",
     metaDescription:
-      "How much protein is in milk? {p}g per 100g for full cream cow's milk. Compare reduced fat, skim and soy milk.",
+      "How much protein is in milk? {p}g per 100ml for full cream cow's milk, about {g:250}g in a 250ml glass. Compare reduced fat, skim and soy milk.",
     intro: [
-      "Milk isn't the highest-protein food gram-for-gram, but it's easy to drink in volume and adds up quickly across a day — 250g of full cream milk, about a glass, has around {g:250}g of protein.",
+      "Milk isn't the highest-protein food gram-for-gram, but it's easy to drink in volume and adds up quickly across a day — a 250ml glass of full cream milk has about {g:250}g of protein.",
     ],
     whyVaries: [
-      "Full cream, reduced fat and skim milk all have very similar protein content: {p}g, {p@light-milk}g and {p@skim-milk}g per 100g respectively. Removing fat doesn't remove protein, so the main difference between them is calories, not protein.",
-      "Plant-based milks vary widely. Regular soy milk is {p@soy-milk}g per 100g, close to dairy milk, while many oat, almond and rice milks are much lower. Check the label if you're substituting.",
+      "Full cream, reduced fat and skim milk all have very similar protein content: {p}g, {p@light-milk}g and {p@skim-milk}g per 100ml respectively. Removing fat doesn't remove protein, so the main difference between them is calories, not protein.",
+      "Plant-based milks vary widely. Regular soy milk is {p@soy-milk}g per 100ml, close to dairy milk, while many oat, almond and rice milks are much lower. Check the label if you're substituting.",
     ],
     usageTips: [
       "Use milk instead of water in oats or protein shakes for an easy protein boost",
@@ -870,15 +872,15 @@ const RAW_FOODS: FoodEntry[] = [
     faqs: [
       {
         q: "How much protein is in a glass of milk?",
-        a: "Full cream milk has {p}g of protein per 100g, so 250g has about {g:250}g. A 250ml glass weighs a little more than 250g, so it has slightly more.",
+        a: "About {g:250}g in a 250ml glass of full cream milk, based on {p}g of protein per 100ml.",
       },
       {
         q: "Does skim milk have less protein than full cream milk?",
-        a: "No. Skim milk has {p@skim-milk}g of protein per 100g and full cream milk has {p}g. The fat content is what changes, not the protein.",
+        a: "No. Skim milk has {p@skim-milk}g of protein per 100ml and full cream milk has {p}g. The fat content is what changes, not the protein.",
       },
       {
         q: "Is plant-based milk a good protein source?",
-        a: "It depends on the milk. Regular soy milk has {p@soy-milk}g of protein per 100g, close to dairy milk. Most oat, almond and rice milks are much lower, so check the label.",
+        a: "It depends on the milk. Regular soy milk has {p@soy-milk}g of protein per 100ml, close to dairy milk. Most oat, almond and rice milks are much lower, so check the label.",
       },
     ],
   },
@@ -886,15 +888,15 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "light-milk",
     name: "Milk (Reduced Fat)",
     category: "Dairy & Eggs",
+    unit: "ml",
     primaryState: "as-sold",
     prepDescription: "cow's milk, reduced fat",
     commonServes: [
-      { label: "100g", grams: 100 },
-      { label: "250g", grams: 250 },
-      { label: "500g", grams: 500 },
-      { label: "1kg", grams: 1000 },
+      { label: "100ml", grams: 100 },
+      { label: "250ml (1 cup)", grams: 250 },
+      { label: "500ml", grams: 500 },
+      { label: "1 litre", grams: 1000 },
     ],
-    todo: ["AFCD figures are per 100g. Per 100ml would need an Australian brand panel."],
     related: ["milk", "skim-milk", "soy-milk"],
     faqs: [],
   },
@@ -902,15 +904,15 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "skim-milk",
     name: "Milk (Skim)",
     category: "Dairy & Eggs",
+    unit: "ml",
     primaryState: "as-sold",
     prepDescription: "cow's milk, skim",
     commonServes: [
-      { label: "100g", grams: 100 },
-      { label: "250g", grams: 250 },
-      { label: "500g", grams: 500 },
-      { label: "1kg", grams: 1000 },
+      { label: "100ml", grams: 100 },
+      { label: "250ml (1 cup)", grams: 250 },
+      { label: "500ml", grams: 500 },
+      { label: "1 litre", grams: 1000 },
     ],
-    todo: ["AFCD figures are per 100g. Per 100ml would need an Australian brand panel."],
     related: ["milk", "light-milk", "soy-milk"],
     faqs: [],
   },
@@ -928,10 +930,7 @@ const RAW_FOODS: FoodEntry[] = [
       { label: "200g", grams: 200 },
       { label: "300g", grams: 300 },
     ],
-    todo: [
-      "Tofu was set to 12g/100g by MJ for the meal pages; AFCD firm tofu is 12.8g. The meal pages and meal calculator are outside this change and still use 12g.",
-      "Check whether 300g is a real Australian block size.",
-    ],
+    todo: ["Check whether 300g is a real Australian block size."],
     title: "Protein in Tofu — Per 100g and by Firmness",
     metaDescription:
       "How much protein is in tofu? {p}g per 100g for firm tofu. See protein by serving size and how firmness changes the number.",
@@ -993,13 +992,14 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "tempeh",
     name: "Tempeh",
     category: "Plant-Based",
-    manual: draft("as-sold"),
-    prepDescription: "tempeh, plain",
+    primaryState: "as-sold",
+    prepDescription: "plain tempeh, Macro brand label",
     commonServes: [
       { label: "100g", grams: 100 },
       { label: "150g", grams: 150 },
+      { label: "300g (pack)", grams: 300 },
     ],
-    todo: [NOT_IN_AFCD, "Check common Australian block sizes."],
+    todo: ["Not in AFCD: one brand panel only. Add more brands if wanted."],
     related: ["tofu", "edamame", "lentils"],
     faqs: [],
   },
@@ -1007,13 +1007,13 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "edamame",
     name: "Edamame",
     category: "Plant-Based",
-    manual: draft("cooked"),
-    prepDescription: "shelled soybeans, cooked",
+    primaryState: "as-sold",
+    prepDescription: "frozen whole soybeans, Umami brand label",
     commonServes: [
       { label: "100g", grams: 100 },
       { label: "150g", grams: 150 },
     ],
-    todo: [NOT_IN_AFCD + " An Australian frozen-pack panel works."],
+    todo: ["Check the Umami label: is the per-100g figure for beans in the pod or shelled? The page says \"as sold\" until confirmed."],
     related: ["tofu", "tempeh", "chickpeas"],
     faqs: [],
   },
@@ -1021,14 +1021,15 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "soy-milk",
     name: "Soy Milk",
     category: "Plant-Based",
+    unit: "ml",
     primaryState: "as-sold",
-    prepDescription: "regular fat, added calcium and vitamins",
+    prepDescription: "regular fat, added calcium and vitamins A, B1, B2 and B12",
     commonServes: [
-      { label: "100g", grams: 100 },
-      { label: "250g", grams: 250 },
-      { label: "500g", grams: 500 },
+      { label: "100ml", grams: 100 },
+      { label: "250ml (1 cup)", grams: 250 },
+      { label: "500ml", grams: 500 },
+      { label: "1 litre", grams: 1000 },
     ],
-    todo: ["AFCD figures are per 100g. Per 100ml would need an Australian brand panel."],
     related: ["milk", "tofu", "light-milk"],
     faqs: [],
   },
@@ -1038,12 +1039,12 @@ const RAW_FOODS: FoodEntry[] = [
     category: "Plant-Based",
     primaryState: "cooked",
     prepDescription: "dried lentils, boiled, drained",
-    todo: ["The dry figure in AFCD is for red lentils, while the cooked figure doesn't name a variety. Check you're happy showing them together."],
     commonServes: [
       { label: "100g", grams: 100 },
       { label: "150g", grams: 150 },
       { label: "200g", grams: 200 },
     ],
+    valueLabels: { F005184: "red lentils, dry" },
     related: ["chickpeas", "kidney-beans", "tofu"],
     faqs: [],
   },
@@ -1078,13 +1079,13 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "black-beans",
     name: "Black Beans",
     category: "Plant-Based",
-    manual: draft("as-sold"),
-    prepDescription: "canned, drained",
+    primaryState: "as-sold",
+    prepDescription: "canned, Woolworths brand label",
     commonServes: [
       { label: "100g", grams: 100 },
       { label: "150g", grams: 150 },
     ],
-    todo: ["Not in the AFCD capture. Look up protein and calories (bean, black, canned, drained) in AFCD or an Australian brand panel."],
+    todo: ["Not in AFCD. Check whether the canned panels are per 100g drained or undrained."],
     related: ["kidney-beans", "chickpeas", "lentils"],
     faqs: [],
   },
@@ -1111,12 +1112,17 @@ const RAW_FOODS: FoodEntry[] = [
     primaryState: "dry",
     prepDescription: "rolled oats, uncooked",
     commonServes: [
-      { label: "40g", grams: 40 },
+      { label: "1 sachet (40g)", grams: 40 },
       { label: "50g", grams: 50 },
       { label: "100g", grams: 100 },
     ],
     related: ["weet-bix", "quinoa", "milk"],
-    faqs: [],
+    faqs: [
+      {
+        q: "How much protein is in a bowl of porridge?",
+        a: "About {g:198:cooked}g for one 40g sachet of rolled oats made into porridge with water (198g cooked, {p:cooked}g of protein per 100g). Making it with milk adds more.",
+      },
+    ],
   },
   {
     slug: "weet-bix",
@@ -1149,12 +1155,14 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "wholemeal-bread",
     name: "Wholemeal Bread",
     category: "Grains & Cereals",
-    manual: draft("as-sold"),
-    prepDescription: "wholemeal bread, sliced",
+    primaryState: "as-sold",
+    prepDescription: "bread made from wholemeal flour",
     commonServes: [
+      { label: "40g", grams: 40 },
+      { label: "80g", grams: 80 },
       { label: "100g", grams: 100 },
     ],
-    todo: ["Not in the AFCD capture. Look up protein and calories in AFCD (bread, wholemeal).", "Check a typical slice weight for a per-slice serve."],
+    todo: ["Check a typical slice weight if you want a per-slice serve."],
     related: ["oats", "weet-bix", "eggs"],
     faqs: [],
   },
@@ -1162,13 +1170,13 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "brown-rice",
     name: "Brown Rice",
     category: "Grains & Cereals",
-    manual: draft("cooked"),
-    prepDescription: "cooked",
+    primaryState: "cooked",
+    prepDescription: "boiled, no added salt",
     commonServes: [
       { label: "100g", grams: 100 },
       { label: "150g", grams: 150 },
+      { label: "200g", grams: 200 },
     ],
-    todo: ["Not in the AFCD capture. Look up protein and calories in AFCD (rice, brown, boiled)."],
     related: ["quinoa", "pasta", "lentils"],
     faqs: [],
   },
@@ -1176,13 +1184,12 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "pasta",
     name: "Pasta",
     category: "Grains & Cereals",
-    manual: draft("cooked"),
-    prepDescription: "wheat pasta, cooked",
+    primaryState: "cooked",
+    prepDescription: "white wheat pasta, boiled from dry, no added salt",
     commonServes: [
       { label: "100g", grams: 100 },
       { label: "200g", grams: 200 },
     ],
-    todo: ["Not in the AFCD capture. Look up protein and calories in AFCD (pasta, white wheat, boiled)."],
     related: ["brown-rice", "quinoa", "parmesan"],
     faqs: [],
   },
@@ -1262,13 +1269,13 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "peanuts",
     name: "Peanuts",
     category: "Nuts & Seeds",
-    manual: draft("as-sold"),
-    prepDescription: "dry roasted, unsalted",
+    primaryState: "as-sold",
+    prepDescription: "raw, with skin, unsalted",
     commonServes: [
       { label: "30g", grams: 30 },
       { label: "100g", grams: 100 },
     ],
-    todo: ["Not in the AFCD capture. Look up protein and calories in AFCD (peanut, dry roasted, unsalted)."],
+    valueLabels: { F006110: "roasted in oil" },
     related: ["peanut-butter", "almonds", "cashews"],
     faqs: [],
   },
@@ -1276,13 +1283,13 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "cashews",
     name: "Cashews",
     category: "Nuts & Seeds",
-    manual: draft("as-sold"),
-    prepDescription: "raw",
+    primaryState: "as-sold",
+    prepDescription: "raw, unsalted",
     commonServes: [
       { label: "30g", grams: 30 },
       { label: "100g", grams: 100 },
     ],
-    todo: ["Not in the AFCD capture. Look up protein and calories in AFCD (cashew, raw)."],
+    valueLabels: { F006092: "roasted" },
     related: ["almonds", "walnuts", "peanuts"],
     faqs: [],
   },
@@ -1290,13 +1297,12 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "walnuts",
     name: "Walnuts",
     category: "Nuts & Seeds",
-    manual: draft("as-sold"),
-    prepDescription: "raw",
+    primaryState: "as-sold",
+    prepDescription: "raw, unsalted",
     commonServes: [
       { label: "30g", grams: 30 },
       { label: "100g", grams: 100 },
     ],
-    todo: ["Not in the AFCD capture. Look up protein and calories in AFCD (walnut, raw)."],
     related: ["almonds", "cashews", "chia-seeds"],
     faqs: [],
   },
@@ -1314,6 +1320,9 @@ const RAW_FOODS: FoodEntry[] = [
       { label: "100g", grams: 100 },
     ],
     related: ["hemp-protein", "milk", "greek-yoghurt"],
+    intro: [
+      "Whey protein powder is the most concentrated protein on this list: {p}g per 100g in Australian food composition data, for whey-based powders with over 70% protein. Brands range roughly from 70% to 90% protein, so check the tub for the one you use.",
+    ],
     faqs: [],
   },
   {
@@ -1334,42 +1343,46 @@ const RAW_FOODS: FoodEntry[] = [
     slug: "beef-jerky",
     name: "Beef Jerky",
     category: "Snacks & Supplements",
-    manual: draft("as-sold"),
-    prepDescription: "plain or original flavour",
+    primaryState: "as-sold",
+    prepDescription: "original flavour, Jack Link's brand label",
     commonServes: [
       { label: "25g", grams: 25 },
       { label: "50g", grams: 50 },
       { label: "100g", grams: 100 },
     ],
-    todo: ["Not in the AFCD capture. Look up protein and calories in AFCD (beef jerky) or an Australian brand panel.", "Check common Australian pack sizes."],
+    todo: ["Not in AFCD. Brands range widely, so the headline is one brand (Jack Link's Original); check you're happy with that choice."],
     related: ["steak", "almonds", "cheddar-cheese"],
-    faqs: [],
+    faqs: [
+      {
+        q: "Why does beef jerky protein vary so much between brands?",
+        a: "Jerky is dried meat, so how much water is removed and how much marinade or sugar is added changes the protein per 100g. The Australian brands we compared range from {pmin:as-sold+as-sold-alt}g to {pmax:as-sold+as-sold-alt}g of protein per 100g, so check the label.",
+      },
+    ],
   },
   {
     slug: "hummus",
     name: "Hummus",
-    category: "Snacks & Supplements",
-    manual: draft("as-sold"),
-    prepDescription: "plain hummus dip",
+    category: "Plant-Based",
+    primaryState: "as-sold",
+    prepDescription: "commercial hummus dip",
     commonServes: [
       { label: "30g", grams: 30 },
       { label: "100g", grams: 100 },
     ],
-    todo: ["Not in the AFCD capture. Look up protein and calories in AFCD (dip, hummus)."],
     related: ["chickpeas", "wholemeal-bread", "lentils"],
     faqs: [],
   },
   {
     slug: "popcorn",
-    name: "Popcorn",
+    name: "Popcorn (Butter Flavoured)",
     category: "Snacks & Supplements",
-    manual: draft("as-sold"),
-    prepDescription: "air-popped, plain",
+    primaryState: "as-sold",
+    prepDescription: "commercial, butter flavoured, salted",
     commonServes: [
       { label: "20g", grams: 20 },
       { label: "100g", grams: 100 },
     ],
-    todo: ["Not in the AFCD capture. Look up protein and calories in AFCD (popcorn, air-popped, plain)."],
+    todo: ["AFCD only has butter-flavoured popcorn. Plain air-popped popcorn would need a brand label."],
     related: ["peanuts", "almonds", "beef-jerky"],
     faqs: [],
   },
@@ -1383,7 +1396,8 @@ interface AfcdJsonValue {
   energyKjPer100g: number;
   caloriesPer100g: number;
   proteinPer100kcal: number;
-  source: { dataset: string; foodKey: string; foodName: string; url: string };
+  // AFCD values have foodKey/foodName; brand panels have stockcode/product.
+  source: { dataset: string; foodKey?: string; foodName?: string; stockcode?: string; product?: string; url: string };
   verified: boolean;
 }
 
@@ -1396,7 +1410,20 @@ const AFCD = new Map<string, FoodValue[]>(
       energyKjPer100g: v.energyKjPer100g,
       caloriesPer100g: v.caloriesPer100g,
       proteinPer100kcal: v.proteinPer100kcal,
-      source: { dataset: v.source.dataset, foodName: v.source.foodName, foodId: v.source.foodKey, url: v.source.url },
+      source: v.source.product
+        ? {
+            dataset: v.source.dataset,
+            foodName: v.source.product,
+            foodId: null,
+            url: v.source.url,
+            note: `Woolworths stockcode ${v.source.stockcode}`,
+          }
+        : {
+            dataset: v.source.dataset,
+            foodName: v.source.foodName ?? null,
+            foodId: v.source.foodKey ?? null,
+            url: v.source.url,
+          },
       verified: v.verified,
     })),
   ]),
@@ -1421,19 +1448,28 @@ export interface Food extends FoodEntry, Omit<FoodValue, "state"> {
 
 // Fill the number tokens described at the top of this file.
 function fill(text: string, entry: FoodEntry, values: FoodValue[]): string {
-  return text.replace(/\{(p|kcal|g)(?:@([a-z0-9-]+))?(?::([a-z0-9.-]+))?\}/g, (token, kind, otherSlug, arg) => {
+  return text.replace(/\{(p|kcal|g|pmin|pmax)(?:@([a-z0-9-]+))?(?::([a-z0-9.:+-]+))?\}/g, (token, kind, otherSlug, arg) => {
     let vals = values;
     if (otherSlug) {
       const other = RAW_FOODS.find((f) => f.slug === otherSlug);
       if (!other) throw new Error(`foods: unknown slug in ${token} on "${entry.slug}"`);
       vals = valuesFor(other);
     }
-    const state = kind === "g" ? undefined : arg;
+    if (kind === "pmin" || kind === "pmax") {
+      const states = String(arg ?? "").split("+");
+      const ns = vals
+        .filter((x) => states.includes(x.state) && x.proteinPer100g !== null)
+        .map((x) => x.proteinPer100g as number);
+      if (!ns.length) throw new Error(`foods: ${token} on "${entry.slug}" matches no figures`);
+      return String(kind === "pmin" ? Math.min(...ns) : Math.max(...ns));
+    }
+    const [gramsArg, gState] = kind === "g" ? String(arg).split(":") : [];
+    const state = kind === "g" ? gState : arg;
     const v = state ? vals.find((x) => x.state === state) : vals[0];
     const n = kind === "kcal" ? v?.caloriesPer100g : v?.proteinPer100g;
     if (n === null || n === undefined) throw new Error(`foods: ${token} on "${entry.slug}" has no figure`);
     if (kind === "g") {
-      const grams = Number(arg);
+      const grams = Number(gramsArg);
       if (!grams) throw new Error(`foods: ${token} on "${entry.slug}" needs a gram amount`);
       return String(Math.round((n * grams) / 100));
     }
@@ -1496,7 +1532,21 @@ export function unitLabel(f: Food): string {
 
 // How the figure was weighed, for labels: "cooked", "raw", "as sold", "dry".
 export function stateLabel(state: FoodState): string {
-  return { raw: "raw", cooked: "cooked", "cooked-alt": "cooked", "as-sold": "as sold", dry: "dry" }[state];
+  return {
+    raw: "raw",
+    cooked: "cooked",
+    "cooked-alt": "cooked",
+    "as-sold": "as sold",
+    "as-sold-alt": "as sold",
+    dry: "dry",
+    "greek-style": "as sold",
+    "greek-style-high-protein": "as sold",
+  }[state];
+}
+
+// Figures from a brand's nutrition panel rather than AFCD.
+export function isBrandValue(v: FoodValue): boolean {
+  return v.source.dataset.startsWith("Brand");
 }
 
 export function proteinForServe(f: { proteinPer100g: number }, grams: number): number {

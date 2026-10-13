@@ -145,11 +145,12 @@ export default function RootLayout({
               </ul>
             </nav>
             <p className="mt-8 max-w-xl text-sm text-pt-white/60">
-              Nutrition figures are sourced from Australian government
-              references (FSANZ AUSNUT/NUTTAB, Eat for Health) where
-              available and are approximate — actual values vary by brand,
-              cut and preparation. This site does not provide medical
-              advice.
+              Nutrition figures are sourced from the Australian Food
+              Composition Database (FSANZ AFCD), Australian brand nutrition
+              panels and Eat for Health where available, and are approximate
+              — actual values vary by brand, cut and preparation. Calories
+              are worked out from AFCD kilojoules and may differ slightly from
+              food labels. This site does not provide medical advice.
             </p>
             <a
               href="https://hitprotein.com.au"

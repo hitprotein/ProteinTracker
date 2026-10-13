@@ -56,8 +56,8 @@ export default function Glp1MealsPage() {
           description:
             "A small no-cook breakfast of thick Greek yoghurt topped with berries and chopped almonds.",
           category: "Breakfast",
-          protein: 22,
-          calories: 235,
+          protein: 21,
+          calories: 195,
           prepMinutes: 5,
           serves: "Serves 1",
           ingredients: [
@@ -76,8 +76,8 @@ export default function Glp1MealsPage() {
           description:
             "A light, no-cook lunch of tuna and cannellini beans tossed with crunchy salad and lemon.",
           category: "Lunch",
-          protein: 22,
-          calories: 190,
+          protein: 23,
+          calories: 210,
           prepMinutes: 10,
           serves: "Serves 1",
           ingredients: [
@@ -97,8 +97,8 @@ export default function Glp1MealsPage() {
           description:
             "A smaller stir-fry of chicken and vegetables over a half serve of rice.",
           category: "Dinner",
-          protein: 29,
-          calories: 320,
+          protein: 28,
+          calories: 310,
           prepMinutes: 10,
           cookMinutes: 10,
           serves: "Serves 1",
@@ -120,8 +120,8 @@ export default function Glp1MealsPage() {
           description:
             "Rye crispbreads topped with cottage cheese, smoked salmon and cucumber — a protein-packed snack or light meal.",
           category: "Snack",
-          protein: 23,
-          calories: 245,
+          protein: 29,
+          calories: 280,
           prepMinutes: 5,
           serves: "Serves 1",
           ingredients: [
