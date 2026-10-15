@@ -68,6 +68,13 @@ const FOOTER_LINKS = [
   { label: "Protein Guides", href: "/protein-guides" },
 ];
 
+// Our other sites, the same list (minus this one) on every site.
+const OTHER_SITES = [
+  { name: "HitProtein", description: "The protein tracking app", href: "https://www.hitprotein.com.au" },
+  { name: "Free Protein Tracker", description: "Free online protein tracker and calculator", href: "https://freeproteintracker.com" },
+  { name: "Free Protein Tracker AU", description: "Protein at Australian takeaway chains", href: "https://freeproteintracker.com.au" },
+];
+
 export const viewport: Viewport = {
   themeColor: "#0B0D0C",
 };
@@ -153,12 +160,21 @@ export default function RootLayout({
               conversion factors from food labels (Standard 1.2.8), so they
               may differ slightly from the pack. This site does not provide medical advice.
             </p>
-            <a
-              href="https://hitprotein.com.au"
-              className="mt-6 inline-block text-sm font-semibold text-pt-green"
-            >
-              HitProtein — the protein tracking app →
-            </a>
+            <div className="mt-8">
+              <p className="text-xs font-semibold uppercase tracking-wide text-pt-white/50">
+                Our other sites
+              </p>
+              <ul className="mt-3 grid gap-3 text-sm sm:grid-cols-3">
+                {OTHER_SITES.map((site) => (
+                  <li key={site.href}>
+                    <a href={site.href} className="font-semibold text-pt-green hover:underline">
+                      {site.name}
+                    </a>
+                    <span className="block text-pt-white/60">{site.description}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </footer>
       </body>
